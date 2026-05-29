@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -9,38 +8,36 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject ripperPrefab;
     [SerializeField] private Transform spawnPoint;
 
+    private bool _isRespawning = false;
+
     private void Awake()
     {
         Instance = this;
     }
 
-    public void CheckRemainingRippers()
+    private void Update()
     {
-        StartCoroutine(CheckAfterFrame());
-    }
-
-    private IEnumerator CheckAfterFrame()
-    {
-        yield return null;
-
         FleshRipper[] allRippers =
             FindObjectsByType<FleshRipper>(
                 FindObjectsSortMode.None);
 
-        if (allRippers.Length == 0)
+        if (allRippers.Length == 0 && !_isRespawning)
         {
+            _isRespawning = true;
             SpawnNewRipper();
         }
     }
 
     private void SpawnNewRipper()
     {
-        Debug.Log("SPAWNING NEW RIPPER");
-
         Instantiate(
             ripperPrefab,
             spawnPoint.position,
             Quaternion.identity
         );
+
+        Debug.Log("NEW RIPPER SPAWNED");
+
+        _isRespawning = false;
     }
 }
