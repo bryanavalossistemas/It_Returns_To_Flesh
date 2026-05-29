@@ -691,9 +691,9 @@ GameObject:
   m_Component:
   - component: {fileID: 410751621}
   - component: {fileID: 410751620}
-  - component: {fileID: 410751619}
   - component: {fileID: 410751622}
   - component: {fileID: 410751623}
+  - component: {fileID: 410751624}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -701,14 +701,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &410751619
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 410751618}
-  m_Enabled: 1
 --- !u!20 &410751620
 Camera:
   m_ObjectHideFlags: 0
@@ -839,6 +831,20 @@ MonoBehaviour:
   zoomSensitivity: 70
   minZoom: 1
   maxZoom: 20
+--- !u!114 &410751624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 410751618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioListener
+  nonRigidbodyVelocity: 0
+  attenuationObject: {fileID: 0}
 --- !u!1 &424931386
 GameObject:
   m_ObjectHideFlags: 0
@@ -2416,6 +2422,16 @@ MonoBehaviour:
   speed: 3
   health: 22
   maxHealth: 33
+  frenzyVisionRange: 6
+  dashMultiplier: 3
+  civilianLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  ripperPrefab: {fileID: 0}
+  mainSpriteRenderer: {fileID: 0}
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  selectedColor: {r: 0, g: 1, b: 0, a: 1}
+  legLessSprite: {fileID: 0}
 --- !u!61 &435702540
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2592,6 +2608,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e120859968f28a946a587e037c160eaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SelectionManager
+  _cam: {fileID: 0}
 --- !u!4 &438425601
 Transform:
   m_ObjectHideFlags: 0
@@ -2717,6 +2734,16 @@ MonoBehaviour:
   speed: 3
   health: 33
   maxHealth: 33
+  frenzyVisionRange: 6
+  dashMultiplier: 3
+  civilianLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  ripperPrefab: {fileID: 0}
+  mainSpriteRenderer: {fileID: 0}
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  selectedColor: {r: 0, g: 1, b: 0, a: 1}
+  legLessSprite: {fileID: 0}
 --- !u!61 &762115762
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3471,6 +3498,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1446342054}
   m_CullTransparentMesh: 1
+--- !u!1 &1541271763
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1541271765}
+  - component: {fileID: 1541271764}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1541271764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541271763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd0bbfe17cfa3a64aa06dc7a85ad4d35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioManager
+  _songLibrary: {fileID: 11400000, guid: ba6fe0a9892f7334a87751395208410c, type: 2}
+--- !u!4 &1541271765
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541271763}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1545921673
 GameObject:
   m_ObjectHideFlags: 0
@@ -3803,6 +3875,16 @@ MonoBehaviour:
   speed: 3
   health: 11
   maxHealth: 11
+  frenzyVisionRange: 6
+  dashMultiplier: 3
+  civilianLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  ripperPrefab: {fileID: 0}
+  mainSpriteRenderer: {fileID: 0}
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  selectedColor: {r: 0, g: 1, b: 0, a: 1}
+  legLessSprite: {fileID: 0}
 --- !u!1 &1685166621
 GameObject:
   m_ObjectHideFlags: 0
@@ -4193,3 +4275,4 @@ SceneRoots:
   - {fileID: 204965870}
   - {fileID: 284790943}
   - {fileID: 438425601}
+  - {fileID: 1541271765}
