@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 3
+  tags:
+  - Wall
+  - Civilian
+  - Floor
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - FleshRipperLayer
+  - CivilianLayer
+  - Destruible
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Background 1
+    uniqueID: 568480175
+    locked: 0
+  - name: Background 2
+    uniqueID: 2136602973
+    locked: 0
+  - name: Background 3
+    uniqueID: 1823602801
+    locked: 0
+  - name: Floor and Walls
+    uniqueID: 2675788625
+    locked: 0
+  - name: Buildings
+    uniqueID: 3395665011
+    locked: 0
+  - name: No-Interaction Objects
+    uniqueID: 3819425869
+    locked: 0
+  - name: Interaction Objects
+    uniqueID: 1385348759
+    locked: 0
+  - name: Dreadnought
+    uniqueID: 3982160575
+    locked: 0
+  - name: Billious
+    uniqueID: 1265931813
+    locked: 0
+  - name: Obligator
+    uniqueID: 3773618089
+    locked: 0
+  - name: FleshRippers
+    uniqueID: 3575796749
+    locked: 0
+  - name: Nervmorfs
+    uniqueID: 1589232011
+    locked: 0
+  - name: Traps
+    uniqueID: 4294424241
+    locked: 0
+  - name: Enemies
+    uniqueID: 1648458433
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  m_RenderingLayers:
+  - Default
