@@ -5072,6 +5072,8 @@ MonoBehaviour:
     m_Bits: 128
   ripperPrefab: {fileID: 2650151315471006676, guid: b8fedf79fc3b6ea4f93a34490689e4c1, type: 3}
   mainSpriteRenderer: {fileID: 0}
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  selectedColor: {r: 0, g: 1, b: 0, a: 1}
   legLessSprite: {fileID: 0}
 --- !u!114 &1574834464
 MonoBehaviour:
@@ -5110,6 +5112,51 @@ MonoBehaviour:
   frenzySpeedMultiplier: 2.5
   soresJumpForceX: 12
   soresJumpForceY: 15
+--- !u!1 &1672482980
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1672482982}
+  - component: {fileID: 1672482981}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1672482981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1672482980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd0bbfe17cfa3a64aa06dc7a85ad4d35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioManager
+  _songLibrary: {fileID: 11400000, guid: ba6fe0a9892f7334a87751395208410c, type: 2}
+--- !u!4 &1672482982
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1672482980}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1685166621
 GameObject:
   m_ObjectHideFlags: 0
@@ -5830,6 +5877,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5198950846039202975, guid: b9766f3e2c79e2b409b32fe8ab36fca9, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -176047303916226115, guid: 5db94399b5ab4ed409696edf85f66d25, type: 3}
     - target: {fileID: 7677830470400958208, guid: b9766f3e2c79e2b409b32fe8ab36fca9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.71
@@ -5894,3 +5945,4 @@ SceneRoots:
   - {fileID: 438425601}
   - {fileID: 1725519907}
   - {fileID: 223907453}
+  - {fileID: 1672482982}
