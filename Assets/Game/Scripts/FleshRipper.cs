@@ -47,51 +47,15 @@ public class FleshRipper : MonoBehaviour
             selected ? selectedColor : normalColor;
     }
 
-    private void SetupHitboxVisualizer()
-    {
-        GameObject lineObj = new GameObject("HitboxVisualizer_Debug");
-        lineObj.transform.SetParent(transform);
-        lineObj.transform.localPosition =Vector3.zero;
-
-        _hitboxVisualizer = lineObj.AddComponent<LineRenderer>();
-        _hitboxVisualizer.startWidth = 0.05f;
-        _hitboxVisualizer.endWidth = 0.05f;
-        _hitboxVisualizer.positionCount = 5;
-        _hitboxVisualizer.useWorldSpace = true;
-        Material debugMat = new Material(Shader.Find("Sprites/Default"));
-        _hitboxVisualizer.material = debugMat;
-        _hitboxVisualizer.startColor = Color.green;
-        _hitboxVisualizer.endColor = Color.green;
-    }
-
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
         _col = GetComponent<Collider2D>();
         _boxCollider = GetComponent<BoxCollider2D>();
         CurrentSpeed = speed;
-        SetupHitboxVisualizer();
-        
     }
 
-    private void Update()
-    {
-        DrawHitboxLines();
-    }
 
-    private void DrawHitboxLines()
-    {
-        if (_boxCollider == null || _hitboxVisualizer == null) return;
-        Bounds bounds = _boxCollider.bounds;
-        Vector3[] corners = new Vector3[5];
-        corners[0] = new Vector3(bounds.min.x, bounds.min.y, transform.position.z);
-        corners[1] = new Vector3(bounds.max.x, bounds.min.y, transform.position.z);
-        corners[2] = new Vector3(bounds.max.x, bounds.max.y, transform.position.z);
-        corners[3] = new Vector3(bounds.min.x, bounds.max.y, transform.position.z);
-        corners[4] = corners[0];
-
-        _hitboxVisualizer.SetPositions(corners);
-    }
     private void FixedUpdate()
     {
         if (_turnCoolDown > 0) _turnCoolDown -= Time.fixedDeltaTime;
