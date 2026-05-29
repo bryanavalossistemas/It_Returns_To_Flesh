@@ -235,7 +235,7 @@ MonoBehaviour:
   HasSourceProject: 0
   HasPlatforms: 1
   sourceProjectPath: 
-  sourceBankPath: ../../Documents/FMOD/FleshRippers/Build
+  sourceBankPath: Assets/Game/Music/Build
   sourceBankPathUnformatted: 
   BankRefreshCooldown: 5
   ShowBankRefreshWindow: 1
