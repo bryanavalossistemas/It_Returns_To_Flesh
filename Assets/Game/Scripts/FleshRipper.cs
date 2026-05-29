@@ -14,6 +14,8 @@ public class FleshRipper : MonoBehaviour
     [SerializeField] private LayerMask civilianLayer;
     [SerializeField] private GameObject ripperPrefab;
     [SerializeField] private SpriteRenderer mainSpriteRenderer;
+    [SerializeField] private Color normalColor = Color.white;
+    [SerializeField] private Color selectedColor = Color.green;
     [SerializeField] private Sprite legLessSprite;
          
     public static FleshRipper SelectedRipper { get; set; }
@@ -36,6 +38,14 @@ public class FleshRipper : MonoBehaviour
     private float _stunTimer = 0f;
     private int _savedDirection = 1;
     public int FacingDirection => _direction;
+    
+    public void SetSelectedVisual(bool selected)
+    {
+        if (mainSpriteRenderer == null) return;
+
+        mainSpriteRenderer.color =
+            selected ? selectedColor : normalColor;
+    }
 
     private void SetupHitboxVisualizer()
     {
@@ -113,19 +123,30 @@ public class FleshRipper : MonoBehaviour
 
     public void SelectThisUnit()
     {
+        if (SelectedRipper != null)
+        {
+            SelectedRipper.SetSelectedVisual(false);
+        }
+
         SelectedRipper = this;
+
+        SetSelectedVisual(true);
+
         UIManager.Instance.UpdateHealth(health, maxHealth);
+
         FleshCaster caster = GetComponent<FleshCaster>();
+
         if (caster != null)
         {
             UIManager.Instance.ConfigureBiologicalLimits(
                 caster.CanCastVomit(),
                 caster.CanCastSores(),
                 true,
-                true, //por completar con las otras 2 //
+                true,
                 caster.CanCastFrenzy()
             );
         }
+
         Debug.Log("flesh selected");
     }
 
