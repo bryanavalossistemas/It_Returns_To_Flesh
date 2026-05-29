@@ -44,36 +44,21 @@ public class SelectionManager: MonoBehaviour
         {
             hits = Physics2D.RaycastAll(mouseWorldPos, Vector2.zero);
         }
-        if (!isPointerOverUI && CurrentState == InputState.Normal && FleshRipper.SelectedRipper == null)
+        if (!isPointerOverUI && FleshRipper.SelectedRipper == null)
         {
             FleshRipper hoveredRipper = GetFirstComponent<FleshRipper>(hits);
             if (hoveredRipper != null)
                 UIManager.Instance.UpdateHealth(hoveredRipper.Health, hoveredRipper.MaxHealth);
             else
-                UIManager.Instance.ClearUI();
+                UIManager.Instance.SetHealthTextToVoid();
         }
 
         if (Mouse.current.leftButton.wasPressedThisFrame && !isPointerOverUI)
         {
-            
             if (CurrentState == InputState.TargetingLimb)
             {
-                FleshRipper target =
-                    GetFirstComponent<FleshRipper>(hits);
-
-                if (target != null)
-                {
-                    FleshLimbs limbs =
-                        target.GetComponent<FleshLimbs>();
-
-                    if (limbs != null)
-                    {
-                        limbs.DetonateLimb(
-                            FleshLimbs.LimbType.Arms
-                        );
-                    }
-                }
-
+                LimbNode limb = GetFirstComponent<LimbNode>(hits);
+                if (limb != null) limb.ReceiveClick();
                 return;
             }
 

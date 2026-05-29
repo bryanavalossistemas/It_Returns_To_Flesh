@@ -48,6 +48,11 @@ public class UIManager : MonoBehaviour
         EvaluateSkills(currentHealth);
     }
 
+		public void SetHealthTextToVoid()
+    {
+        healthText.text = "Health:--/--";
+    }
+
     private void EvaluateSkills(int currentHealth)
     {
         int vomitCost = 1;
