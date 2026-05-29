@@ -11,6 +11,7 @@ public class DeathZone : MonoBehaviour
         {
             Debug.Log("Ripper destroyed");
             Destroy(ripper.gameObject);
+            GameManager.Instance.DeadRipper();
         }
         else
         {

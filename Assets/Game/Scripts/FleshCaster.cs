@@ -9,17 +9,24 @@ public class FleshCaster :MonoBehaviour
     [SerializeField] private float frenzySpeedMultiplier = 2.5f;
     [SerializeField] private float soresJumpForceX = 10f;
     [SerializeField] private float soresJumpForceY = 5f;
+    [SerializeField] float _sizeDetector;
+
+    [SerializeField] LayerMask _groundMask;
     private FleshRipper _body;
     private float _savedPatrolSpeed;
     private float _frenzyTimer = 0f;
     private bool _isFrenzied = false;
     private int _soresCastCount = 0;
     public int SoresCastCount => _soresCastCount;
-
+    private Animator _animator;
+    Transform _floorDetector;
+    bool _isGrounded;
     private void Awake()
     {
         _body = GetComponent<FleshRipper>();
+        _floorDetector = transform.Find("FloorDetect");  
         if (cancelNodeObject !=null) cancelNodeObject.SetActive (false);
+        _animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -32,6 +39,15 @@ public class FleshCaster :MonoBehaviour
                 EndFrenzy();
             }
         }
+    }
+     void FixedUpdate()
+
+    {
+
+       Collider2D floor = Physics2D.OverlapCircle(_floorDetector.position, _sizeDetector, _groundMask);
+
+        _isGrounded = floor != null;
+
     }
 
     public void CastVomit()
@@ -99,11 +115,14 @@ public class FleshCaster :MonoBehaviour
 
     public void CastSores()
     {
-        if (CurrentCastState == CastState.Vomiting || _body.Health < 2 || _soresCastCount >= 3) return;
+        if (CurrentCastState == CastState.Vomiting || _body.Health < 2 || _soresCastCount >= 3 || !_isGrounded) return;
 
         _soresCastCount++;
         _body.ModifyHealth(-2);
-
+        if (_animator != null)
+        {
+            _animator.SetInteger("Llagas", _soresCastCount);
+        }
         Vector2 jumpForce = new Vector2(soresJumpForceX * _body.FacingDirection, soresJumpForceY);
         _body.ApplyKnockback(jumpForce);
         if (_soresCastCount == 3)
@@ -123,6 +142,7 @@ public class FleshCaster :MonoBehaviour
 
     public bool CanCastSores()
     {
-        return CurrentCastState != CastState.Vomiting && _body.Health >= 2 && _soresCastCount < 3;
+        
+        return CurrentCastState != CastState.Vomiting && _body.Health >= 2 && _soresCastCount < 3 && _isGrounded;
     }
 }
