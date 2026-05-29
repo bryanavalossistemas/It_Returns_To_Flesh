@@ -186,7 +186,14 @@ public class FleshRipper : MonoBehaviour
             SelectedRipper = null;
             UIManager.Instance.ClearUI();
         }
+
         Destroy(gameObject);
+
+        if (GameManager.Instance != null)
+        {
+            Debug.Log("Checking remaining rippers...");
+            GameManager.Instance.CheckRemainingRippers();
+        }
     }
 
     public void ApplyLegLoss()

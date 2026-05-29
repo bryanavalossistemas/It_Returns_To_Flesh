@@ -55,10 +55,25 @@ public class SelectionManager: MonoBehaviour
 
         if (Mouse.current.leftButton.wasPressedThisFrame && !isPointerOverUI)
         {
+            
             if (CurrentState == InputState.TargetingLimb)
             {
-                LimbNode limb = GetFirstComponent<LimbNode>(hits);
-                if (limb != null) limb.ReceiveClick();
+                FleshRipper target =
+                    GetFirstComponent<FleshRipper>(hits);
+
+                if (target != null)
+                {
+                    FleshLimbs limbs =
+                        target.GetComponent<FleshLimbs>();
+
+                    if (limbs != null)
+                    {
+                        limbs.DetonateLimb(
+                            FleshLimbs.LimbType.Arms
+                        );
+                    }
+                }
+
                 return;
             }
 
