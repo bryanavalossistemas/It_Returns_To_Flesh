@@ -55,18 +55,10 @@ public class FleshRipper : MonoBehaviour
         CurrentSpeed = speed;
     }
 
-<<<<<<< Updated upstream
-=======
     void Start()
     {
         GameManager.Instance.RegisterRipper();
     }
-
-    private void Update()
-    {
-        DrawHitboxLines();
-    }
->>>>>>> Stashed changes
 
     private void FixedUpdate()
     {

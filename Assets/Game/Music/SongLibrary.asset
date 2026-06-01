@@ -24,6 +24,6 @@ MonoBehaviour:
         Path: event:/BGM/Game
   Scene_Themes:
     _serializedList:
-    - Key: 0
+    - Key: LevelDesign
       Value: Game
   Parameter: PlayState

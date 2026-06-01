@@ -5196,6 +5196,10 @@ MonoBehaviour:
   frenzySpeedMultiplier: 2.5
   soresJumpForceX: 12
   soresJumpForceY: 15
+  _sizeDetector: 0
+  _groundMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &1672482980
 GameObject:
   m_ObjectHideFlags: 0
@@ -6007,18 +6011,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2716032082624753156, guid: b9766f3e2c79e2b409b32fe8ab36fca9, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6774411657159257558, guid: b9766f3e2c79e2b409b32fe8ab36fca9, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.058
-      objectReference: {fileID: 0}
-    - target: {fileID: 6774411657159257558, guid: b9766f3e2c79e2b409b32fe8ab36fca9, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.436
-      objectReference: {fileID: 0}
     - target: {fileID: 7677830470400958208, guid: b9766f3e2c79e2b409b32fe8ab36fca9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.71
