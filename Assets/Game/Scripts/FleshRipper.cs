@@ -17,6 +17,8 @@ public class FleshRipper : MonoBehaviour
     [SerializeField] private Color normalColor = Color.white;
     [SerializeField] private Color selectedColor = Color.green;
     [SerializeField] private Sprite legLessSprite;
+    private const float RayLength = 0.05f;
+    [SerializeField] private LayerMask groundLayer;
          
     public static FleshRipper SelectedRipper { get; set; }
 
@@ -73,6 +75,16 @@ public class FleshRipper : MonoBehaviour
         _rb.angularDamping = 0f;
 
         float appliedSpeed = CurrentSpeed;
+
+        //Choque contra pared
+        bool hitWall = TRaycast(transform, transform.right);
+        if (hitWall)
+        {
+            _direction = _direction * -1;
+            if (_isPushed) _savedDirection *= -1;
+            _turnCoolDown = 0.5f;
+        }
+
         if (IsFrenzied)
         {
             RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right * _direction, frenzyVisionRange, civilianLayer);
@@ -87,6 +99,8 @@ public class FleshRipper : MonoBehaviour
             appliedSpeed /= 1.5f;
         }
         _rb.linearVelocity = new Vector2(appliedSpeed * _direction, _rb.linearVelocity.y);
+
+        RaycastHit2D TRaycast(Transform foot, Vector2 direction) => Physics2D.Raycast(foot.position, direction, RayLength, groundLayer);
     }
 
     public void SelectThisUnit()
@@ -118,7 +132,7 @@ public class FleshRipper : MonoBehaviour
         Debug.Log("flesh selected");
     }
 
-    private void OnCollisionEnter2D(Collision2D col)
+    /*private void OnCollisionEnter2D(Collision2D col)
     {
         if (_turnCoolDown <= 0 && (col.gameObject.CompareTag("Wall") || col.gameObject.GetComponent<FleshRipper>() != null))
         {
@@ -126,7 +140,7 @@ public class FleshRipper : MonoBehaviour
             if (_isPushed) _savedDirection *= -1;
             _turnCoolDown = 0.5f;
         }
-    }
+    }*/
 
     private void OnTriggerEnter2D(Collider2D col)
     {

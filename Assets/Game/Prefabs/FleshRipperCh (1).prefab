@@ -507,6 +507,9 @@ MonoBehaviour:
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   selectedColor: {r: 0, g: 1, b: 0, a: 1}
   legLessSprite: {fileID: 0}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!114 &5012289450544244105
 MonoBehaviour:
   m_ObjectHideFlags: 0
