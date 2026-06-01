@@ -529,7 +529,7 @@ MonoBehaviour:
   _sizeDetector: 0.1
   _groundMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 1024
 --- !u!114 &6757668871874450761
 MonoBehaviour:
   m_ObjectHideFlags: 0
