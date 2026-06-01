@@ -163,7 +163,14 @@ public class FleshRipper : MonoBehaviour
         Destroy(civilian);
         if (ripperPrefab != null)
         {
-            Instantiate(ripperPrefab, spawnPosition, Quaternion.identity);
+            GameObject newRipper =Instantiate(ripperPrefab, spawnPosition, Quaternion.identity);
+        FleshRipper zombieStats = newRipper.GetComponent<FleshRipper>();           
+        zombieStats.maxHealth = zombieStats.MaxHealth;
+        if (zombieStats != null)
+        {
+            
+            zombieStats.ModifyHealth(zombieStats.MaxHealth); 
+        }
         }
     }
 

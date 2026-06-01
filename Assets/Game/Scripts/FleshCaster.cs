@@ -130,7 +130,7 @@ public class FleshCaster :MonoBehaviour
             FleshLimbs limbs = GetComponent<FleshLimbs>();
             if (limbs != null)
             {
-                limbs.DetonateLimb(FleshLimbs.LimbType.Legs, false);
+                
             }
             if (FleshRipper.SelectedRipper == _body && UIManager.Instance != null)
             {
