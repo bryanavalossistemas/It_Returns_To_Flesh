@@ -1,6 +1,5 @@
-using System;
-using UnityEditor.Rendering.Universal;
 using UnityEngine;
+using static BehaviourPlus;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class FleshRipper : MonoBehaviour
@@ -22,11 +21,11 @@ public class FleshRipper : MonoBehaviour
          
     public static FleshRipper SelectedRipper { get; set; }
 
-    private Rigidbody2D _rb;
+    [Header("Components")]
+    [SerializeField] private Rigidbody2D _rb;
     private LineRenderer _hitboxVisualizer;
     private int _direction = 1;
-    private Collider2D _col;
-    private BoxCollider2D _boxCollider;
+    [SerializeField] private BoxCollider2D _boxCollider;
     public int Health => health;
     public int MaxHealth => maxHealth;
     public float CurrentSpeed { get; set; }
@@ -51,15 +50,12 @@ public class FleshRipper : MonoBehaviour
 
     private void Awake()
     {
-        _rb = GetComponent<Rigidbody2D>();
-        _col = GetComponent<Collider2D>();
-        _boxCollider = GetComponent<BoxCollider2D>();
         CurrentSpeed = speed;
     }
 
     void Start()
     {
-        GameManager.Instance.RegisterRipper();
+        gameManager.RegisterRipper();
     }
 
     private void FixedUpdate()

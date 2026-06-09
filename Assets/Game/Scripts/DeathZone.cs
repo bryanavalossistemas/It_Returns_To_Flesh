@@ -1,4 +1,5 @@
 using UnityEngine;
+using static BehaviourPlus;
 
 public class DeathZone : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class DeathZone : MonoBehaviour
         {
             Debug.Log("Ripper destroyed");
             Destroy(ripper.gameObject);
-            GameManager.Instance.DeadRipper();
+            gameManager.DeadRipper();
         }
         else
         {

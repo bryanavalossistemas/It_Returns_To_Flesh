@@ -1,18 +1,21 @@
-using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance;
-
     [Header("Respawn")]
     [SerializeField] private GameObject ripperPrefab;
-    [SerializeField] private Transform spawnPoint;
+    private Transform spawnPoint;
     int totalRippers;
 
-    private void Awake()
+    void Awake()
     {
-        Instance = this;
+        SceneManager.sceneLoaded += SceneLoaded;
+    }
+
+    private void SceneLoaded(Scene arg0, LoadSceneMode arg1)
+    {
+        spawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint").transform;
     }
 
     public void RegisterRipper() => totalRippers++;
@@ -25,12 +28,7 @@ public class GameManager : MonoBehaviour
 
     private void SpawnNewRipper()
     {
-        Instantiate(
-            ripperPrefab,
-            spawnPoint.position,
-            Quaternion.identity
-        );
-
+        Instantiate(ripperPrefab, spawnPoint.position, Quaternion.identity);
         Debug.Log("NEW RIPPER SPAWNED");
     }
 }
