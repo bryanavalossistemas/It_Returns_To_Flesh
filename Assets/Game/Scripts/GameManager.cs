@@ -33,4 +33,9 @@ public class GameManager : MonoBehaviour
 
         Debug.Log("NEW RIPPER SPAWNED");
     }
+    public void UpdateCheckPoint(Transform newCheckPoint)
+    {
+    spawnPoint = newCheckPoint;
+    Debug.Log("¡Checkpoint actualizado!");
+    }
 }

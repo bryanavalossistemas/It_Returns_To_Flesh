@@ -4,16 +4,15 @@ using UnityEngine.InputSystem;
 public class CameraController : MonoBehaviour
 {
     [SerializeField] private float speed = 15f;
-    [SerializeField] private float minX = -100f;
-    [SerializeField] private float maxX = 100f;
-    [SerializeField] private float minY = -50f; 
-    [SerializeField] private float maxY = 50f;
+    [SerializeField] private float minX = -10.996f;
+    [SerializeField] private float maxX = 185.95f;
+    [SerializeField] private float minY = -7.991f; 
+    [SerializeField] private float maxY = 12.98f;
 
     [Header("Zoom")]
     [SerializeField] private float zoomSensitivity = 1f;
     [SerializeField] private float minZoom = 5f;
     [SerializeField] private float maxZoom = 30f;
-
     private InputAction _moveAction;
     private Camera _cam;
 
