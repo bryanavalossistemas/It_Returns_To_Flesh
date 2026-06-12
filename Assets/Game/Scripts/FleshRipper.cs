@@ -83,6 +83,7 @@ public class FleshRipper : MonoBehaviour
             _direction = _direction * -1;
             if (_isPushed) _savedDirection *= -1;
             _turnCoolDown = 0.5f;
+            
         }
 
         if (IsFrenzied)
@@ -92,6 +93,7 @@ public class FleshRipper : MonoBehaviour
             {
                 appliedSpeed *= dashMultiplier;
             }
+
         }
         
         if (!HasLegs)
@@ -254,6 +256,10 @@ public class FleshRipper : MonoBehaviour
                 _direction *= -1;
                 if (_isPushed) _savedDirection *= -1;
                 _turnCoolDown = 0.5f;
+                if (mainSpriteRenderer != null)
+    {
+        transform.localScale = new Vector3(_direction, 1f, 1f);
+    }
             }
 
         }
