@@ -1,4 +1,5 @@
 using UnityEngine;
+using static BehaviourPlus;
 
 [RequireComponent (typeof(FleshRipper))]
 public class FleshCaster :MonoBehaviour
@@ -132,10 +133,10 @@ public class FleshCaster :MonoBehaviour
             {
                 
             }
-            if (FleshRipper.SelectedRipper == _body && UIManager.Instance != null)
+            if (FleshRipper.SelectedRipper == _body)
             {
                 _body.SelectThisUnit();
-                if (UIManager.Instance != null) UIManager.Instance.ResetSkillHighlight();
+                uiManager.ResetSkillHighlight();
             }
         }
     }

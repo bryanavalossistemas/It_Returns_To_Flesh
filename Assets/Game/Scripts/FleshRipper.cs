@@ -1,9 +1,10 @@
 using UnityEngine;
 using static BehaviourPlus;
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(SpriteRenderer),typeof(Animator)), RequireComponent(typeof(Rigidbody2D),typeof(BoxCollider2D))]
 public class FleshRipper : MonoBehaviour
 {
+    [SerializeField] private RipperData ripperData;
     [Header("Stats")]
     [SerializeField] private float speed = 3f;
     [SerializeField] private int health = 11;
@@ -51,6 +52,7 @@ public class FleshRipper : MonoBehaviour
     private void Awake()
     {
         CurrentSpeed = speed;
+        UpdateFacing();
     }
 
     void Start()
@@ -77,6 +79,7 @@ public class FleshRipper : MonoBehaviour
         if (hitWall)
         {
             _direction = _direction * -1;
+            UpdateFacing();
             if (_isPushed) _savedDirection *= -1;
             _turnCoolDown = 0.5f;
             
@@ -112,13 +115,13 @@ public class FleshRipper : MonoBehaviour
 
         SetSelectedVisual(true);
 
-        UIManager.Instance.UpdateHealth(health, maxHealth);
+        uiManager.UpdateHealth(health, maxHealth);
 
         FleshCaster caster = GetComponent<FleshCaster>();
 
         if (caster != null)
         {
-            UIManager.Instance.ConfigureBiologicalLimits(
+            uiManager.ConfigureBiologicalLimits(
                 caster.CanCastVomit(),
                 caster.CanCastSores(),
                 true,
@@ -179,7 +182,7 @@ public class FleshRipper : MonoBehaviour
         if (health > maxHealth) health = maxHealth;
         if (SelectedRipper == this)
         {
-            UIManager.Instance.UpdateHealth(health, maxHealth);
+            uiManager.UpdateHealth(health, maxHealth);
         }
         if (health <= 0)
         {
@@ -192,7 +195,7 @@ public class FleshRipper : MonoBehaviour
         if (SelectedRipper == this)
         {
             SelectedRipper = null;
-            UIManager.Instance.ClearUI();
+            uiManager.ClearUI();
         }
 
         Destroy(gameObject);
@@ -225,6 +228,7 @@ public class FleshRipper : MonoBehaviour
 
         if (force.x > 0) _direction = 1;
         else if (force.x < 0) _direction = -1;
+        UpdateFacing();
     }
 
     private void OnCollisionStay2D(Collision2D col)
@@ -250,6 +254,7 @@ public class FleshRipper : MonoBehaviour
             if (hitWall || col.gameObject.CompareTag("Wall") || col.gameObject.GetComponent<FleshRipper>() != null)
             {
                 _direction *= -1;
+                UpdateFacing();
                 if (_isPushed) _savedDirection *= -1;
                 _turnCoolDown = 0.5f;
                 if (mainSpriteRenderer != null)
@@ -259,5 +264,12 @@ public class FleshRipper : MonoBehaviour
             }
 
         }
+    }
+
+    private void UpdateFacing()
+    {
+        Vector3 scale = transform.localScale;
+        scale.x = Mathf.Abs(scale.x) * _direction;
+        transform.localScale = scale;
     }
 }

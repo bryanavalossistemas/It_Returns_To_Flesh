@@ -1,9 +1,7 @@
-using Mono.Cecil;
-using TMPro.EditorUtilities;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
-using System.Runtime.CompilerServices;
+using static BehaviourPlus;
 
 public class SelectionManager : MonoBehaviour
 {
@@ -50,7 +48,7 @@ public class SelectionManager : MonoBehaviour
 
             FleshRipper.SelectedRipper = null;
 
-            UIManager.Instance.ClearUI();
+            uiManager.ClearUI();
 
             return;
         }
@@ -81,14 +79,14 @@ public class SelectionManager : MonoBehaviour
 
             if (hoveredRipper != null)
             {
-                UIManager.Instance.UpdateHealth(
+                uiManager.UpdateHealth(
                     hoveredRipper.Health,
                     hoveredRipper.MaxHealth
                 );
             }
             else
             {
-                UIManager.Instance.ClearUI();
+                uiManager.ClearUI();
             }
         }
 

@@ -1,10 +1,11 @@
 using UnityEngine;
+using static BehaviourPlus;
 
 public class Checkpoint : MonoBehaviour
 {
     private bool isActivated = false;
 
-    private void OnTriggerEnter2D(Collider2D col)
+    void OnTriggerEnter2D(Collider2D col)
     {
         if (isActivated) return;
 
@@ -13,7 +14,7 @@ public class Checkpoint : MonoBehaviour
         if (ripper != null)
         {
             isActivated = true;
-             GameManager.Instance.UpdateCheckPoint(this.transform);
+             gameManager.UpdateCheckPoint(transform);
         }
     }
 }

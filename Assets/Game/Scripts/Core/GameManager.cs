@@ -3,33 +3,39 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public const int CivilianLayer = 9, ExplodableLayer = 11, InstakillLayer = 8;
+    public const float RayLength = 0.05f;
+    [SerializeField] private GameObject gameplayOnly;
     [Header("Respawn")]
     [SerializeField] private GameObject ripperPrefab;
+    public LayerMask groundLayer, pushableLayer;
     private Transform spawnPoint;
-    int totalRippers;
+    private int nRippers;
+    public Material normalMat, ripperSelectedMat;
 
-    void Awake()
-    {
-        SceneManager.sceneLoaded += SceneLoaded;
-    }
+    void Awake() => SceneManager.sceneLoaded += SceneLoaded;
+    void OnDestroy() => SceneManager.sceneLoaded -= SceneLoaded;
 
-    private void SceneLoaded(Scene arg0, LoadSceneMode arg1)
+    private void SceneLoaded(Scene scene, LoadSceneMode loadMode)
     {
+        bool inGameplay = scene.buildIndex > 1;
+        gameplayOnly.SetActive(inGameplay);
+        Time.timeScale = 1f;
+        if (!inGameplay) return;
+
         spawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint").transform;
     }
 
-    public void RegisterRipper() => totalRippers++;
-
+    public void RegisterRipper() => nRippers++;
     public void DeadRipper()
     {
-        totalRippers--;
-        if (totalRippers <= 0) SpawnNewRipper();
+        nRippers--;
+        if (nRippers <= 0) SpawnRipper(spawnPoint);
     }
 
-    private void SpawnNewRipper()
+    private void SpawnRipper(Transform transform)
     {
-        Instantiate(ripperPrefab, spawnPoint.position, Quaternion.identity);
-        Debug.Log("NEW RIPPER SPAWNED");
+        Instantiate(ripperPrefab, transform.position, Quaternion.identity);
     }
     public void UpdateCheckPoint(Transform newCheckPoint)
     {

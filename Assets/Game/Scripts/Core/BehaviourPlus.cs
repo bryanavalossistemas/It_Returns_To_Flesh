@@ -1,13 +1,13 @@
-using UnityEngine;
-
 public static class BehaviourPlus
 {
     public static GameManager gameManager;
     public static UIManager uiManager;
 
-    public static void Init(GameManager gm, UIManager um)
+    public static bool Init(GameManager gm, UIManager um)
     {
+        if (gameManager != null) return false;
         gameManager = gm;
         uiManager = um;
+        return true;
     }
 }

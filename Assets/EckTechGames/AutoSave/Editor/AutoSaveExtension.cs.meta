@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7b0412035f55dbd41961c46eda8c116a
+guid: 07f267af4dcecd5449d8c996902d7f0b
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
@@ -11,8 +11,8 @@ MonoImporter:
   assetBundleVariant: 
 AssetOrigin:
   serializedVersion: 1
-  productId: 243052
-  packageName: Serialized Dictionary
-  packageVersion: 1.0.13
-  assetPath: Assets/Plugins/SerializedCollections/Sample/SerializedDictionarySampleTwo.cs
-  uploadId: 632226
+  productId: 43605
+  packageName: AutoSave
+  packageVersion: 1.1
+  assetPath: Assets/EckTechGames/AutoSave/Editor/AutoSaveExtension.cs
+  uploadId: 498246
