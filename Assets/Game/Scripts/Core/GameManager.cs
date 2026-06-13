@@ -5,7 +5,6 @@ public class GameManager : MonoBehaviour
 {
     public const int CivilianLayer = 9, ExplodableLayer = 11, InstakillLayer = 8;
     public const float RayLength = 0.05f;
-    [SerializeField] private GameObject gameplayOnly;
     [Header("Respawn")]
     [SerializeField] private GameObject ripperPrefab;
     public LayerMask groundLayer, pushableLayer;
@@ -18,8 +17,8 @@ public class GameManager : MonoBehaviour
 
     private void SceneLoaded(Scene scene, LoadSceneMode loadMode)
     {
-        bool inGameplay = scene.buildIndex > 1;
-        gameplayOnly.SetActive(inGameplay);
+        bool inGameplay = scene.buildIndex > 0;
+        gameObject.SetActive(inGameplay);
         Time.timeScale = 1f;
         if (!inGameplay) return;
 

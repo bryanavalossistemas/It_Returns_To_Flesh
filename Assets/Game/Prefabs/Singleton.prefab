@@ -47,7 +47,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   ripperPrefab: {fileID: 8939549028696894721, guid: b9766f3e2c79e2b409b32fe8ab36fca9, type: 3}
-  spawnPoint: {fileID: 0}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  pushableLayer:
+    serializedVersion: 2
+    m_Bits: 448
+  normalMat: {fileID: 0}
+  ripperSelectedMat: {fileID: 0}
 --- !u!1 &502147735370196554
 GameObject:
   m_ObjectHideFlags: 0
@@ -861,7 +868,6 @@ GameObject:
   - component: {fileID: 854018115248661717}
   - component: {fileID: 2991430906305684802}
   - component: {fileID: 567277299830013968}
-  - component: {fileID: 7899602254332951846}
   - component: {fileID: 88981104382565792}
   - component: {fileID: 3100297495023925934}
   m_Layer: 0
@@ -921,7 +927,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -981,26 +987,6 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
---- !u!114 &7899602254332951846
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3062044081181203808}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b549289e3dd583342b7bcbeaea054cd7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CameraController
-  speed: 35
-  minX: -10
-  maxX: 50
-  minY: -5
-  maxY: 5
-  zoomSensitivity: 70
-  minZoom: 1
-  maxZoom: 20
 --- !u!114 &88981104382565792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1280,6 +1266,7 @@ GameObject:
   - component: {fileID: 1123141448042725873}
   - component: {fileID: 6100203260620696905}
   - component: {fileID: 2938690047417260710}
+  - component: {fileID: 159558059313680156}
   m_Layer: 0
   m_Name: CinemachineCamera
   m_TagString: Untagged
@@ -1327,7 +1314,7 @@ MonoBehaviour:
     CustomLookAtTarget: 0
   Lens:
     FieldOfView: 60
-    OrthographicSize: 10
+    OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -1365,6 +1352,27 @@ MonoBehaviour:
     MaxWindowSize: 0
     Padding: 0
   m_LegacyMaxWindowSize: -2
+--- !u!114 &159558059313680156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3617712336057408101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b549289e3dd583342b7bcbeaea054cd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraController
+  speed: 35
+  minX: -10
+  maxX: 50
+  minY: -5
+  maxY: 5
+  zoomSensitivity: 70
+  minZoom: 1
+  maxZoom: 20
+  _cam: {fileID: 6100203260620696905}
 --- !u!1 &3709950324504258576
 GameObject:
   m_ObjectHideFlags: 0
@@ -2119,9 +2127,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea19b010b94c178439af09fec0bddef9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Core
-  gameplayOnly: {fileID: 272395599228231880}
   gameManager: {fileID: 8849794092704661988}
-  uiManager: {fileID: 0}
+  uiManager: {fileID: 6553777428056829156}
 --- !u!114 &6342506370883500296
 MonoBehaviour:
   m_ObjectHideFlags: 0

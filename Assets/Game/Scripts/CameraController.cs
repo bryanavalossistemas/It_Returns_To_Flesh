@@ -1,3 +1,4 @@
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,13 +15,15 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float minZoom = 5f;
     [SerializeField] private float maxZoom = 30f;
     private InputAction _moveAction;
-    private Camera _cam;
+    [SerializeField] private CinemachineCamera _cam;
+    private LensSettings lens;
 
     void Start()
     {
         _moveAction = InputSystem.actions["Player/Move"];
-        _cam = GetComponent<Camera>();
-        _cam.orthographicSize = Mathf.Clamp(_cam.orthographicSize, minZoom, maxZoom);
+        lens = _cam.Lens;
+        lens.OrthographicSize = Mathf.Clamp(lens.OrthographicSize, minZoom, maxZoom);
+        _cam.Lens = lens;
     }
 
     void Update()
@@ -37,7 +40,7 @@ public class CameraController : MonoBehaviour
             }
         }
         Vector2 moveInput = _moveAction.ReadValue<Vector2>();
-        Vector3 newPos = transform.position + new Vector3(moveInput.x, moveInput.y, 0) * speed * Time.unscaledDeltaTime;
+        Vector3 newPos = transform.position + speed * Time.unscaledDeltaTime * (Vector3)moveInput;
         newPos.x = Mathf.Clamp(newPos.x, minX, maxX);
         newPos.y = Mathf.Clamp(newPos.y, minY, maxY);
         transform.position = newPos;
@@ -46,8 +49,9 @@ public class CameraController : MonoBehaviour
         if (scrollDelta != 0)
         {
             float zoomAmount = (scrollDelta / 120f) * zoomSensitivity;
-            float targetZoom = _cam.orthographicSize - zoomAmount;
-            _cam.orthographicSize = Mathf.Clamp(targetZoom, minZoom, maxZoom);
+            float targetZoom = lens.OrthographicSize - zoomAmount;
+            lens.OrthographicSize = Mathf.Clamp(targetZoom, minZoom, maxZoom);
+            _cam.Lens = lens;
         }
     }
 }
