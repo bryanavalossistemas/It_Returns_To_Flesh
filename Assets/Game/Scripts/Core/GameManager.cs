@@ -31,4 +31,9 @@ public class GameManager : MonoBehaviour
         Instantiate(ripperPrefab, spawnPoint.position, Quaternion.identity);
         Debug.Log("NEW RIPPER SPAWNED");
     }
+    public void UpdateCheckPoint(Transform newCheckPoint)
+    {
+    spawnPoint = newCheckPoint;
+    Debug.Log("¡Checkpoint actualizado!");
+    }
 }
