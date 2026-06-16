@@ -10,40 +10,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
-  m_Name: Menus_en
+  m_Name: Gameplay_en
   m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.StringTable
   m_LocaleId:
     m_Code: en
-  m_SharedData: {fileID: 11400000, guid: 0192e1361fd12bf4fae5982baa4c223e, type: 2}
+  m_SharedData: {fileID: 11400000, guid: 0c1509f7d93192d4bb9d95aba048f936, type: 2}
   m_Metadata:
     m_Items: []
   m_TableData:
-  - m_Id: 205300932673536
-    m_Localized: IT RETURNS TO FLESH
+  - m_Id: 68491542528
+    m_Localized: Vomit (stay)
     m_Metadata:
       m_Items: []
-  - m_Id: 574003478134784
-    m_Localized: Quit
+  - m_Id: 301959086080
+    m_Localized: Sores (jump)
     m_Metadata:
       m_Items: []
-  - m_Id: 205409179271168
-    m_Localized: Play
+  - m_Id: 363997036544
+    m_Localized: Explode (wave impulse)
     m_Metadata:
       m_Items: []
-  - m_Id: 205446223364096
-    m_Localized: Options
+  - m_Id: 712262680576
+    m_Localized: Frenzy (run)
     m_Metadata:
       m_Items: []
-  - m_Id: 205480205615104
-    m_Localized: Credits
-    m_Metadata:
-      m_Items: []
-  - m_Id: 647326195122176
-    m_Localized: 'Health:'
-    m_Metadata:
-      m_Items: []
-  - m_Id: 647367521599488
-    m_Localized: Reserve
+  - m_Id: 706499706880
+    m_Localized: WIP
     m_Metadata:
       m_Items: []
   references:

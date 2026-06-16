@@ -121,13 +121,7 @@ public class FleshRipper : MonoBehaviour
 
         if (caster != null)
         {
-            uiManager.ConfigureBiologicalLimits(
-                caster.CanCastVomit(),
-                caster.CanCastSores(),
-                true,
-                true,
-                caster.CanCastFrenzy()
-            );
+            //uiManager.ConfigureBiologicalLimits(caster.CanCastVomit(), caster.CanCastSores(), true, true, caster.CanCastFrenzy());
         }
 
         Debug.Log("flesh selected");

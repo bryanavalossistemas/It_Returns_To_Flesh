@@ -10,47 +10,39 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
-  m_Name: Menus Shared Data
+  m_Name: Gameplay Shared Data
   m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.SharedTableData
-  m_TableCollectionName: Menus
-  m_TableCollectionNameGuidString: 0192e1361fd12bf4fae5982baa4c223e
+  m_TableCollectionName: Gameplay
+  m_TableCollectionNameGuidString: 0c1509f7d93192d4bb9d95aba048f936
   m_Entries:
-  - m_Id: 205300932673536
-    m_Key: Title
+  - m_Id: 68491542528
+    m_Key: Vomit
     m_Metadata:
       m_Items: []
-  - m_Id: 205409179271168
-    m_Key: Play
+  - m_Id: 301959086080
+    m_Key: Sores
     m_Metadata:
       m_Items: []
-  - m_Id: 205446223364096
-    m_Key: Options
+  - m_Id: 363997036544
+    m_Key: Explode
     m_Metadata:
       m_Items: []
-  - m_Id: 205480205615104
-    m_Key: Credits
+  - m_Id: 706499706880
+    m_Key: Cephalic
     m_Metadata:
       m_Items: []
-  - m_Id: 574003478134784
-    m_Key: Quit
-    m_Metadata:
-      m_Items: []
-  - m_Id: 647326195122176
-    m_Key: Health
-    m_Metadata:
-      m_Items: []
-  - m_Id: 647367521599488
-    m_Key: Reserve
+  - m_Id: 712262680576
+    m_Key: Frenzy
     m_Metadata:
       m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
-    rid: 6250280798602657900
+    rid: 6250280834752053943
   references:
     version: 2
     RefIds:
-    - rid: 6250280798602657900
+    - rid: 6250280834752053943
       type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
       data:
-        m_CustomEpoch: 1781323209862
+        m_CustomEpoch: 1781477506904

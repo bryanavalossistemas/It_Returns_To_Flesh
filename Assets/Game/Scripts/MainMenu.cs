@@ -12,9 +12,9 @@ public class MainMenu : MonoBehaviour
     {
         VisualElement root = uiDocument.rootVisualElement;
 
-        Button btnPlay = root.Q<Button>("btn-play");
-        Button btnOptions = root.Q<Button>("btn-opt");
-        Button btnQuit = root.Q<Button>("btn-quit");
+        Button btnPlay = root.Q<Button>("play");
+        Button btnOptions = root.Q<Button>("options");
+        Button btnQuit = root.Q<Button>("quit");
 
         btnPlay.clicked += OnPlay;
         //btnOptions.clicked += () => panelOptions.RemoveFromClassList("hidden");
@@ -53,7 +53,7 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-    private void OnPlay() => Core.ChangeScene(2);
+    private void OnPlay() => Core.ChangeScene(1);
     private void OnQuit() => Core.QuitGame();
     private void ShowOptions() => panelOptions.style.display = DisplayStyle.Flex;
     private void HideOptions() => panelOptions.style.display = DisplayStyle.None;

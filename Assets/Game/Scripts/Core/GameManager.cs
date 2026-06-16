@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static BehaviourPlus;
 
 public class GameManager : MonoBehaviour
 {
@@ -38,7 +40,49 @@ public class GameManager : MonoBehaviour
     }
     public void UpdateCheckPoint(Transform newCheckPoint)
     {
-    spawnPoint = newCheckPoint;
-    Debug.Log("¡Checkpoint actualizado!");
+        spawnPoint = newCheckPoint;
+        Debug.Log("¡Checkpoint actualizado!");
+    }
+
+    void Update()
+    {
+        if (inputHandler.Pause) Time.timeScale = Time.timeScale == 0f ? 1f : 0f;
+        //PauseMenu.instance.TogglePauseMenu();
+    }
+
+    public void TriggerSkill(int pos)
+    {
+        Action[] skills = { SkillVomit, SkillSores, SkillExplode, SkillCephalic, SkillFrenzy };
+        skills[pos].Invoke();
+        FleshRipper.SelectedRipper = null;
+        uiManager.ClearUI();
+    }
+
+    private void SkillVomit()
+    {
+        SelectionManager.CurrentState = SelectionManager.InputState.QuickCast;
+        SelectionManager.PendingSkillID = 1;
+    }
+
+    private void SkillSores()
+    {
+        SelectionManager.CurrentState = SelectionManager.InputState.QuickCast;
+        SelectionManager.PendingSkillID = 2;
+    }
+
+    private void SkillExplode()
+    {
+        SelectionManager.CurrentState = SelectionManager.InputState.TargetingLimb;
+    }
+
+    private void SkillCephalic()
+    {
+
+    }
+
+    private void SkillFrenzy()
+    {
+        SelectionManager.CurrentState = SelectionManager.InputState.QuickCast;
+        SelectionManager.PendingSkillID = 5;
     }
 }

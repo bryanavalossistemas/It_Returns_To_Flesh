@@ -17,7 +17,35 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: 0192e1361fd12bf4fae5982baa4c223e, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 205300932673536
+    m_Localized: REGRESA A LA CARNE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 205409179271168
+    m_Localized: Jugar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 205446223364096
+    m_Localized: Opciones
+    m_Metadata:
+      m_Items: []
+  - m_Id: 205480205615104
+    m_Localized: "Cr\xE9ditos"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 574003478134784
+    m_Localized: Salir
+    m_Metadata:
+      m_Items: []
+  - m_Id: 647326195122176
+    m_Localized: 'Salud:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 647367521599488
+    m_Localized: Reservas
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
