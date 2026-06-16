@@ -123,6 +123,7 @@ public class FleshCaster :MonoBehaviour
         if (_animator != null)
         {
             _animator.SetInteger("Llagas", _soresCastCount);
+            _animator.SetTrigger("Jump");
         }
         Vector2 jumpForce = new Vector2(soresJumpForceX * _body.FacingDirection, soresJumpForceY);
         _body.ApplyKnockback(jumpForce);
