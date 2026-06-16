@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using static BehaviourPlus;
 
@@ -13,6 +14,14 @@ public class GameManager : MonoBehaviour
     private Transform spawnPoint;
     private int nRippers;
     public Material normalMat, ripperSelectedMat;
+    public int selectedSkill = -1;
+    public enum SelectionTarget
+    {
+        None,
+        Ripper,
+        Limb
+    }
+    public SelectionTarget selectionTarget;
 
     void Awake() => SceneManager.sceneLoaded += SceneLoaded;
     void OnDestroy() => SceneManager.sceneLoaded -= SceneLoaded;
@@ -46,8 +55,24 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (inputHandler.Pause) Time.timeScale = Time.timeScale == 0f ? 1f : 0f;
+        if (inputManager.Pause) Time.timeScale = Time.timeScale == 0f ? 1f : 0f;
         //PauseMenu.instance.TogglePauseMenu();
+        bool[] _numbers = { inputManager._1, inputManager._2, inputManager._3, inputManager._4, inputManager._5 };
+        for (int i = 0; i < _numbers.Length; i++)
+        {
+            if (_numbers[i]) uiManager.SelectButton(i);
+        }
+        if (inputManager.Deselect)
+        {
+            selectedSkill = -1;
+            //cameraController targer = null
+            if (FleshRipper.SelectedRipper != null)
+            {
+                FleshRipper.SelectedRipper.SetSelectedVisual(false);
+                FleshRipper.SelectedRipper = null;
+            }
+            uiManager.ClearUI();
+        }
     }
 
     public void TriggerSkill(int pos)
@@ -60,19 +85,17 @@ public class GameManager : MonoBehaviour
 
     private void SkillVomit()
     {
-        SelectionManager.CurrentState = SelectionManager.InputState.QuickCast;
-        SelectionManager.PendingSkillID = 1;
+        selectionTarget = SelectionTarget.Ripper;
     }
 
     private void SkillSores()
     {
-        SelectionManager.CurrentState = SelectionManager.InputState.QuickCast;
-        SelectionManager.PendingSkillID = 2;
+        selectionTarget = SelectionTarget.Ripper;
     }
 
     private void SkillExplode()
     {
-        SelectionManager.CurrentState = SelectionManager.InputState.TargetingLimb;
+        selectionTarget = SelectionTarget.Limb;
     }
 
     private void SkillCephalic()
@@ -82,7 +105,6 @@ public class GameManager : MonoBehaviour
 
     private void SkillFrenzy()
     {
-        SelectionManager.CurrentState = SelectionManager.InputState.QuickCast;
-        SelectionManager.PendingSkillID = 5;
+        selectionTarget = SelectionTarget.Ripper;
     }
 }

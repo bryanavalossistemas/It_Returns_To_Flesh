@@ -55,6 +55,8 @@ MonoBehaviour:
     m_Bits: 448
   normalMat: {fileID: 0}
   ripperSelectedMat: {fileID: 0}
+  selectedSkill: -1
+  selectionTarget: 0
 --- !u!1 &633721334592762128
 GameObject:
   m_ObjectHideFlags: 0
@@ -408,7 +410,7 @@ MonoBehaviour:
   m_XRTrackingOrigin: {fileID: 0}
   m_ActionsAsset: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
   m_PointAction: {fileID: -1654692200621890270, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_MoveAction: {fileID: -8784545083839296357, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_MoveAction: {fileID: 0}
   m_SubmitAction: {fileID: 392368643174621059, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
   m_CancelAction: {fileID: 7727032971491509709, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
   m_LeftClickAction: {fileID: 3001919216989983466, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
@@ -1237,8 +1239,9 @@ GameObject:
   - component: {fileID: 6380891523433051109}
   - component: {fileID: 6493199828588462059}
   - component: {fileID: 6342506370883500296}
+  - component: {fileID: 5601232880861483884}
   - component: {fileID: 1142410005317995247}
-  - component: {fileID: 5992583702937980956}
+  - component: {fileID: 8909878579151716242}
   m_Layer: 0
   m_Name: Singleton
   m_TagString: Untagged
@@ -1278,7 +1281,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Core
   gameManager: {fileID: 8849794092704661988}
-  inputHandler: {fileID: 5992583702937980956}
+  inputManager: {fileID: 8909878579151716242}
+  selectionManager: {fileID: 5601232880861483884}
   uiManager: {fileID: 6553777428056829156}
 --- !u!114 &6342506370883500296
 MonoBehaviour:
@@ -1292,6 +1296,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20ed61047393b40488a5ce401bf5566b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpdateManager
+--- !u!114 &5601232880861483884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7373287120759380130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e120859968f28a946a587e037c160eaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SelectionManager
 --- !u!114 &1142410005317995247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1305,7 +1321,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
   _songLibrary: {fileID: 11400000, guid: ba6fe0a9892f7334a87751395208410c, type: 2}
---- !u!114 &5992583702937980956
+--- !u!114 &8909878579151716242
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1314,13 +1330,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 7373287120759380130}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec49be4095c81484eb675b5b40272908, type: 3}
+  m_Script: {fileID: 11500000, guid: ad631d08ddbd8814aa44cdd42a69d529, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InputHandler
+  m_EditorClassIdentifier: Assembly-CSharp::InputManager
   moveAction: {fileID: 497469923386048288, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   panAction: {fileID: -2018140766406845618, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   zoomAction: {fileID: 7762212343192942875, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   pauseAction: {fileID: 5187799899868384099, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  _1Action: {fileID: -2005444852687853336, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  _2Action: {fileID: 7736414204305748541, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  _3Action: {fileID: -8698227757634464462, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  _4Action: {fileID: 2648885315527614094, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  _5Action: {fileID: 1550600631267827703, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  deselectAction: {fileID: 2932674152201632102, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  pointerPosAction: {fileID: 1431184514859085871, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  pointerClickAction: {fileID: -6936088188447603565, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
 --- !u!1 &7599789758100059916
 GameObject:
   m_ObjectHideFlags: 0
@@ -1601,6 +1625,10 @@ MonoBehaviour:
   - {fileID: 3979468843304996231}
   - {fileID: 2144813536813880206}
   - {fileID: 4608311627468064263}
+  _normalColor: {r: 0.5647059, g: 0.14509805, b: 0.14509805, a: 1}
+  _dangerColor: {r: 1, g: 0, b: 0, a: 1}
+  _disabledColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+  _selectedColor: {r: 0, g: 1, b: 0, a: 1}
 --- !u!1 &9032701283618941833
 GameObject:
   m_ObjectHideFlags: 0

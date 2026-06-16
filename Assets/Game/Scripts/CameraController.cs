@@ -22,16 +22,20 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-        Vector3 newPos = transform.position + speed * Time.unscaledDeltaTime * (Vector3)inputHandler.Move + pan * (Vector3)inputHandler.Pan;
+        Vector3 newPos = transform.position + speed * Time.unscaledDeltaTime * (Vector3)inputManager.Move + pan * (Vector3)inputManager.Pan;
         //newPos.x = Mathf.Clamp(newPos.x, minX, maxX);
         //newPos.y = Mathf.Clamp(newPos.y, minY, maxY);
         transform.position = newPos;
 
-        float zoom = inputHandler.Zoom;
+        float zoom = inputManager.Zoom;
         if (zoom != 0)
         {
             lens.OrthographicSize = Mathf.Clamp(lens.OrthographicSize - zoom * zoomSensitivity, minZoom, maxZoom);
             cam.Lens = lens;
-        }     
+        }
+
+        if ((inputManager.Move + inputManager.Pan).magnitude > 0) SetFollow(null);
     }
+
+    public void SetFollow(Transform t) => cam.Follow = t;
 }

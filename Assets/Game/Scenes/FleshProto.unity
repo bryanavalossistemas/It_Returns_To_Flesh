@@ -2235,51 +2235,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1574834462}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &438425599
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 438425601}
-  - component: {fileID: 438425600}
-  m_Layer: 0
-  m_Name: SelectionManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &438425600
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 438425599}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e120859968f28a946a587e037c160eaf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SelectionManager
-  _cam: {fileID: 1351633780}
---- !u!4 &438425601
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 438425599}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &453206014
 GameObject:
   m_ObjectHideFlags: 0
@@ -2879,18 +2834,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6553777428056829156, guid: a466d0754ddddb144a29f003c0540abf, type: 3}
-      propertyPath: _normalColor.b
-      value: 0.14509805
-      objectReference: {fileID: 0}
-    - target: {fileID: 6553777428056829156, guid: a466d0754ddddb144a29f003c0540abf, type: 3}
-      propertyPath: _normalColor.g
-      value: 0.14509805
-      objectReference: {fileID: 0}
-    - target: {fileID: 6553777428056829156, guid: a466d0754ddddb144a29f003c0540abf, type: 3}
-      propertyPath: _normalColor.r
-      value: 0.5647059
-      objectReference: {fileID: 0}
     - target: {fileID: 7373287120759380130, guid: a466d0754ddddb144a29f003c0540abf, type: 3}
       propertyPath: m_Name
       value: Singleton
@@ -2900,11 +2843,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a466d0754ddddb144a29f003c0540abf, type: 3}
---- !u!20 &1351633780 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 2991430906305684802, guid: a466d0754ddddb144a29f003c0540abf, type: 3}
-  m_PrefabInstance: {fileID: 1351633779}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1399670377
 GameObject:
   m_ObjectHideFlags: 0
@@ -3522,8 +3460,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1351633779}
-  - {fileID: 1574834462}
   - {fileID: 1788727578}
-  - {fileID: 438425601}
   - {fileID: 223907453}
   - {fileID: 1214212398}
+  - {fileID: 1574834462}

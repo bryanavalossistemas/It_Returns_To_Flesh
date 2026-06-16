@@ -2,9 +2,11 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class InputHandler : MonoBehaviour_UL, ILateUpdatable
+public class InputManager : MonoBehaviour_UL, ILateUpdatable
 {
     [SerializeField] private InputActionReference moveAction, panAction, zoomAction, pauseAction;
+    [SerializeField] private InputActionReference _1Action, _2Action, _3Action, _4Action, _5Action, deselectAction;
+    [SerializeField] private InputActionReference pointerPosAction, pointerClickAction;
 
     void Start()
     {
@@ -12,6 +14,14 @@ public class InputHandler : MonoBehaviour_UL, ILateUpdatable
         EnableValue(panAction, PanInput);
         EnableValue(zoomAction, ZoomInput);
         EnableButton(pauseAction, PauseButton);
+        EnableButton(_1Action, _1Button);
+        EnableButton(_2Action, _2Button);
+        EnableButton(_3Action, _3Button);
+        EnableButton(_4Action, _4Button);
+        EnableButton(_5Action, _5Button);
+        EnableButton(deselectAction, DeselectButton);
+        EnableValue(pointerPosAction, PointerPosInput);
+        EnableButton(pointerClickAction, PointerClickButton);
 
         static void EnableValue(InputActionReference input, Action<InputAction.CallbackContext> callback)
         {
@@ -42,7 +52,6 @@ public class InputHandler : MonoBehaviour_UL, ILateUpdatable
         }
     }*/
 
-    #region Camera
     public Vector2 Move { get; private set; }
     private void MoveInput(InputAction.CallbackContext c)
     {
@@ -60,54 +69,33 @@ public class InputHandler : MonoBehaviour_UL, ILateUpdatable
     {
         Zoom = c.ReadValue<float>();
     }
-    #endregion
 
     public bool Pause { get; private set; }
-    private void PauseButton(InputAction.CallbackContext c)
-    {
-        Pause = c.performed;
-    }
+    private void PauseButton(InputAction.CallbackContext _) => Pause = true;
 
-    public PhasedInput<Vector2> CameraMov { get; private set; } = new();
-    public void GetCameraMov_enabled(InputAction.CallbackContext c)
-    {
-        CameraMov.SetPhase(c);
-    }
-    public void GetCameraMov(InputAction.CallbackContext c)
-    {
-        CameraMov.TrySetValue(c);
-    }
+    public bool _1 { get; private set; }
+    private void _1Button(InputAction.CallbackContext _) => _1 = true;
+    public bool _2 { get; private set; }
+    private void _2Button(InputAction.CallbackContext _) => _2 = true;
+    public bool _3 { get; private set; }
+    private void _3Button(InputAction.CallbackContext _) => _3 = true;
+    public bool _4 { get; private set; }
+    private void _4Button(InputAction.CallbackContext _) => _4 = true;
+    public bool _5 { get; private set; }
+    private void _5Button(InputAction.CallbackContext _) => _5 = true;
+    public bool Deselect { get; private set; }
+    private void DeselectButton(InputAction.CallbackContext _) => _5 = true;
 
-    public enum InputPhases { None, Started, Performed, Canceled }
-    public class PhasedInput
+    public Vector2 PointerPos { get; private set; }
+    private void PointerPosInput(InputAction.CallbackContext c)
     {
-        public InputPhases Phase;
-        public virtual void SetPhase(InputAction.CallbackContext c)
-        {
-            Phase = c.phase switch
-            {
-                InputActionPhase.Started => InputPhases.Started,
-                InputActionPhase.Performed => InputPhases.Performed,
-                InputActionPhase.Canceled => InputPhases.Canceled,
-                _ => InputPhases.None
-            };
-        }
-        public bool IsStarted => Phase is InputPhases.Started;
-        public bool IsTriggered => Phase is InputPhases.Started or InputPhases.Performed;
-        public bool IsNone => Phase is InputPhases.None;
+        PointerPos = c.ReadValue<Vector2>();
     }
-
-    public class PhasedInput<T> : PhasedInput where T : struct
-    {
-        public T Value { get; private set; }
-        public void TrySetValue(InputAction.CallbackContext c)
-        {
-            Value = IsTriggered ? c.ReadValue<T>() : default;
-        }
-    }
+    public bool PointerClick { get; private set; }
+    private void PointerClickButton(InputAction.CallbackContext _) => PointerClick = true;
 
     public void OnLateUpdate()
     {
-        Pause = false;
+        Pause = _1 = _2 = _3 = _4 = _5 = Deselect = PointerClick = false;
     }
 }

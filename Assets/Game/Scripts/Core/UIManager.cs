@@ -1,22 +1,19 @@
-using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+using static BehaviourPlus;
 
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI healthText;
     [SerializeField] private SkillButton[] skills;
     [SerializeField] public Color _normalColor = Color.white, _dangerColor = Color.red, _disabledColor = new(0.2f, 0.2f, 0.2f, 1f), _selectedColor = Color.green;
-    public static int _currentHighlightedSkill = -1;
-    private Selectable currentButtonGO;
 
     void Start() => ClearUI();
 
     public void ClearUI()
     {
         healthText.text = "--/--";
-        foreach (SkillButton skill in skills) skill.Clear();
+        foreach (SkillButton skill in skills) skill.SetColor(_normalColor);
     }
 
     public void UpdateHealth(int currentHealth, int maxHealth)
@@ -27,12 +24,23 @@ public class UIManager : MonoBehaviour
 
     private void EvaluateSkills(int currentHealth)
     {
-        foreach (SkillButton skill in skills) skill.EvaluateSkill(_currentHighlightedSkill, currentHealth);
+        for (int i = 0; i < skills.Length; i++)
+        {
+            skills[i].SetColor(GetColor());
+
+            Color GetColor()
+            {
+                if (gameManager.selectedSkill == i) return uiManager._selectedColor;
+                if (!true) return uiManager._disabledColor;
+                if (currentHealth <= 4) return uiManager._dangerColor;
+                return uiManager._normalColor;
+            }
+        }
     }
 
     public void ResetSkillHighlight()
     {
-        _currentHighlightedSkill = -1;
+        gameManager.selectedSkill = -1;
         if (FleshRipper.SelectedRipper != null)
         {
             EvaluateSkills(FleshRipper.SelectedRipper.Health);
@@ -40,10 +48,14 @@ public class UIManager : MonoBehaviour
         else ClearUI();
     }
 
-    public void SetButtonGO(Selectable s) => currentButtonGO = s;
-    public void NextButtonGO()
+    public void SelectButton(int pos)
+    {
+        gameManager.selectedSkill = pos;
+        skills[pos].Select();
+    }
+    /*public void NextButtonGO()
     {
         currentButtonGO = currentButtonGO.FindSelectableOnDown();
         currentButtonGO.Select();
-    }
+    }*/
 }

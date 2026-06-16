@@ -1,211 +1,95 @@
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using static BehaviourPlus;
 
+public interface IHoverable
+{
+    void EnterHover();
+    void ExitHover();
+}
+public interface ISelectable
+{
+    void Select();
+    void Deselect();
+}
+
 public class SelectionManager : MonoBehaviour
 {
-    public enum InputState
+    private LayerMask selectableMask = ~0;
+    public IHoverable Hovered { get; private set; }
+    public ISelectable Selected { get; private set; }
+    private PointerEventData pointerData;
+
+    void Start()
     {
-        Normal,
-        QuickCast,
-        TargetingLimb
+        pointerData = new(EventSystem.current);
     }
 
-    public static InputState CurrentState = InputState.Normal;
-    public static int PendingSkillID = -1;
-
-    [SerializeField] private Camera _cam;
-
-    private Transform _lockedTarget;
-    private Vector2 _cameraOffset = new Vector3(0, 0, -10f);
-
-    public static bool isTargetingLimb = false;
-
-    private void Awake()
+    void Update()
     {
-        _cam = Camera.main;
+        TryHover(inputManager.PointerPos);
+        if (inputManager.PointerClick) TrySelect(inputManager.PointerPos);
     }
 
-    private void Update()
+    public void TryHover(Vector2 screenPos)
     {
-        bool isPointerOverUI =
-            EventSystem.current.IsPointerOverGameObject();
+        IHoverable hoverable = GetHoverable();
+        if (hoverable == null) ExitHover();
+        else EnterHover(hoverable);
 
-        // CLICK DERECHO = DESELECCIONAR
-        if (Mouse.current.rightButton.wasPressedThisFrame)
+        IHoverable GetHoverable()
         {
-            CurrentState = InputState.Normal;
-            PendingSkillID = -1;
-
-            _lockedTarget = null;
-
-            if (FleshRipper.SelectedRipper != null)
-            {
-                FleshRipper.SelectedRipper
-                    .SetSelectedVisual(false);
-            }
-
-            FleshRipper.SelectedRipper = null;
-
-            uiManager.ClearUI();
-
-            return;
-        }
-
-        Vector2 mouseScreenPos =
-            Mouse.current.position.ReadValue();
-
-        Vector3 mouseWorldPos =
-            _cam.ScreenToWorldPoint(mouseScreenPos);
-
-        RaycastHit2D[] hits = new RaycastHit2D[0];
-
-        if (!isPointerOverUI)
-        {
-            hits = Physics2D.RaycastAll(
-                mouseWorldPos,
-                Vector2.zero
-            );
-        }
-
-        // HOVER UI
-        if (!isPointerOverUI &&
-            CurrentState == InputState.Normal &&
-            FleshRipper.SelectedRipper == null)
-        {
-            FleshRipper hoveredRipper =
-                GetFirstComponent<FleshRipper>(hits);
-
-            if (hoveredRipper != null)
-            {
-                uiManager.UpdateHealth(
-                    hoveredRipper.Health,
-                    hoveredRipper.MaxHealth
-                );
-            }
-            else
-            {
-                uiManager.ClearUI();
-            }
-        }
-
-        // CLICK IZQUIERDO
-        if (Mouse.current.leftButton.wasPressedThisFrame &&
-            !isPointerOverUI)
-        {
-            // TARGETING LIMB
-            if (CurrentState == InputState.TargetingLimb)
-            {
-                FleshRipper target =
-                    GetFirstComponent<FleshRipper>(hits);
-
-                if (target != null)
-                {
-                    FleshLimbs limbs =
-                        target.GetComponent<FleshLimbs>();
-
-                    if (limbs != null)
-                    {
-                        limbs.DetonateLimb(
-                            FleshLimbs.LimbType.Arms
-                        );
-                    }
-                }
-
-                return;
-            }
-
-            // QUICK CAST
-            if (CurrentState == InputState.QuickCast)
-            {
-                FleshRipper target =
-                    GetFirstComponent<FleshRipper>(hits);
-
-                if (target != null)
-                {
-                    ExecuteQuickCast(
-                        target.GetComponent<FleshCaster>()
-                    );
-                }
-
-                return;
-            }
-
-            // CANCEL NODE
-            ActionCancelNode cancelNode =
-                GetFirstComponent<ActionCancelNode>(hits);
-
-            if (cancelNode != null)
-            {
-                cancelNode.TriggerCancel();
-                return;
-            }
-
-            // SELECCIONAR RIPPER
-            FleshRipper ripperToLock =
-                GetFirstComponent<FleshRipper>(hits);
-
-            if (ripperToLock != null)
-            {
-                _lockedTarget = ripperToLock.transform;
-
-                ripperToLock.SelectThisUnit();
-            }
+            if (IsPointerOverUI(screenPos)) return null;
+            Vector2 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
+            Collider2D hit = Physics2D.OverlapPoint(worldPos, selectableMask);
+            if (hit != null && hit.TryGetComponent(out IHoverable hoverable)) return hoverable;
+            return null;
         }
     }
 
-    private void LateUpdate()
+    public void EnterHover(IHoverable hoverable)
     {
-        if (_lockedTarget != null)
-        {
-            _cam.transform.position =
-                _lockedTarget.position +
-                new Vector3(0, 0, -10f);
-
-            float moveX =
-                Keyboard.current.aKey.ReadValue() -
-                Keyboard.current.dKey.ReadValue();
-
-            float moveY =
-                Keyboard.current.wKey.ReadValue() -
-                Keyboard.current.sKey.ReadValue();
-
-            if (Mathf.Abs(moveX) > 0 ||
-                Mathf.Abs(moveY) > 0)
-            {
-                _lockedTarget = null;
-            }
-        }
+        if (ReferenceEquals(Hovered, hoverable)) return;
+        Hovered?.ExitHover();
+        Hovered = hoverable;
+        Hovered.EnterHover();
     }
 
-    private void ExecuteQuickCast(FleshCaster caster)
+    public void ExitHover()
     {
-        if (caster == null) return;
+        Hovered?.ExitHover();
+        Hovered = null;
+    }
 
-        switch (PendingSkillID)
-        {
-            case 1:
+    public void TrySelect(Vector2 screenPos)
+    {
+        if (IsPointerOverUI(screenPos)) return;
+        Vector2 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
+        Collider2D hit = Physics2D.OverlapPoint(worldPos, selectableMask);
+        if (hit != null && hit.TryGetComponent(out ISelectable selectable)) Select(selectable);
+    }
 
-                if (caster.CanCastVomit())
-                    caster.CastVomit();
+    public void Select(ISelectable selectable)
+    {
+        if (ReferenceEquals(Selected, selectable)) return;
+        Selected?.Deselect();
+        Selected = selectable;
+        Selected.Select();
+    }
 
-                break;
+    public void Deselect()
+    {
+        Selected?.Deselect();
+        Selected = null;
+    }
 
-            case 2:
-
-                if (caster.CanCastSores())
-                    caster.CastSores();
-
-                break;
-
-            case 5:
-
-                if (caster.CanCastFrenzy())
-                    caster.CastFrenzy();
-
-                break;
-        }
+    private bool IsPointerOverUI(Vector2 screenPos)
+    {
+        pointerData.position = screenPos;
+        List<RaycastResult> uiResults = new();
+        EventSystem.current.RaycastAll(pointerData, uiResults);
+        return uiResults.Count > 0;
     }
 
     private T GetFirstComponent<T>(RaycastHit2D[] hits)

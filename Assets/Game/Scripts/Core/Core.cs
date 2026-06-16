@@ -8,14 +8,15 @@ using UnityEngine.SceneManagement;
 public class Core : MonoBehaviour
 {
     [SerializeField] private GameManager gameManager;
-    [SerializeField] private InputHandler inputHandler;
+    [SerializeField] private InputManager inputManager;
+    [SerializeField] private SelectionManager selectionManager;
     [SerializeField] private UIManager uiManager;
     public static string[] LocaleNames { get; private set; }
     public static string CurrentLocaleName => LocalizationSettings.SelectedLocale.LocaleName;
 
     void Awake()
     {
-        if (!BehaviourPlus.Init(gameManager, inputHandler, uiManager))
+        if (!BehaviourPlus.Init(gameManager, inputManager, selectionManager, uiManager))
         {
             Destroy(gameObject);
             return;

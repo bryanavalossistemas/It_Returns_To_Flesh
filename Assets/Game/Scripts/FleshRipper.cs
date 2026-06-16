@@ -2,7 +2,7 @@ using UnityEngine;
 using static BehaviourPlus;
 
 [RequireComponent(typeof(SpriteRenderer),typeof(Animator)), RequireComponent(typeof(Rigidbody2D),typeof(BoxCollider2D))]
-public class FleshRipper : MonoBehaviour
+public class FleshRipper : MonoBehaviour, IHoverable,ISelectable
 {
     [SerializeField] private RipperData ripperData;
     [Header("Stats")]
@@ -265,5 +265,57 @@ public class FleshRipper : MonoBehaviour
         Vector3 scale = transform.localScale;
         scale.x = Mathf.Abs(scale.x) * _direction;
         transform.localScale = scale;
+    }
+
+    public void EnterHover()
+    {
+        uiManager.UpdateHealth(Health, MaxHealth);
+    }
+
+    public void ExitHover()
+    {
+        uiManager.ClearUI();
+    }
+
+    public void Select()
+    {
+        switch (gameManager.selectionTarget)
+        {
+            case GameManager.SelectionTarget.None:
+                //_lockedTarget = ripperToLock.transform;
+                SelectThisUnit();
+                break;
+            case GameManager.SelectionTarget.Ripper:
+                ExecuteQuickCast(GetComponent<FleshCaster>());
+                break;
+            case GameManager.SelectionTarget.Limb:
+                if (TryGetComponent(out FleshLimbs limbs))
+                {
+                    limbs.DetonateLimb(FleshLimbs.LimbType.Arms);
+                }
+                break;
+        }
+    }
+
+    private void ExecuteQuickCast(FleshCaster caster)
+    {
+        if (caster == null) return;
+        switch (gameManager.selectedSkill)
+        {
+            case 0:
+                if (caster.CanCastVomit()) caster.CastVomit();
+                break;
+            case 1:
+                if (caster.CanCastSores()) caster.CastSores();
+                break;
+            case 4:
+                if (caster.CanCastFrenzy()) caster.CastFrenzy();
+                break;
+        }
+    }
+
+    public void Deselect()
+    {
+        
     }
 }
