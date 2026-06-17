@@ -1,6 +1,5 @@
 using System.Linq;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 using UnityEngine.SceneManagement;
@@ -46,11 +45,6 @@ public class Core : MonoBehaviour
     public static void ChangeScene(int buildIndex)
     {
         SceneManager.LoadScene(buildIndex);
-    }
-
-    public static void SetSelectedGO(GameObject go)
-    {
-        EventSystem.current.SetSelectedGameObject(go);
     }
 
     public static void QuitGame()

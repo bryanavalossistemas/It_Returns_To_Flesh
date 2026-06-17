@@ -1,19 +1,18 @@
 using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using static BehaviourPlus;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour, IUpdatable
 {
+    public const int MenusIndex = 0;
     public const int CivilianLayer = 9, ExplodableLayer = 11, InstakillLayer = 8;
     public const float RayLength = 0.05f;
-    [Header("Respawn")]
+    private LayerMask groundLayer, pushableLayer;
+    public Material normalMat, ripperSelectedMat;
     [SerializeField] private GameObject ripperPrefab;
-    public LayerMask groundLayer, pushableLayer;
     private Transform spawnPoint;
     private int nRippers;
-    public Material normalMat, ripperSelectedMat;
     public int selectedSkill = -1;
     public enum SelectionTarget
     {
@@ -28,7 +27,7 @@ public class GameManager : MonoBehaviour
 
     private void SceneLoaded(Scene scene, LoadSceneMode loadMode)
     {
-        bool inGameplay = scene.buildIndex > 0;
+        bool inGameplay = scene.buildIndex > MenusIndex;
         gameObject.SetActive(inGameplay);
         Time.timeScale = 1f;
         if (!inGameplay) return;
@@ -47,16 +46,20 @@ public class GameManager : MonoBehaviour
     {
         Instantiate(ripperPrefab, transform.position, Quaternion.identity);
     }
+
     public void UpdateCheckPoint(Transform newCheckPoint)
     {
         spawnPoint = newCheckPoint;
-        Debug.Log("¡Checkpoint actualizado!");
     }
 
-    void Update()
+    public void OnUpdate()
     {
-        if (inputManager.Pause) Time.timeScale = Time.timeScale == 0f ? 1f : 0f;
-        //PauseMenu.instance.TogglePauseMenu();
+        if (inputManager.Pause)
+        {
+            bool isPaused = Time.timeScale == 0f;
+            Time.timeScale = isPaused? 1f : 0f;
+            //PauseMenu.instance.TogglePauseMenu();
+        }
         bool[] _numbers = { inputManager._1, inputManager._2, inputManager._3, inputManager._4, inputManager._5 };
         for (int i = 0; i < _numbers.Length; i++)
         {

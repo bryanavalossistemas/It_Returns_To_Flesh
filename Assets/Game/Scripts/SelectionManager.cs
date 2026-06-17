@@ -14,19 +14,16 @@ public interface ISelectable
     void Deselect();
 }
 
-public class SelectionManager : MonoBehaviour
+public class SelectionManager : MonoBehaviour, IUpdatable
 {
-    private LayerMask selectableMask = ~0;
     public IHoverable Hovered { get; private set; }
     public ISelectable Selected { get; private set; }
+    private LayerMask selectableMask = ~0;
     private PointerEventData pointerData;
 
-    void Start()
-    {
-        pointerData = new(EventSystem.current);
-    }
+    void Start() => pointerData = new(EventSystem.current);
 
-    void Update()
+    public void OnUpdate()
     {
         TryHover(inputManager.PointerPos);
         if (inputManager.PointerClick) TrySelect(inputManager.PointerPos);
@@ -72,9 +69,11 @@ public class SelectionManager : MonoBehaviour
 
     public void Select(ISelectable selectable)
     {
-        if (ReferenceEquals(Selected, selectable)) return;
-        Selected?.Deselect();
-        Selected = selectable;
+        if (!ReferenceEquals(Selected, selectable))
+        {
+            Selected?.Deselect();
+            Selected = selectable;
+        }
         Selected.Select();
     }
 
@@ -90,20 +89,5 @@ public class SelectionManager : MonoBehaviour
         List<RaycastResult> uiResults = new();
         EventSystem.current.RaycastAll(pointerData, uiResults);
         return uiResults.Count > 0;
-    }
-
-    private T GetFirstComponent<T>(RaycastHit2D[] hits)
-        where T : Component
-    {
-        foreach (var hit in hits)
-        {
-            T component =
-                hit.collider.GetComponent<T>();
-
-            if (component != null)
-                return component;
-        }
-
-        return null;
     }
 }
