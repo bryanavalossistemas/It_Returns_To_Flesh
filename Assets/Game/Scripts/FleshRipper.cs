@@ -17,7 +17,7 @@ public class FleshRipper : MonoBehaviour, IHoverable,ISelectable
     [SerializeField] private Color normalColor = Color.white;
     [SerializeField] private Color selectedColor = Color.green;
     [SerializeField] private Sprite legLessSprite;
-    private const float RayLength = 0.05f;
+    private const float RayLength = 1f;
     [SerializeField] private LayerMask groundLayer;
          
     public static FleshRipper SelectedRipper { get; set; }
@@ -49,10 +49,10 @@ public class FleshRipper : MonoBehaviour, IHoverable,ISelectable
             selected ? selectedColor : normalColor;
     }
 
-    private void Awake()
+    void Awake()
     {
         CurrentSpeed = speed;
-        UpdateFacing();
+        //UpdateFacing();
     }
 
     void Start()
@@ -60,7 +60,7 @@ public class FleshRipper : MonoBehaviour, IHoverable,ISelectable
         gameManager.RegisterRipper();
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
         if (_turnCoolDown > 0) _turnCoolDown -= Time.fixedDeltaTime;
 
@@ -78,11 +78,10 @@ public class FleshRipper : MonoBehaviour, IHoverable,ISelectable
         bool hitWall = TRaycast(transform, transform.right);
         if (hitWall)
         {
-            _direction = _direction * -1;
+            _direction *= -1;
             UpdateFacing();
             if (_isPushed) _savedDirection *= -1;
             _turnCoolDown = 0.5f;
-            
         }
 
         if (IsFrenzied)
@@ -141,14 +140,7 @@ public class FleshRipper : MonoBehaviour, IHoverable,ISelectable
     {
         if (col.CompareTag("Civilian"))
         {
-            if (IsFrenzied)
-            {
-                ConvertCivilian(col.gameObject);
-            }
-            else
-            {
-                ConvertCivilian(col.gameObject);
-            }
+            ConvertCivilian(col.gameObject);
         }
     }
 
@@ -184,14 +176,14 @@ public class FleshRipper : MonoBehaviour, IHoverable,ISelectable
         }
     }
 
-    private void Die()
+    public void Die()
     {
         if (SelectedRipper == this)
         {
             SelectedRipper = null;
             uiManager.ClearUI();
         }
-
+        gameManager.DeadRipper();
         Destroy(gameObject);
     }
 
@@ -222,10 +214,10 @@ public class FleshRipper : MonoBehaviour, IHoverable,ISelectable
 
         if (force.x > 0) _direction = 1;
         else if (force.x < 0) _direction = -1;
-        UpdateFacing();
+        //UpdateFacing();
     }
 
-    private void OnCollisionStay2D(Collision2D col)
+    void OnCollisionStay2D(Collision2D col)
     {
         if (_isPushed && _stunTimer <= 0)
         {
@@ -235,6 +227,7 @@ public class FleshRipper : MonoBehaviour, IHoverable,ISelectable
                 _direction = _savedDirection;
             }
         }
+        return;
         if (_turnCoolDown <= 0)
         {
             bool hitWall = false;
@@ -251,20 +244,14 @@ public class FleshRipper : MonoBehaviour, IHoverable,ISelectable
                 UpdateFacing();
                 if (_isPushed) _savedDirection *= -1;
                 _turnCoolDown = 0.5f;
-                if (mainSpriteRenderer != null)
-    {
-        transform.localScale = new Vector3(_direction, 1f, 1f);
-    }
+                if (mainSpriteRenderer != null) transform.localScale = new Vector3(_direction, 1f, 1f);
             }
-
         }
     }
 
     private void UpdateFacing()
     {
-        Vector3 scale = transform.localScale;
-        scale.x = Mathf.Abs(scale.x) * _direction;
-        transform.localScale = scale;
+        transform.InvertAxis();
     }
 
     public void EnterHover()
@@ -308,6 +295,9 @@ public class FleshRipper : MonoBehaviour, IHoverable,ISelectable
             case 1:
                 if (caster.CanCastSores()) caster.CastSores();
                 break;
+            case 3:
+                Die();
+                break;
             case 4:
                 if (caster.CanCastFrenzy()) caster.CastFrenzy();
                 break;
@@ -318,4 +308,12 @@ public class FleshRipper : MonoBehaviour, IHoverable,ISelectable
     {
         
     }
+
+#if UNITY_EDITOR
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, transform.position+transform.right * RayLength);
+    }
+#endif
 }

@@ -1,26 +1,28 @@
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Tilemaps;
 using static BehaviourPlus;
 
-public class GameManager : MonoBehaviour, IUpdatable
+public class GameManager : MonoBehaviour_UU, IUpdatable
 {
     public const int MenusIndex = 0;
     public const int CivilianLayer = 9, ExplodableLayer = 11, InstakillLayer = 8;
     public const float RayLength = 0.05f;
     private LayerMask groundLayer, pushableLayer;
     public Material normalMat, ripperSelectedMat;
+    [SerializeField] private CameraController cameraController;
     [SerializeField] private GameObject ripperPrefab;
     private Transform spawnPoint;
     private int nRippers;
-    public int selectedSkill = -1;
+    [HideInInspector] public int selectedSkill = -1;
     public enum SelectionTarget
     {
         None,
         Ripper,
         Limb
     }
-    public SelectionTarget selectionTarget;
+    [HideInInspector] public SelectionTarget selectionTarget;
 
     void Awake() => SceneManager.sceneLoaded += SceneLoaded;
     void OnDestroy() => SceneManager.sceneLoaded -= SceneLoaded;
@@ -33,6 +35,10 @@ public class GameManager : MonoBehaviour, IUpdatable
         if (!inGameplay) return;
 
         spawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint").transform;
+        Tilemap tilemap = FindFirstObjectByType<Tilemap>();
+        Bounds bounds = tilemap.localBounds;
+        bounds.center += tilemap.transform.position;
+        cameraController.UpdateConfiner(bounds.center, bounds.size);
     }
 
     public void RegisterRipper() => nRippers++;
@@ -103,7 +109,7 @@ public class GameManager : MonoBehaviour, IUpdatable
 
     private void SkillCephalic()
     {
-
+        selectionTarget = SelectionTarget.Ripper;
     }
 
     private void SkillFrenzy()

@@ -91,6 +91,7 @@ public class InputManager : MonoBehaviour_UL, ILateUpdatable
     {
         PointerPos = c.ReadValue<Vector2>();
     }
+
     public bool PointerClick { get; private set; }
     private void PointerClickButton(InputAction.CallbackContext _) => PointerClick = true;
 

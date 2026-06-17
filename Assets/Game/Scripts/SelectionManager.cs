@@ -14,7 +14,7 @@ public interface ISelectable
     void Deselect();
 }
 
-public class SelectionManager : MonoBehaviour, IUpdatable
+public class SelectionManager : MonoBehaviour_UU, IUpdatable
 {
     public IHoverable Hovered { get; private set; }
     public ISelectable Selected { get; private set; }

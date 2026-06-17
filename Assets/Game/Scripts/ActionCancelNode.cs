@@ -1,11 +1,15 @@
-using JetBrains.Annotations;
 using UnityEngine;
 
-public class ActionCancelNode : MonoBehaviour
+public class ActionCancelNode : MonoBehaviour, ISelectable
 {
     public FleshCaster cancelCaster;
 
-    public void TriggerCancel()
+    public void Deselect()
+    {
+        
+    }
+
+    public void Select()
     {
         cancelCaster.CancelVomit();
         gameObject.SetActive(false);

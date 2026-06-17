@@ -5,6 +5,8 @@ using static BehaviourPlus;
 public class CameraController : MonoBehaviour
 {
     [SerializeField] private CinemachineCamera cam;
+    [SerializeField] private CinemachineConfiner2D confiner;
+    [SerializeField] private BoxCollider2D bounds2D;
     [SerializeField] private float speed = 15f, pan = 10f;
     private float minX, maxX, minY, maxY;
     [SerializeField] private float zoomSensitivity = 1f;
@@ -38,4 +40,11 @@ public class CameraController : MonoBehaviour
     }
 
     public void SetFollow(Transform t) => cam.Follow = t;
+
+    public void UpdateConfiner(Vector3 offset, Vector3 size)
+    {
+        bounds2D.offset = offset;
+        bounds2D.size = size;
+        confiner.InvalidateBoundingShapeCache();
+    }
 }
