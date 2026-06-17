@@ -29427,6 +29427,7 @@ GameObject:
   - component: {fileID: 1725519907}
   - component: {fileID: 1725519906}
   - component: {fileID: 1725519908}
+  - component: {fileID: 1725519909}
   m_Layer: 8
   m_Name: Destruible
   m_TagString: Wall
@@ -29554,6 +29555,22 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!111 &1725519909
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1725519905}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Animation: {fileID: 0}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_UpdateMode: 0
+  m_CullingType: 0
 --- !u!1 &1788727576
 GameObject:
   m_ObjectHideFlags: 0
