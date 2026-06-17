@@ -67,5 +67,5 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "It_Returns_To_Flesh_lunes16.slnx"
+    "dotnet.defaultSolution": "It_Returns_To_Flesh.slnx"
 }

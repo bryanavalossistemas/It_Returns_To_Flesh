@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Game/Visuals/Sprites/Materials.meta
 guid: 3e71caa39f5235d438510e2fcaf5f576
+========
+guid: 0e93a0392f7876c4ebb8e7773898475d
+>>>>>>>> origin/Sherlock:Assets/Game/Visuals/Sprites/UI ICONOS.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

@@ -266,7 +266,7 @@ public class FleshRipper : MonoBehaviour, IHoverable,ISelectable
 
     public void Select()
     {
-        switch (gameManager.selectionTarget)
+Debug.Log("Clic detectado en el Ripper. Target actual: " + gameManager.selectionTarget + " | Habilidad: " + gameManager.selectedSkill);        switch (gameManager.selectionTarget)
         {
             case GameManager.SelectionTarget.None:
                 //_lockedTarget = ripperToLock.transform;

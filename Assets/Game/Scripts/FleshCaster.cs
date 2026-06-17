@@ -48,7 +48,10 @@ public class FleshCaster :MonoBehaviour
        Collider2D floor = Physics2D.OverlapCircle(_floorDetector.position, _sizeDetector, _groundMask);
 
         _isGrounded = floor != null;
-
+if (_animator != null)
+    {
+        _animator.SetBool("IsGrounded", _isGrounded);
+    }
     }
 
     public void CastVomit()
@@ -116,6 +119,7 @@ public class FleshCaster :MonoBehaviour
 
     public void CastSores()
     {
+        
         if (CurrentCastState == CastState.Vomiting || _body.Health < 2 || _soresCastCount >= 3 || !_isGrounded) return;
 
         _soresCastCount++;
