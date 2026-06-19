@@ -245,6 +245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenu
   uiDocument: {fileID: 2056663344}
+  optionsUXML: {fileID: 9197481963319205126, guid: d962f4e1939e27747a8258236282c6a2, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

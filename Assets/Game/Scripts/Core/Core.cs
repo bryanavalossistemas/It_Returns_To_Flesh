@@ -31,9 +31,9 @@ public class Core : MonoBehaviour
 
     public static void LoadPlayerPrefs()
     {
-        AudioManager.SetMasterVolume(PlayerPrefs.GetFloat("vol_master", 1f));
-        AudioManager.SetMusicVolume(PlayerPrefs.GetFloat("vol_music", 1f));
-        AudioManager.SetSfxVolume(PlayerPrefs.GetFloat("vol_sfx", 1f));
+        AudioManager.SetMasterVolume(PlayerPrefs.GetInt("vol_master", 100));
+        AudioManager.SetMusicVolume(PlayerPrefs.GetInt("vol_music", 100));
+        AudioManager.SetSfxVolume(PlayerPrefs.GetInt("vol_sfx", 100));
     }
 
     public static void ChangeLanguage(string localeName)

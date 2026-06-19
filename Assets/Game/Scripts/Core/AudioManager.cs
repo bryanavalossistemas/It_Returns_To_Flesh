@@ -7,9 +7,9 @@ using STOP_MODE = FMOD.Studio.STOP_MODE;
 public class AudioManager : MonoBehaviour
 {
 #pragma warning disable IDE1006 // Estilos de nombres
-    public static float masterVolume { get; private set; } = 1f;
-    public static float musicVolume { get; private set; } = 1f;
-    public static float sfxVolume { get; private set; } = 1f;
+    public static int masterVolume { get; private set; } = 100;
+    public static int musicVolume { get; private set; } = 100;
+    public static int sfxVolume { get; private set; } = 100;
 #pragma warning restore IDE1006 // Estilos de nombres
     private static Bus masterBus, musicBus, sfxBus;
     private static EventInstance bgmInstance;
@@ -62,23 +62,23 @@ public class AudioManager : MonoBehaviour
         RuntimeManager.PlayOneShot(soundEvent, position);
     }
 
-    public static void SetMasterVolume(float value)
+    public static void SetMasterVolume(int value)
     {
         masterVolume = value;
         masterBus.setVolume(masterVolume);
-        PlayerPrefs.SetFloat("vol_master", value);
+        PlayerPrefs.SetInt("vol_master", value);
     }
-    public static void SetMusicVolume(float value)
+    public static void SetMusicVolume(int value)
     {
         musicVolume = value;
         musicBus.setVolume(musicVolume);
-        PlayerPrefs.SetFloat("vol_music", value);
+        PlayerPrefs.SetInt("vol_music", value);
     }
-    public static void SetSfxVolume(float value)
+    public static void SetSfxVolume(int value)
     {
         sfxVolume = value;
         sfxBus.setVolume(sfxVolume);
-        PlayerPrefs.SetFloat("vol_sfx", value);
+        PlayerPrefs.SetInt("vol_sfx", value);
     }
 
     private static EventInstance stepEventInstance;

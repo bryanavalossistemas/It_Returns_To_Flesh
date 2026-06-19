@@ -6,44 +6,46 @@ using UnityEngine.UIElements;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] private UIDocument uiDocument;
+    [SerializeField] private VisualTreeAsset optionsUXML;
     private VisualElement panelOptions;
 
     void Start()
     {
         VisualElement root = uiDocument.rootVisualElement;
+        TemplateContainer container = optionsUXML.Instantiate();
+        panelOptions = container.Q<VisualElement>("canvas");
+        root.Add(panelOptions);
+        SetPanelOptions();
+        HideOptions();
 
         Button btnPlay = root.Q<Button>("play");
         Button btnOptions = root.Q<Button>("options");
         Button btnQuit = root.Q<Button>("quit");
 
         btnPlay.clicked += OnPlay;
-        //btnOptions.clicked += () => panelOptions.RemoveFromClassList("hidden");
+        btnOptions.clicked += ShowOptions;
         btnQuit.clicked += OnQuit;
-
-        //SetPanelOptions();
 
         async void SetPanelOptions()
         {
-            panelOptions = root.Q<VisualElement>("panel-options");
-            Button _btnClosePopup = root.Q<Button>("btn-close-popup");
+            Button _btnCloseOptions = root.Q<Button>("btn_close");
 
-            DropdownField _dropdownLanguage = root.Q<DropdownField>("dropdown-language");
+            DropdownField _dropdownLanguage = root.Q<DropdownField>("drop_languages");
             _dropdownLanguage.choices = Core.LocaleNames.ToList();
             _dropdownLanguage.value = Core.CurrentLocaleName;
             _dropdownLanguage.RegisterValueChangedCallback(evt => Core.ChangeLanguage(evt.newValue));
 
             // Sliders de volumen
-            Slider _sliderMaster = root.Q<Slider>("vol_master");
-            Slider _sliderMusic = root.Q<Slider>("vol_music");
-            Slider _sliderSfx = root.Q<Slider>("vol_sfx");
+            SliderInt _sliderMaster = root.Q<SliderInt>("vol_master");
+            SliderInt _sliderMusic = root.Q<SliderInt>("vol_bgm");
+            SliderInt _sliderSfx = root.Q<SliderInt>("vol_sfx");
 
             // Eventos de cambio de volumen
             _sliderMaster.RegisterValueChangedCallback(evt => AudioManager.SetMasterVolume(evt.newValue));
             _sliderMusic.RegisterValueChangedCallback(evt => AudioManager.SetMusicVolume(evt.newValue));
             _sliderSfx.RegisterValueChangedCallback(evt => AudioManager.SetSfxVolume(evt.newValue));
 
-            _btnClosePopup.clicked += HidePopup;
-            HidePopup(); // Ocultar al inicio
+            _btnCloseOptions.clicked += HideOptions;
 
             await Task.Yield();
             // Inicializar sliders con los valores actuales del AudioManager
@@ -57,5 +59,4 @@ public class MainMenu : MonoBehaviour
     private void OnQuit() => Core.QuitGame();
     private void ShowOptions() => panelOptions.style.display = DisplayStyle.Flex;
     private void HideOptions() => panelOptions.style.display = DisplayStyle.None;
-    private void HidePopup() => panelOptions.AddToClassList("hidden");
 }
