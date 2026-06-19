@@ -8,9 +8,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Game/Scenes/Menu.unity
     guid: 00ef812970e6c9049b8fb8a68ad1c30c
-  - enabled: 1
+  - enabled: 0
     path: Assets/Game/Scenes/Levels/L0.unity
     guid: 314ef0f318f875f42811faa1691e46e6
+  - enabled: 1
+    path: Assets/Game/Scenes/L0__.unity
+    guid: 4676bbe4340aeca4b9ecb87320ff3a5c
   - enabled: 1
     path: Assets/Game/Scenes/FleshProto.unity
     guid: 29c4f93acb4982f469c4e4b0bf37fdf1
