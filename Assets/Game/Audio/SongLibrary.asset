@@ -24,7 +24,7 @@ MonoBehaviour:
         Path: event:/BGM/Game
   Scene_Themes:
     _serializedList:
-    - Key: LevelDesign
+    - Key: L0
       Value: Game
     - Key: FleshProto
       Value: Game

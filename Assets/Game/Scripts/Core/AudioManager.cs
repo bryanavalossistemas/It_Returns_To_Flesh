@@ -7,9 +7,9 @@ using STOP_MODE = FMOD.Studio.STOP_MODE;
 public class AudioManager : MonoBehaviour
 {
 #pragma warning disable IDE1006 // Estilos de nombres
-    public static int masterVolume { get; private set; } = 100;
-    public static int musicVolume { get; private set; } = 100;
-    public static int sfxVolume { get; private set; } = 100;
+    public static int masterVolume { get; private set; } = 1;
+    public static int musicVolume { get; private set; } = 1;
+    public static int sfxVolume { get; private set; } = 1;
 #pragma warning restore IDE1006 // Estilos de nombres
     private static Bus masterBus, musicBus, sfxBus;
     private static EventInstance bgmInstance;
@@ -64,19 +64,19 @@ public class AudioManager : MonoBehaviour
 
     public static void SetMasterVolume(int value)
     {
-        masterVolume = value;
+        //masterVolume = value;
         masterBus.setVolume(masterVolume);
         PlayerPrefs.SetInt("vol_master", value);
     }
     public static void SetMusicVolume(int value)
     {
-        musicVolume = value;
+        //musicVolume = value;
         musicBus.setVolume(musicVolume);
         PlayerPrefs.SetInt("vol_music", value);
     }
     public static void SetSfxVolume(int value)
     {
-        sfxVolume = value;
+        //sfxVolume = value;
         sfxBus.setVolume(sfxVolume);
         PlayerPrefs.SetInt("vol_sfx", value);
     }

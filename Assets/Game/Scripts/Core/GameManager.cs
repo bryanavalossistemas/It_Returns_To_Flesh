@@ -116,4 +116,6 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
     {
         selectionTarget = SelectionTarget.Ripper;
     }
+
+    public void RestartLevel() => Core.ChangeScene(SceneManager.GetActiveScene().buildIndex);
 }
