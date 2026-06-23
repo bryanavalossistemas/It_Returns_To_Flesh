@@ -126,7 +126,7 @@ if (_animator != null)
         _body.ModifyHealth(-2);
         if (_animator != null)
         {
-            _animator.SetInteger("Llagas", _soresCastCount);
+            _animator.SetFloat("Llagas", _soresCastCount);
             _animator.SetTrigger("Jump");
         }
         Vector2 jumpForce = new Vector2(soresJumpForceX * _body.FacingDirection, soresJumpForceY);
