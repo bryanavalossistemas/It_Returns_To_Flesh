@@ -21,10 +21,9 @@ MonoBehaviour:
           Data2: 1182551728
           Data3: -362796670
           Data4: -53932228
-        Path: event:/BGM/Game
   Scene_Themes:
     _serializedList:
-    - Key: L0
+    - Key: L0__
       Value: Game
     - Key: FleshProto
       Value: Game

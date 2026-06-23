@@ -3,51 +3,57 @@ using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 using UnityEngine.SceneManagement;
+using static BehaviourPlus;
 
 public class Core : MonoBehaviour
 {
-    [SerializeField] private GameManager gameManager;
-    [SerializeField] private InputManager inputManager;
-    [SerializeField] private SelectionManager selectionManager;
-    [SerializeField] private UIManager uiManager;
+    public const int MenusIndex = 0;
+    [SerializeField] private GameManager _game;
+    [SerializeField] private InputManager _input;
+    [SerializeField] private AudioManager _audio;
+    [SerializeField] private UIManager _ui;
     public static string[] LocaleNames { get; private set; }
     public static string CurrentLocaleName => LocalizationSettings.SelectedLocale.LocaleName;
+    public Camera MainCamera { get; private set; }
 
     void Awake()
     {
-        if (!BehaviourPlus.Init(gameManager, inputManager, selectionManager, uiManager))
+        if (!Init(this, _game, _input, _audio, _ui))
         {
             Destroy(gameObject);
             return;
         }
         DontDestroyOnLoad(gameObject);
+        MainCamera = Camera.main;
     }
 
-    void Start()
+    async void Start()
     {
-        LocaleNames = LocalizationSettings.AvailableLocales.Locales.Select(locale => locale.LocaleName).ToArray();
         LoadPlayerPrefs();
+        await LocalizationSettings.InitializationOperation.Task;
+        LocaleNames = LocalizationSettings.AvailableLocales.Locales.Select(locale => locale.LocaleName).ToArray();
     }
-
-    public static void LoadPlayerPrefs()
+    private void LoadPlayerPrefs()
     {
-        AudioManager.SetMasterVolume(PlayerPrefs.GetInt("vol_master", 100));
-        AudioManager.SetMusicVolume(PlayerPrefs.GetInt("vol_music", 100));
-        AudioManager.SetSfxVolume(PlayerPrefs.GetInt("vol_sfx", 100));
+        audioManager.SetMasterVolume(GetPlayerPrefs("vol_master"));
+        audioManager.SetMusicVolume(GetPlayerPrefs("vol_music"));
+        audioManager.SetSfxVolume(GetPlayerPrefs("vol_sfx"));
     }
 
-    public static void ChangeLanguage(string localeName)
+    public void SetPlayerPrefs(string key, int value) => PlayerPrefs.SetInt(key, value);
+    public int GetPlayerPrefs(string key) => PlayerPrefs.GetInt(key, 100);
+
+    public void ChangeLanguage(string localeName)
     {
         Locale newLocale = LocalizationSettings.AvailableLocales.Locales.FirstOrDefault(l => l.LocaleName == localeName);
         LocalizationSettings.SelectedLocale = newLocale;
     }
 
-    public static void ChangeScene(int buildIndex)
-    {
-        SceneManager.LoadScene(buildIndex);
-    }
+    public void ChangeScene(int buildIndex) => SceneManager.LoadScene(buildIndex);
+    public void ReloadScene() => ChangeScene(SceneManager.GetActiveScene().buildIndex);
+    public void NextScene() => ChangeScene(SceneManager.GetActiveScene().buildIndex+1);
 
-    public static void QuitGame()
+    public void QuitGame()
     {
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;

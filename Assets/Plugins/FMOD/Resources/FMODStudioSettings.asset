@@ -233,12 +233,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: FMODUnity::FMODUnity.Settings
   switchSettingsMigration: 1
   HasSourceProject: 0
-  HasPlatforms: 1
+  HasPlatforms: 0
   sourceProjectPath: 
-  sourceBankPath: Assets/Game/Audio
+  sourceBankPath: Assets/Game/Audio/Build
   sourceBankPathUnformatted: 
-  BankRefreshCooldown: 5
-  ShowBankRefreshWindow: 1
+  BankRefreshCooldown: 1
+  ShowBankRefreshWindow: 0
   AutomaticEventLoading: 1
   BankLoadType: 0
   AutomaticSampleLoading: 0
@@ -246,8 +246,8 @@ MonoBehaviour:
   ImportType: 0
   TargetAssetPath: FMODBanks
   TargetBankFolder: 
-  EventLinkage: 0
-  SerializeGUIDsOnly: 0
+  EventLinkage: 1
+  SerializeGUIDsOnly: 1
   LoggingLevel: 2
   SpeakerModeSettings: []
   SampleRateSettings: []

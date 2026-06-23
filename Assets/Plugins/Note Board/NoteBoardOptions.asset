@@ -1,0 +1,227 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecad5aea56b7a4647a5754ded403d93e, type: 3}
+  m_Name: NoteBoardOptions
+  m_EditorClassIdentifier: NoteBoard::Tornadoally.NoteBoard.NoteBoardOptions
+  records:
+  - id: 3e6d7424a302dbf4c8c0e992cbf83c02
+    noteTag: 16c225dbeea3485286000ac77b476ff1
+    name: Laser
+    data:
+      statusIndex: 1
+      flagMask: 32
+      notes: Laser
+    order: 1
+    isExpanded: 1
+  - id: 15eafa0561bd3b54cac2e7f00b75a2cc
+    noteTag: c39130c31eac4448a0bdbb756b775256
+    name: Guillotine
+    data:
+      statusIndex: 1
+      flagMask: 128
+      notes: Guillotina
+    order: 0
+    isExpanded: 1
+  - id: a466d0754ddddb144a29f003c0540abf
+    noteTag: a3712d04b9754944ac2948e359faf304
+    name: Singleton
+    data:
+      statusIndex: -1
+      flagMask: 258
+      notes: Renovar UI
+    order: 8
+    isExpanded: 1
+  - id: b549289e3dd583342b7bcbeaea054cd7
+    noteTag: 2ef2a2d5fe614d4ea91450b766947fdc
+    name: CameraController
+    data:
+      statusIndex: -1
+      flagMask: 40
+      notes: Corregir esquinas
+    order: 6
+    isExpanded: 1
+  - id: b549289e3dd583342b7bcbeaea054cd7
+    noteTag: f36d22c2c5204346abfbd357cc85f17c
+    name: CameraController
+    data:
+      statusIndex: -1
+      flagMask: 34
+      notes: Lockear Ripper
+    order: 5
+    isExpanded: 1
+  - id: a466d0754ddddb144a29f003c0540abf
+    noteTag: 7f0ca692d5be4561bea171fb1a31b93e
+    name: Singleton
+    data:
+      statusIndex: 0
+      flagMask: 32
+      notes: "Mini c\xE1mara"
+    order: 0
+    isExpanded: 1
+  - id: b4676d0a922086b4da8866be3903c486
+    noteTag: d2e4d7f9908a40b9b4d3f0256b009044
+    name: FleshAnimationPSD (1)_0
+    data:
+      statusIndex: 1
+      flagMask: 64
+      notes: Completar Animator, implementar Blend Tree
+    order: 2
+    isExpanded: 1
+  - id: a466d0754ddddb144a29f003c0540abf
+    noteTag: ab818fa96ff743239312cc41df175b10
+    name: Singleton
+    data:
+      statusIndex: -1
+      flagMask: 164
+      notes: "Di\xE1logos de cient\xEDficos"
+    order: 9
+    isExpanded: 1
+  - id: 9363caf8d17bd9849b3500db78034750
+    noteTag: d412b6dff7464593bd7913ae8a465194
+    name: GameManager
+    data:
+      statusIndex: 0
+      flagMask: 32
+      notes: Implementar wrappers
+    order: 1
+    isExpanded: 1
+  - id: 57008dc01c8c9db4da80d4926da0e4cf
+    noteTag: 45d45ea50a2c45fd8abc7b27e88c813e
+    name: KillButton
+    data:
+      statusIndex: 1
+      flagMask: 256
+      notes: Cuando el Ripper lo pisa, muere y pasa a la siguiente fase
+    order: 3
+    isExpanded: 1
+  - id: 8f97bed8884bf604ca38dc32e2fa07d5
+    noteTag: 532c8e1eaf3348c191331762423a0b14
+    name: Menu
+    data:
+      statusIndex: -1
+      flagMask: 40
+      notes: "Arreglar tama\xF1o de los botones"
+    order: 0
+    isExpanded: 1
+  - id: d962f4e1939e27747a8258236282c6a2
+    noteTag: 5626da417b4045d4b95fa43a47e48793
+    name: Options
+    data:
+      statusIndex: -1
+      flagMask: 40
+      notes: "Hacer que funcione el bot\xF3n de Cerrar"
+    order: 3
+    isExpanded: 1
+  - id: 944da9f06948a964e85520da6567b988
+    noteTag: a76584bde7ea44a4a8d82d07936f1092
+    name: FleshRipper
+    data:
+      statusIndex: -1
+      flagMask: 34
+      notes: Eliminar ExitHover
+    order: 1
+    isExpanded: 1
+  - id: 9c15143e0ddcd2c4c929f6781de9ee69
+    noteTag: 6e44bf082d334ed1b0780ea8d7e140f8
+    name: Shader Graphs/New Shader Graph
+    data:
+      statusIndex: -1
+      flagMask: 36
+      notes: Ripper + Llagas shader
+    order: 2
+    isExpanded: 1
+  - id: 944da9f06948a964e85520da6567b988
+    noteTag: 60255cc5456343c9b0dea1e18a4f5a65
+    name: FleshRipper
+    data:
+      statusIndex: -1
+      flagMask: 36
+      notes: "Trazo de movimiento de Salto / Explosi\xF3n"
+    order: 4
+    isExpanded: 1
+  - id: a466d0754ddddb144a29f003c0540abf
+    noteTag: 4946366e293c46dbb5d199e750539c63
+    name: Singleton
+    data:
+      statusIndex: -1
+      flagMask: 68
+      notes: "Ventana de UI reactiva + detecci\xF3n de Game Over"
+    order: 7
+    isExpanded: 1
+  - id: a466d0754ddddb144a29f003c0540abf
+    noteTag: 7968f956893241d7a29be994a60e3597
+    name: Singleton
+    data:
+      statusIndex: -1
+      flagMask: 0
+      notes: "Cinem\xE1tica de Ripper comiendo cient\xEDficos"
+    order: 8
+    isExpanded: 1
+  - id: b9766f3e2c79e2b409b32fe8ab36fca9
+    noteTag: 77d35d1094a54fcc9ded355f657e7698
+    name: FleshRipper
+    data:
+      statusIndex: -1
+      flagMask: 0
+      notes: Aumentar campo para clickear
+    order: 0
+    isExpanded: 1
+  - id: b9766f3e2c79e2b409b32fe8ab36fca9
+    noteTag: 1ee0234a22c34151863d6298b05b231a
+    name: FleshRipper
+    data:
+      statusIndex: -1
+      flagMask: 0
+      notes: Hacer que si se supoerponen vayan a diferentes velocidades
+    order: 1
+    isExpanded: 1
+  columns:
+  - name: LATER
+    emoji: "\U0001F552"
+    color: {r: 1, g: 1, b: 1, a: 1}
+  - name: TODO
+    emoji: "\U0001F4CB"
+    color: {r: 0.6117647, g: 0.23529412, b: 0.1882353, a: 1}
+  - name: WIP
+    emoji: "\U0001F6E0\uFE0F"
+    color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  - name: DONE
+    emoji: "\u2714\uFE0F"
+    color: {r: 0.16862746, g: 0.6784314, b: 0.16862746, a: 1}
+  flags:
+  - name: Stable
+    emoji: "\U0001F9F1"
+    color: {r: 0.78431374, g: 0.39215687, b: 0.19607843, a: 1}
+  - name: Refactor
+    emoji: "\U0001F9E0"
+    color: {r: 0.9019608, g: 0.43137255, b: 0.50980395, a: 1}
+  - name: Experiment
+    emoji: "\U0001F9EA"
+    color: {r: 0, g: 0.5882353, b: 0.49019608, a: 1}
+  - name: Bug
+    emoji: "\U0001F47E"
+    color: {r: 0.53333336, g: 0.42352942, b: 0.89411765, a: 1}
+  - name: Placeholder
+    emoji: "\U0001F6A7"
+    color: {r: 0.5882353, g: 0.54901963, b: 0.15686275, a: 1}
+  - name: "Adri\xE1n"
+    emoji: "\U0001F913"
+    color: {r: 0, g: 0, b: 0, a: 1}
+  - name: Sherlock
+    emoji: "\U0001F913"
+    color: {r: 0, g: 0, b: 0, a: 1}
+  - name: Diego
+    emoji: "\U0001F913"
+    color: {r: 0, g: 0, b: 0, a: 1}
+  - name: Bryan
+    emoji: "\U0001F913"
+    color: {r: 0, g: 0, b: 0, a: 1}

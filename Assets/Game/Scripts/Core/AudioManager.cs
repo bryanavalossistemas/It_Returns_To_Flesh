@@ -3,27 +3,23 @@ using FMODUnity;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using STOP_MODE = FMOD.Studio.STOP_MODE;
+using static BehaviourPlus;
 
 public class AudioManager : MonoBehaviour
 {
 #pragma warning disable IDE1006 // Estilos de nombres
-    public static int masterVolume { get; private set; } = 1;
-    public static int musicVolume { get; private set; } = 1;
-    public static int sfxVolume { get; private set; } = 1;
+    public int masterVolume = 100, musicVolume = 100, sfxVolume = 100;
 #pragma warning restore IDE1006 // Estilos de nombres
-    private static Bus masterBus, musicBus, sfxBus;
-    private static EventInstance bgmInstance;
-    private static SongLibraries songs;
-    [SerializeField] private SongLibraries _songLibrary;
-    private static PARAMETER_ID id;
-
-    void Awake() => songs = _songLibrary;
+    private Bus masterBus, musicBus, sfxBus;
+    private EventInstance bgmInstance;
+    [SerializeField] private SongLibraries songs;
+    private PARAMETER_ID id;
 
     void Start()
     {
         masterBus = RuntimeManager.GetBus("bus:/");
-        sfxBus = RuntimeManager.GetBus("bus:/SFX");
         musicBus = RuntimeManager.GetBus("bus:/BGM");
+        sfxBus = RuntimeManager.GetBus("bus:/SFX");
         RuntimeManager.StudioSystem.getParameterDescriptionByName(songs.Parameter, out var desc);
         id = desc.id;
     }
@@ -34,55 +30,43 @@ public class AudioManager : MonoBehaviour
         SceneManager.sceneLoaded -= SceneLoaded;
         ReleaseBGMInstance();
     }
-
     private void SceneLoaded(Scene scene, LoadSceneMode loadMode) => PlayBGM(songs.Scene_Themes[scene.name]);
 
-    public static EventReference GetEventFromName(string bgmName) => songs.Events_BGM[bgmName];
-    public static EventInstance CreateEventInstance(string bgmName) => CreateEventInstance(GetEventFromName(bgmName));
-    public static EventInstance CreateEventInstance(EventReference soundEvent) => RuntimeManager.CreateInstance(soundEvent);
+    public EventReference GetEventFromName(string bgmName) => songs.Events_BGM[bgmName];
+    public EventInstance CreateEventInstance(string bgmName) => CreateEventInstance(GetEventFromName(bgmName));
+    public EventInstance CreateEventInstance(EventReference soundEvent) => RuntimeManager.CreateInstance(soundEvent);
 
-    public static void PlayBGM(string bgmName)
+    private void ReleaseBGMInstance(bool allowFadeOut = false)
+    {
+        if (bgmInstance.isValid())
+        {
+            bgmInstance.stop(allowFadeOut ? STOP_MODE.ALLOWFADEOUT : STOP_MODE.IMMEDIATE);
+            bgmInstance.release();
+        }
+    }
+
+    public void PlayBGM(string bgmName)
     {
         ReleaseBGMInstance(true);
         bgmInstance = CreateEventInstance(bgmName);
         bgmInstance.start();
     }
+    public void PlayOneShot(EventReference soundEvent, Vector2 position) => RuntimeManager.PlayOneShot(soundEvent, position);
 
-    private static void ReleaseBGMInstance(bool allowFadeOut = false)
+    public void SetMasterVolume(int value) => SetVolume(ref masterVolume, masterBus, "vol_master", value);
+    public void SetMusicVolume(int value) => SetVolume(ref musicVolume, musicBus, "vol_music", value);
+    public void SetSfxVolume(int value) => SetVolume(ref sfxVolume, sfxBus, "vol_sfx", value);
+    private void SetVolume(ref int volume, Bus bus, string key, int value)
     {
-        if (bgmInstance.isValid())
-        {
-            bgmInstance.stop(allowFadeOut? STOP_MODE.ALLOWFADEOUT : STOP_MODE.IMMEDIATE);
-            bgmInstance.release();
-        }
-    }
-
-    public void PlayOneShot(EventReference soundEvent, Vector2 position)
-    {
-        RuntimeManager.PlayOneShot(soundEvent, position);
-    }
-
-    public static void SetMasterVolume(int value)
-    {
-        //masterVolume = value;
-        masterBus.setVolume(masterVolume);
-        PlayerPrefs.SetInt("vol_master", value);
-    }
-    public static void SetMusicVolume(int value)
-    {
-        //musicVolume = value;
-        musicBus.setVolume(musicVolume);
-        PlayerPrefs.SetInt("vol_music", value);
-    }
-    public static void SetSfxVolume(int value)
-    {
-        //sfxVolume = value;
-        sfxBus.setVolume(sfxVolume);
-        PlayerPrefs.SetInt("vol_sfx", value);
+        volume = value;
+        bus.setMute(volume == 0);
+        float db = Mathf.Lerp(-80f, 0f, volume / 100f);
+        bus.setVolume(db);
+        core.SetPlayerPrefs(key, value);
     }
 
-    private static EventInstance stepEventInstance;
-    public static void UpdateSound(bool playSfx)
+    private EventInstance stepEventInstance;
+    public void UpdateSound(bool playSfx)
     {
         //stepEventInstance = CreateEventInstance(playerStepSound);
         if (playSfx)
@@ -99,7 +83,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public static void UpdatePlaystate()
+    public void UpdatePlaystate()
     {
         RuntimeManager.StudioSystem.setParameterByID(id, Time.timeScale == 0? 1 : 0);
     }

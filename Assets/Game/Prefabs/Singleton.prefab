@@ -45,8 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9363caf8d17bd9849b3500db78034750, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  normalMat: {fileID: 0}
-  ripperSelectedMat: {fileID: 0}
   cameraController: {fileID: 1840134684906731062}
   ripperPrefab: {fileID: 8939549028696894721, guid: b9766f3e2c79e2b409b32fe8ab36fca9, type: 3}
   selectedSkill: -1
@@ -591,7 +589,7 @@ GameObject:
   m_Layer: 0
   m_Name: CinemachineCamera
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -660,7 +658,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3617712336057408101}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f453f694addf4275988fac205bc91968, type: 3}
   m_Name: 
@@ -1144,7 +1142,7 @@ GameObject:
   m_Layer: 0
   m_Name: Singleton
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1180,10 +1178,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea19b010b94c178439af09fec0bddef9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Core
-  gameManager: {fileID: 8849794092704661988}
-  inputManager: {fileID: 8909878579151716242}
-  selectionManager: {fileID: 5601232880861483884}
-  uiManager: {fileID: 6553777428056829156}
+  _game: {fileID: 8849794092704661988}
+  _input: {fileID: 8909878579151716242}
+  _audio: {fileID: 1142410005317995247}
+  _ui: {fileID: 6553777428056829156}
 --- !u!114 &6342506370883500296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1205,7 +1203,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7373287120759380130}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e120859968f28a946a587e037c160eaf, type: 3}
+  m_Script: {fileID: 11500000, guid: 61cecb34b6e9bf54d97d3efeac1ed09e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SelectionManager
 --- !u!114 &1142410005317995247
@@ -1220,7 +1218,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd0bbfe17cfa3a64aa06dc7a85ad4d35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
-  _songLibrary: {fileID: 11400000, guid: ba6fe0a9892f7334a87751395208410c, type: 2}
+  masterVolume: 100
+  musicVolume: 100
+  sfxVolume: 100
+  songs: {fileID: 11400000, guid: ba6fe0a9892f7334a87751395208410c, type: 2}
 --- !u!114 &8909878579151716242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1259,7 +1260,7 @@ GameObject:
   m_Layer: 5
   m_Name: CastingBar
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1

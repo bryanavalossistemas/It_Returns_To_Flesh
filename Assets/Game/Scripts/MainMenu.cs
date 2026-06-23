@@ -2,6 +2,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static BehaviourPlus;
 
 public class MainMenu : MonoBehaviour
 {
@@ -33,7 +34,7 @@ public class MainMenu : MonoBehaviour
             DropdownField _dropdownLanguage = root.Q<DropdownField>("drop_languages");
             _dropdownLanguage.choices = Core.LocaleNames.ToList();
             _dropdownLanguage.value = Core.CurrentLocaleName;
-            _dropdownLanguage.RegisterValueChangedCallback(evt => Core.ChangeLanguage(evt.newValue));
+            _dropdownLanguage.RegisterValueChangedCallback(evt => core.ChangeLanguage(evt.newValue));
 
             // Sliders de volumen
             SliderInt _sliderMaster = root.Q<SliderInt>("vol_master");
@@ -41,22 +42,22 @@ public class MainMenu : MonoBehaviour
             SliderInt _sliderSfx = root.Q<SliderInt>("vol_sfx");
 
             // Eventos de cambio de volumen
-            _sliderMaster.RegisterValueChangedCallback(evt => AudioManager.SetMasterVolume(evt.newValue));
-            _sliderMusic.RegisterValueChangedCallback(evt => AudioManager.SetMusicVolume(evt.newValue));
-            _sliderSfx.RegisterValueChangedCallback(evt => AudioManager.SetSfxVolume(evt.newValue));
+            _sliderMaster.RegisterValueChangedCallback(evt => audioManager.SetMasterVolume(evt.newValue));
+            _sliderMusic.RegisterValueChangedCallback(evt => audioManager.SetMusicVolume(evt.newValue));
+            _sliderSfx.RegisterValueChangedCallback(evt => audioManager.SetSfxVolume(evt.newValue));
 
             _btnCloseOptions.clicked += HideOptions;
 
             await Task.Yield();
             // Inicializar sliders con los valores actuales del AudioManager
-            _sliderMaster.value = AudioManager.masterVolume;
-            _sliderMusic.value = AudioManager.musicVolume;
-            _sliderSfx.value = AudioManager.sfxVolume;
+            _sliderMaster.value = audioManager.masterVolume;
+            _sliderMusic.value = audioManager.musicVolume;
+            _sliderSfx.value = audioManager.sfxVolume;
         }
     }
 
-    private void OnPlay() => Core.ChangeScene(1);
-    private void OnQuit() => Core.QuitGame();
+    private void OnPlay() => core.NextScene();
+    private void OnQuit() => core.QuitGame();
     private void ShowOptions() => panelOptions.style.display = DisplayStyle.Flex;
     private void HideOptions() => panelOptions.style.display = DisplayStyle.None;
 }

@@ -6,16 +6,13 @@ using static BehaviourPlus;
 
 public class GameManager : MonoBehaviour_UU, IUpdatable
 {
-    public const int MenusIndex = 0;
     public const int CivilianLayer = 9, ExplodableLayer = 11, InstakillLayer = 8;
     public const float RayLength = 0.05f;
-    private LayerMask groundLayer, pushableLayer;
-    public Material normalMat, ripperSelectedMat;
     [SerializeField] private CameraController cameraController;
     [SerializeField] private GameObject ripperPrefab;
-    private Transform spawnPoint;
-    private int nRippers;
+    //public Material normalMat, ripperSelectedMat;
     [HideInInspector] public int selectedSkill = -1;
+    //private LayerMask groundLayer, pushableLayer;
     public enum SelectionTarget
     {
         None,
@@ -23,47 +20,36 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
         Limb
     }
     [HideInInspector] public SelectionTarget selectionTarget;
+    private int nRippers;
+    private Transform spawnPoint;
 
     void Awake() => SceneManager.sceneLoaded += SceneLoaded;
     void OnDestroy() => SceneManager.sceneLoaded -= SceneLoaded;
 
     private void SceneLoaded(Scene scene, LoadSceneMode loadMode)
     {
-        bool inGameplay = scene.buildIndex > MenusIndex;
+        bool inGameplay = scene.buildIndex > Core.MenusIndex;
         gameObject.SetActive(inGameplay);
         Time.timeScale = 1f;
-        if (!inGameplay) return;
+        //if (!inGameplay) return;
+    }
 
-        spawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint").transform;
-        Tilemap tilemap = FindFirstObjectByType<Tilemap>();
+    public void SetLevelData(LevelData level)
+    {
+        spawnPoint = level.spawnPoint;
+        Tilemap tilemap = level.tilemap;
         Bounds bounds = tilemap.localBounds;
         bounds.center += tilemap.transform.position;
         cameraController.UpdateConfiner(bounds.center, bounds.size);
     }
-
-    public void RegisterRipper() => nRippers++;
-    public void DeadRipper()
-    {
-        nRippers--;
-        if (nRippers <= 0) SpawnRipper(spawnPoint);
-    }
-
-    private void SpawnRipper(Transform transform)
-    {
-        Instantiate(ripperPrefab, transform.position, Quaternion.identity);
-    }
-
-    public void UpdateCheckPoint(Transform newCheckPoint)
-    {
-        spawnPoint = newCheckPoint;
-    }
+    public void RestartLevel() => core.ReloadScene();
 
     public void OnUpdate()
     {
         if (inputManager.Pause)
         {
             bool isPaused = Time.timeScale == 0f;
-            Time.timeScale = isPaused? 1f : 0f;
+            Time.timeScale = isPaused ? 1f : 0f;
             //PauseMenu.instance.TogglePauseMenu();
         }
         bool[] _numbers = { inputManager._1, inputManager._2, inputManager._3, inputManager._4, inputManager._5 };
@@ -74,7 +60,7 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
         if (inputManager.Deselect)
         {
             selectedSkill = -1;
-            //cameraController targer = null
+            //cameraController target = null
             if (FleshRipper.SelectedRipper != null)
             {
                 FleshRipper.SelectedRipper.SetSelectedVisual(false);
@@ -83,6 +69,19 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
             uiManager.ClearUI();
         }
     }
+
+    public void UpdateCheckPoint(Transform checkPoint)
+    {
+        spawnPoint = checkPoint;
+    }
+
+    public void RegisterRipper() => nRippers++;
+    public void DeadRipper()
+    {
+        nRippers--;
+        if (nRippers <= 0) SpawnRipper(spawnPoint);
+    }
+    private void SpawnRipper(Transform transform) => Instantiate(ripperPrefab, transform.position, Quaternion.identity);
 
     public void TriggerSkill(int pos)
     {
@@ -116,6 +115,4 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
     {
         selectionTarget = SelectionTarget.Ripper;
     }
-
-    public void RestartLevel() => Core.ChangeScene(SceneManager.GetActiveScene().buildIndex);
 }

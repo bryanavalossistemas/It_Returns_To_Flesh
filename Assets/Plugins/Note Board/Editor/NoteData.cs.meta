@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 77a794eb87fa7d842a16b9b8fff711d0
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 365478
+  packageName: Note Board | Project Management Tool
+  packageVersion: 1.4.2
+  assetPath: Assets/Note Board/Editor/NoteData.cs
+  uploadId: 913836

@@ -84,7 +84,7 @@ public class InputManager : MonoBehaviour_UL, ILateUpdatable
     public bool _5 { get; private set; }
     private void _5Button(InputAction.CallbackContext _) => _5 = true;
     public bool Deselect { get; private set; }
-    private void DeselectButton(InputAction.CallbackContext _) => _5 = true;
+    private void DeselectButton(InputAction.CallbackContext _) => Deselect = true;
 
     public Vector2 PointerPos { get; private set; }
     private void PointerPosInput(InputAction.CallbackContext c)

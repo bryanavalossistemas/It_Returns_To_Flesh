@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Game/Scenes/FleshProto.unity
     guid: 29c4f93acb4982f469c4e4b0bf37fdf1
   m_configObjects:
+    com.unity.adaptivePerformance.basic.provider_settings: {fileID: 11400000, guid: e6f08786113cd9d4bbfd0ef8745dd0c7, type: 2}
+    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: eb1b8ea972cb55741aa53b99c20b44d2, type: 2}
+    com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 64a209537d1ec2b479f48b9a00137b46, type: 2}
     com.unity.addressableassets: {fileID: 11400000, guid: a5cfb7134e116a541a175dab6a6b7416, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
     com.unity.localization.settings: {fileID: 11400000, guid: d3d1b14b5aa730d46ad937aa63e9bd44, type: 2}
