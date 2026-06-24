@@ -15,7 +15,7 @@ MonoBehaviour:
   Path: Assets/Game/Audio/Build/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639169047734588065
+  lastModified: 639178576883406239
   FileSizes: []
   Exists: 1
 --- !u!114 &-7369227333134926283
@@ -133,7 +133,7 @@ MonoBehaviour:
   Path: Assets/Game/Audio/Build/BGM.bank
   Name: BGM
   StudioPath: bank:/BGM
-  lastModified: 639169047734567933
+  lastModified: 639178576883386055
   FileSizes: []
   Exists: 1
 --- !u!114 &-3688951252396568716
@@ -204,7 +204,7 @@ MonoBehaviour:
   Path: Assets/Game/Audio/Build/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639169047734598074
+  lastModified: 639178576883406239
   FileSizes:
   - Name: 
     Value: 1016
@@ -283,7 +283,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: -3114105662222977567}
   cacheVersion: 131860
-  cacheTime: 639169047734608052
+  cacheTime: 639178576883438187
   SerializableEventsDict:
   - key: event:/BGM/Game
     index: 0
@@ -443,7 +443,7 @@ MonoBehaviour:
   Path: Assets/Game/Audio/Build/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 639169047734608052
+  lastModified: 639178576883438187
   FileSizes: []
   Exists: 1
 --- !u!114 &3805734842578260985
