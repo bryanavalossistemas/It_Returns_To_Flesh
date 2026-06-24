@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 using UnityEngine.SceneManagement;
+using Cysharp.Threading.Tasks;
 using static BehaviourPlus;
 
 public class Core : MonoBehaviour
@@ -12,13 +13,14 @@ public class Core : MonoBehaviour
     [SerializeField] private InputManager _input;
     [SerializeField] private AudioManager _audio;
     [SerializeField] private UIManager _ui;
+    [SerializeField] private PrefsManager _prefs;
     public static string[] LocaleNames { get; private set; }
     public static string CurrentLocaleName => LocalizationSettings.SelectedLocale.LocaleName;
     public Camera MainCamera { get; private set; }
 
     void Awake()
     {
-        if (!Init(this, _game, _input, _audio, _ui))
+        if (!Init(this, _game, _input, _audio, _ui, _prefs))
         {
             Destroy(gameObject);
             return;
@@ -27,21 +29,12 @@ public class Core : MonoBehaviour
         MainCamera = Camera.main;
     }
 
-    async void Start()
+    async UniTaskVoid Start()
     {
-        LoadPlayerPrefs();
-        await LocalizationSettings.InitializationOperation.Task;
+        prefsManager.LoadPlayerPrefs();
+        await LocalizationSettings.InitializationOperation.Task.AsUniTask();
         LocaleNames = LocalizationSettings.AvailableLocales.Locales.Select(locale => locale.LocaleName).ToArray();
     }
-    private void LoadPlayerPrefs()
-    {
-        audioManager.SetMasterVolume(GetPlayerPrefs("vol_master"));
-        audioManager.SetMusicVolume(GetPlayerPrefs("vol_music"));
-        audioManager.SetSfxVolume(GetPlayerPrefs("vol_sfx"));
-    }
-
-    public void SetPlayerPrefs(string key, int value) => PlayerPrefs.SetInt(key, value);
-    public int GetPlayerPrefs(string key) => PlayerPrefs.GetInt(key, 100);
 
     public void ChangeLanguage(string localeName)
     {

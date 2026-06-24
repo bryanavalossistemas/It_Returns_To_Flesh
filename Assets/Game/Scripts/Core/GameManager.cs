@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
     [HideInInspector] public SelectionTarget selectionTarget;
     private int nRippers;
     private Transform spawnPoint;
+    public event Action OnAA, OnAA2;
 
     void Awake() => SceneManager.sceneLoaded += SceneLoaded;
     void OnDestroy() => SceneManager.sceneLoaded -= SceneLoaded;
@@ -34,10 +35,9 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
         //if (!inGameplay) return;
     }
 
-    public void SetLevelData(LevelData level)
+    public void SetLevelData(Transform spawnPoint, Tilemap tilemap)
     {
-        spawnPoint = level.spawnPoint;
-        Tilemap tilemap = level.tilemap;
+        this.spawnPoint = spawnPoint;
         Bounds bounds = tilemap.localBounds;
         bounds.center += tilemap.transform.position;
         cameraController.UpdateConfiner(bounds.center, bounds.size);
@@ -61,11 +61,7 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
         {
             selectedSkill = -1;
             //cameraController target = null
-            if (FleshRipper.SelectedRipper != null)
-            {
-                FleshRipper.SelectedRipper.SetSelectedVisual(false);
-                FleshRipper.SelectedRipper = null;
-            }
+            OnAA();
             uiManager.ClearUI();
         }
     }
@@ -87,7 +83,7 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
     {
         Action[] skills = { SkillVomit, SkillSores, SkillExplode, SkillCephalic, SkillFrenzy };
         skills[pos].Invoke();
-        FleshRipper.SelectedRipper = null;
+        OnAA2();
         uiManager.ClearUI();
     }
 

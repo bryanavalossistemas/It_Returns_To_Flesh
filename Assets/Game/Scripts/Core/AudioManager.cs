@@ -62,7 +62,7 @@ public class AudioManager : MonoBehaviour
         bus.setMute(volume == 0);
         float db = Mathf.Lerp(-80f, 0f, volume / 100f);
         bus.setVolume(db);
-        core.SetPlayerPrefs(key, value);
+        prefsManager.SetInt(key, value);
     }
 
     private EventInstance stepEventInstance;

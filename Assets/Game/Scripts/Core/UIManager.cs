@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using static BehaviourPlus;
@@ -5,15 +6,15 @@ using static BehaviourPlus;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI healthText;
-    [SerializeField] private SkillButton[] skills;
     [SerializeField] public Color _normalColor = Color.white, _dangerColor = Color.red, _disabledColor = new(0.2f, 0.2f, 0.2f, 1f), _selectedColor = Color.green;
+    public event Action<Color?> SetColor;
 
     void Start() => ClearUI();
 
     public void ClearUI()
     {
         healthText.text = "--/--";
-        foreach (SkillButton skill in skills) skill.SetColor(_normalColor);
+        SetColor(_normalColor);
     }
 
     public void UpdateHealth(int currentHealth, int maxHealth)
@@ -24,34 +25,20 @@ public class UIManager : MonoBehaviour
 
     private void EvaluateSkills(int currentHealth)
     {
-        for (int i = 0; i < skills.Length; i++)
-        {
-            skills[i].SetColor(GetColor());
-
-            Color GetColor()
-            {
-                if (gameManager.selectedSkill == i) return uiManager._selectedColor;
-                if (!true) return uiManager._disabledColor;
-                if (currentHealth <= 4) return uiManager._dangerColor;
-                return uiManager._normalColor;
-            }
-        }
+        SetColor(null);
     }
 
     public void ResetSkillHighlight()
     {
         gameManager.selectedSkill = -1;
-        if (FleshRipper.SelectedRipper != null)
-        {
-            EvaluateSkills(FleshRipper.SelectedRipper.Health);
-        }
-        else ClearUI();
+        //if (FleshRipper.SelectedRipper != null) EvaluateSkills(FleshRipper.SelectedRipper.Health);
+        //else ClearUI();
     }
 
     public void SelectButton(int pos)
     {
         gameManager.selectedSkill = pos;
-        skills[pos].Select();
+        //skills[pos].Select();
     }
     /*public void NextButtonGO()
     {
