@@ -37,11 +37,13 @@ public class GameManager : MonoBehaviour
     }
 
     public void RegisterRipper() => nRippers++;
+    
     public void DeadRipper()
     {
         nRippers--;
         if (nRippers <= 0) SpawnRipper(spawnPoint);
     }
+<<<<<<< Updated upstream
 
     private void SpawnRipper(Transform transform)
     {
@@ -74,6 +76,22 @@ public class GameManager : MonoBehaviour
             uiManager.ClearUI();
         }
     }
+=======
+    private void SpawnRipper(Transform transform)
+    {
+        if (transform == null)
+        {
+            Debug.LogError("SpawnPoint no asignado en GameManager");
+            return;
+        }
+        if (ripperPrefab == null)
+        {
+            Debug.LogError("RipperPrefab no asignado en GameManager");
+            return;
+        }
+        Instantiate(ripperPrefab, transform.position, Quaternion.identity);
+    }
+>>>>>>> Stashed changes
 
     public void TriggerSkill(int pos)
     {

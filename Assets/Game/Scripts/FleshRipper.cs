@@ -186,12 +186,20 @@ public class FleshRipper : MonoBehaviour, IHoverable,ISelectable
 
     private void Die()
     {
+        Debug.Log("DIE EJECUTADO");
+
         if (SelectedRipper == this)
         {
             SelectedRipper = null;
             uiManager.ClearUI();
         }
 
+<<<<<<< Updated upstream:Assets/Game/Scripts/FleshRipper.cs
+=======
+        gameManager.DeadRipper();
+        
+        gameObject.SetActive(false); // línea temporal
+>>>>>>> Stashed changes:Assets/Game/Scripts/Gameplay/FleshRipper.cs
         Destroy(gameObject);
     }
 
