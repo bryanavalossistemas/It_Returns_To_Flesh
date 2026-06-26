@@ -1,30 +1,28 @@
+using System.Collections;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
-using System.Collections;
 
 public class VideoTutorialMonitor : MonoBehaviour
 {
     [Header("Componentes de Video y UI")]
-    [SerializeField] private RawImage monitorRawImage; 
-    [SerializeField] private VideoPlayer videoPlayer;   
+    [SerializeField] private RawImage monitorRawImage;
+    [SerializeField] private VideoPlayer videoPlayer;
     
     [Header("Texturas e Iconos")]
-    [SerializeField] private RenderTexture videoTexture; 
-    [SerializeField] private Texture iconoHabilidad;     
+    [SerializeField] private RenderTexture videoTexture;
+    [SerializeField] private Texture iconoHabilidad;
 
     [Header("Tiempos de Intercalado (en segundos)")]
-    [SerializeField] private float tiempoVideo = 3.0f;      
-    [SerializeField] private float tiempoIcono = 2.0f;      
+    [SerializeField] private float tiempoVideo = 3.0f;
+    [SerializeField] private float tiempoIcono = 2.0f;
 
-    private void Start()
+    void Start()
     {
-        if (monitorRawImage == null) monitorRawImage = GetComponent<RawImage>();
-        if (videoPlayer == null) videoPlayer = GetComponent<VideoPlayer>();
-
+        videoPlayer.url = Path.Combine(Application.streamingAssetsPath, "LabMonitor.mp4");
         StartCoroutine(BucleMonitorVideo());
     }
-
     private IEnumerator BucleMonitorVideo()
     {
         while (true)
@@ -36,10 +34,7 @@ public class VideoTutorialMonitor : MonoBehaviour
 
             // --- MODO ICONO HABILIDAD ---
             videoPlayer.Pause();
-            if (iconoHabilidad != null)
-            {
-                monitorRawImage.texture = iconoHabilidad;
-            }
+            if (iconoHabilidad != null) monitorRawImage.texture = iconoHabilidad;
             yield return new WaitForSeconds(tiempoIcono);
         }
     }

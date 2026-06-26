@@ -599,6 +599,7 @@ PlayerSettings:
   webWasm2023: 0
   webEnableSubmoduleStrippingCompatibility: 0
   scriptingDefineSymbols:
+    Standalone: 
     WebGL: FMOD_SERIALIZE_GUID_ONLY
   additionalCompilerArguments: {}
   platformArchitecture: {}
@@ -609,7 +610,7 @@ PlayerSettings:
     WebGL: 1
   il2cppStacktraceInformation: {}
   managedStrippingLevel:
-    WebGL: 3
+    WebGL: 4
   incrementalIl2cppBuild: {}
   suppressCommonWarnings: 1
   allowUnsafeCode: 0
