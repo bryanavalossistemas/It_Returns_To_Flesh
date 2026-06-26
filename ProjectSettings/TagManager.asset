@@ -8,6 +8,7 @@ TagManager:
   - Civilian
   - Floor
   - SpawnPoint
+  - KillButton
   layers:
   - Default
   - TransparentFX
