@@ -106,7 +106,17 @@ public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatab
             SelectedRipper = null;
             uiManager.ClearUI();
         }
-        Destroy(gameObject);
+
+        enabled = false;
+        rb.linearVelocity = Vector2.zero;
+        rb.bodyType = RigidbodyType2D.Kinematic;
+        col.enabled = false;
+        anim.SetTrigger("Die");
+    }
+
+    public void OnDeathAnimationComplete()
+    {
+        Destroy(gameObject); //Return Pool
         gameManager.RipperDead();
     }
 
