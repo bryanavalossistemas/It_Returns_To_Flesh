@@ -9,7 +9,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] public Color _normalColor = Color.white, _dangerColor = Color.red, _disabledColor = new(0.2f, 0.2f, 0.2f, 1f), _selectedColor = Color.green;
     public event Action<Color?> SetColor;
 
-    void Start() => ClearUI();
+    //void Start() => ClearUI();
 
     public void ClearUI()
     {

@@ -235,7 +235,7 @@ MonoBehaviour:
   HasSourceProject: 0
   HasPlatforms: 0
   sourceProjectPath: 
-  sourceBankPath: Assets/Game/Audio/Build
+  sourceBankPath: Assets/Game/Audio/Build/HTML5
   sourceBankPathUnformatted: 
   BankRefreshCooldown: 1
   ShowBankRefreshWindow: 0
