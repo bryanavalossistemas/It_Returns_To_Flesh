@@ -8,20 +8,21 @@ using static BehaviourPlus;
 public class AudioManager : MonoBehaviour
 {
 #pragma warning disable IDE1006 // Estilos de nombres
-    public int masterVolume = 100, musicVolume = 100, sfxVolume = 100;
+    [HideInInspector] public int masterVolume = 100, musicVolume = 100, sfxVolume = 100;
 #pragma warning restore IDE1006 // Estilos de nombres
     private Bus masterBus, musicBus, sfxBus;
     private EventInstance bgmInstance;
     [SerializeField] private SongLibraries songs;
-    private PARAMETER_ID id;
+    [SerializeField, ParamRef] private string playState;
+    private PARAMETER_ID pState;
 
     void Start()
     {
         masterBus = RuntimeManager.GetBus("bus:/");
         musicBus = RuntimeManager.GetBus("bus:/BGM");
         sfxBus = RuntimeManager.GetBus("bus:/SFX");
-        RuntimeManager.StudioSystem.getParameterDescriptionByName(songs.Parameter, out var desc);
-        id = desc.id;
+        RuntimeManager.StudioSystem.getParameterDescriptionByName(playState, out var desc);
+        pState = desc.id;
     }
 
     void OnEnable() => SceneManager.sceneLoaded += SceneLoaded;
@@ -65,26 +66,17 @@ public class AudioManager : MonoBehaviour
         prefsManager.SetInt(key, value);
     }
 
-    private EventInstance stepEventInstance;
+    /*private EventInstance stepEventInstance;
     public void UpdateSound(bool playSfx)
     {
         //stepEventInstance = CreateEventInstance(playerStepSound);
         if (playSfx)
         {
             stepEventInstance.getPlaybackState(out PLAYBACK_STATE playbackState);
-            if (playbackState.Equals(PLAYBACK_STATE.STOPPED))
-            {
-                stepEventInstance.start();
-            }
+            if (playbackState.Equals(PLAYBACK_STATE.STOPPED)) stepEventInstance.start();
         }
-        else
-        {
-            stepEventInstance.stop(STOP_MODE.ALLOWFADEOUT);
-        }
-    }
+        else stepEventInstance.stop(STOP_MODE.ALLOWFADEOUT);
+    }*/
 
-    public void UpdatePlaystate()
-    {
-        RuntimeManager.StudioSystem.setParameterByID(id, Time.timeScale == 0? 1 : 0);
-    }
+    public void UpdatePlaystate() => RuntimeManager.StudioSystem.setParameterByID(pState, Time.timeScale == 0? 1 : 0);
 }

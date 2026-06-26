@@ -6,6 +6,6 @@ public class DeathZone : MonoBehaviour
     {
         FleshRipper ripper = col.GetComponentInParent<FleshRipper>();
 
-        if (ripper != null) ripper.Die();
+        if (ripper != null) ripper.RipperDead();
     }
 }

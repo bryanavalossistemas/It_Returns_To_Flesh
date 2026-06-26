@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections.Generic;
 
 public static class TransformExtensions
 {
@@ -10,7 +10,13 @@ public static class TransformExtensions
     }
 }
 
-public class Pool<T> where T : Component
+public interface IPool
+{
+    void PoolStart();
+    void PoolEnd();
+}
+
+public class Pool<T> where T : Component, IPool
 {
     private readonly T prefab;
     private readonly Queue<T> pool = new();
@@ -26,24 +32,24 @@ public class Pool<T> where T : Component
         }
     }
 
-    public T Get()
+    public T Get(Vector3 pos = default)
     {
+        T obj;
         if (pool.Count > 0)
         {
-            T obj = pool.Dequeue();
+            obj = pool.Dequeue();
             obj.gameObject.SetActive(true);
-            return obj;
         }
-        else
-        {
-            T obj = GameObject.Instantiate(prefab);
-            return obj;
-        }
+        else obj = GameObject.Instantiate(prefab);
+        obj.transform.position = pos;
+        obj.PoolStart();
+        return obj;
     }
 
     public void Return(T obj)
     {
         obj.gameObject.SetActive(false);
+        obj.PoolEnd();
         pool.Enqueue(obj);
     }
 }

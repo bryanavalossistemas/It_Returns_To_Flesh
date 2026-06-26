@@ -1,5 +1,5 @@
-using Unity.Cinemachine;
 using UnityEngine;
+using Unity.Cinemachine;
 using static BehaviourPlus;
 
 public class CameraController : MonoBehaviour

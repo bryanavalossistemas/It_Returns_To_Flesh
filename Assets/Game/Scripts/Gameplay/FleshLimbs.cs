@@ -27,29 +27,29 @@ public class FleshLimbs : MonoBehaviour
         Vector2 explosionCenter = transform.position;
         float radius = applyExplosionRadius ? currentRadius : 0f;
         Collider2D[] objectsInRange = Physics2D.OverlapCircleAll(explosionCenter, radius, whatCanBePushed);
-        if (limb == LimbType.Head && !_body.HasHead) return;
-        if (limb == LimbType.Arms && !_body.HasArms) return;
-        if (limb == LimbType.Legs && !_body.HasLegs) return;
+        //if (limb == LimbType.Head && !_body.HasHead) return;
+        //if (limb == LimbType.Arms && !_body.HasArms) return;
+        //if (limb == LimbType.Legs && !_body.HasLegs) return;
 
 
         switch (limb)
         {
             case LimbType.Head:
-                _body.HasHead = false;
+                //_body.HasHead = false;
                 if (headObject != null) headObject.SetActive(false);
                 currentRadius *= 1.5f;
                 currentForceX *= 1.5f;
                 currentForceY *= 1.5f;
-                damageToTake = _body.MaxHealth;
+                //damageToTake = _body.MaxHealth;
                 break;
 
             case LimbType.Arms:
-                _body.HasArms = false;
+                //_body.HasArms = false;
                 if (armsObject !=null) armsObject.SetActive(false);
                 break;
 
             case LimbType.Legs:
-                _body.HasLegs = false;
+                //_body.HasLegs = false;
                 if (legsObject !=null) legsObject.SetActive(false);
                 _body.ApplyLegLoss();
                 break;
@@ -100,19 +100,12 @@ public class FleshLimbs : MonoBehaviour
             }
         }
 
-        _body.ModifyHealth(-damageToTake);
+        //_body.ModifyHealth(-damageToTake);
     }
 
     public void TriggerSkillVomit()
     {
-        if (FleshRipper.SelectedRipper !=null)
-        {
-            FleshCaster caster = FleshRipper.SelectedRipper.GetComponent<FleshCaster>();
-            if (caster != null)
-            {
-                caster.CastVomit();
-            }
-        }
+        if (FleshRipper.SelectedRipper != null) FleshRipper.SelectedRipper.CastVomit();
     }
 
     void ODrawGizmos()

@@ -1,6 +1,6 @@
 using System;
-using TMPro;
 using UnityEngine;
+using TMPro;
 using static BehaviourPlus;
 
 public class UIManager : MonoBehaviour
@@ -20,11 +20,6 @@ public class UIManager : MonoBehaviour
     public void UpdateHealth(int currentHealth, int maxHealth)
     {
         healthText.text = $"{currentHealth}/{maxHealth}";
-        EvaluateSkills(currentHealth);
-    }
-
-    private void EvaluateSkills(int currentHealth)
-    {
         SetColor(null);
     }
 

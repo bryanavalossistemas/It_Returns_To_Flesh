@@ -9,10 +9,9 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
     public const int CivilianLayer = 9, ExplodableLayer = 11, InstakillLayer = 8;
     public const float RayLength = 0.05f;
     [SerializeField] private CameraController cameraController;
-    [SerializeField] private GameObject ripperPrefab;
-    //public Material normalMat, ripperSelectedMat;
+    public Material normalMat, ripperSelectedMat;
     [HideInInspector] public int selectedSkill = -1;
-    //private LayerMask groundLayer, pushableLayer;
+    public LayerMask groundLayer, pushableLayer;
     public enum SelectionTarget
     {
         None,
@@ -23,6 +22,10 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
     private int nRippers;
     private Transform spawnPoint;
     public event Action OnAA, OnAA2;
+    public event Action<Vector3> OnSpawnRipper;
+    public int MaxHP {  get; private set; }
+    public int HP { get; private set; }
+    [SerializeField] private RipperSO ripperSO;
 
     void Awake() => SceneManager.sceneLoaded += SceneLoaded;
     void OnDestroy() => SceneManager.sceneLoaded -= SceneLoaded;
@@ -32,7 +35,10 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
         bool inGameplay = scene.buildIndex > Core.MenusIndex;
         gameObject.SetActive(inGameplay);
         Time.timeScale = 1f;
-        //if (!inGameplay) return;
+        if (!inGameplay) return;
+
+        MaxHP = ripperSO.initialHP;
+        HP = MaxHP;
     }
 
     public void SetLevelData(Transform spawnPoint, Tilemap tilemap)
@@ -49,7 +55,7 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
         if (inputManager.Pause)
         {
             bool isPaused = Time.timeScale == 0f;
-            Time.timeScale = isPaused ? 1f : 0f;
+            Time.timeScale = isPaused? 1f : 0f;
             //PauseMenu.instance.TogglePauseMenu();
         }
         bool[] _numbers = { inputManager._1, inputManager._2, inputManager._3, inputManager._4, inputManager._5 };
@@ -66,18 +72,15 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
         }
     }
 
-    public void UpdateCheckPoint(Transform checkPoint)
-    {
-        spawnPoint = checkPoint;
-    }
+    public void UpdateCheckPoint(Transform checkPoint) => spawnPoint = checkPoint;
 
     public void RegisterRipper() => nRippers++;
-    public void DeadRipper()
+    public void RipperDead()
     {
         nRippers--;
-        if (nRippers <= 0) SpawnRipper(spawnPoint);
+        if (nRippers <= 0) RestartLevel();
     }
-    private void SpawnRipper(Transform transform) => Instantiate(ripperPrefab, transform.position, Quaternion.identity);
+    public void SpawnRipper(Transform transform) => OnSpawnRipper(transform.position);
 
     public void TriggerSkill(int pos)
     {
@@ -87,28 +90,16 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
         uiManager.ClearUI();
     }
 
-    private void SkillVomit()
-    {
-        selectionTarget = SelectionTarget.Ripper;
-    }
+    private void SkillVomit() => selectionTarget = SelectionTarget.Ripper;
+    private void SkillSores() => selectionTarget = SelectionTarget.Ripper;
+    private void SkillExplode() => selectionTarget = SelectionTarget.Limb;
+    private void SkillCephalic() => selectionTarget = SelectionTarget.Ripper;
+    private void SkillFrenzy() => selectionTarget = SelectionTarget.Ripper;
 
-    private void SkillSores()
+    public void ModifyHP(int n)
     {
-        selectionTarget = SelectionTarget.Ripper;
-    }
-
-    private void SkillExplode()
-    {
-        selectionTarget = SelectionTarget.Limb;
-    }
-
-    private void SkillCephalic()
-    {
-        selectionTarget = SelectionTarget.Ripper;
-    }
-
-    private void SkillFrenzy()
-    {
-        selectionTarget = SelectionTarget.Ripper;
+        HP += n;
+        if (HP > MaxHP) HP = MaxHP;
+        if (HP <= 0) RestartLevel();
     }
 }

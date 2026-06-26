@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   cameraController: {fileID: 1840134684906731062}
-  ripperPrefab: {fileID: 6588384766902915105, guid: b9766f3e2c79e2b409b32fe8ab36fca9, type: 3}
+  ripperPrefab: {fileID: 0}
   selectedSkill: -1
   selectionTarget: 0
 --- !u!1 &571192459602958783
@@ -1265,6 +1265,7 @@ GameObject:
   - component: {fileID: 6493199828588462059}
   - component: {fileID: 6342506370883500296}
   - component: {fileID: 5601232880861483884}
+  - component: {fileID: 3637858096429089721}
   - component: {fileID: 1142410005317995247}
   - component: {fileID: 8909878579151716242}
   m_Layer: 0
@@ -1311,6 +1312,7 @@ MonoBehaviour:
   _input: {fileID: 8909878579151716242}
   _audio: {fileID: 1142410005317995247}
   _ui: {fileID: 6553777428056829156}
+  _prefs: {fileID: 3637858096429089721}
 --- !u!114 &6342506370883500296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1335,6 +1337,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61cecb34b6e9bf54d97d3efeac1ed09e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SelectionManager
+--- !u!114 &3637858096429089721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7373287120759380130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb01af403d36d340b473a094dbc3c8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Core::PrefsManager
 --- !u!114 &1142410005317995247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1351,6 +1365,7 @@ MonoBehaviour:
   musicVolume: 100
   sfxVolume: 100
   songs: {fileID: 11400000, guid: ba6fe0a9892f7334a87751395208410c, type: 2}
+  playState: PlayState
 --- !u!114 &8909878579151716242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1658,12 +1673,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIManager
   healthText: {fileID: 3534011916556671767}
-  skills:
-  - {fileID: 2387911730802479831}
-  - {fileID: 8653906175779798135}
-  - {fileID: 3979468843304996231}
-  - {fileID: 2144813536813880206}
-  - {fileID: 4608311627468064263}
   _normalColor: {r: 0.5647059, g: 0.14509805, b: 0.14509805, a: 1}
   _dangerColor: {r: 1, g: 0, b: 0, a: 1}
   _disabledColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
@@ -1790,17 +1799,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7561274371668890200, guid: 15b519b0064ed094aa24c8bc884fa02f, type: 3}
   m_PrefabInstance: {fileID: 964170210821321110}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8653906175779798135 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8464993116144618977, guid: 15b519b0064ed094aa24c8bc884fa02f, type: 3}
-  m_PrefabInstance: {fileID: 964170210821321110}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07bb4e6a3f6fdb8489fa4c426d856474, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SkillButton
 --- !u!1001 &4773916450542878822
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1923,17 +1921,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7561274371668890200, guid: 15b519b0064ed094aa24c8bc884fa02f, type: 3}
   m_PrefabInstance: {fileID: 4773916450542878822}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3979468843304996231 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8464993116144618977, guid: 15b519b0064ed094aa24c8bc884fa02f, type: 3}
-  m_PrefabInstance: {fileID: 4773916450542878822}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07bb4e6a3f6fdb8489fa4c426d856474, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SkillButton
 --- !u!1001 &5372144963383725030
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2052,17 +2039,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7561274371668890200, guid: 15b519b0064ed094aa24c8bc884fa02f, type: 3}
   m_PrefabInstance: {fileID: 5372144963383725030}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4608311627468064263 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8464993116144618977, guid: 15b519b0064ed094aa24c8bc884fa02f, type: 3}
-  m_PrefabInstance: {fileID: 5372144963383725030}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07bb4e6a3f6fdb8489fa4c426d856474, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SkillButton
 --- !u!1001 &6078209621847514934
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2192,17 +2168,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 15b519b0064ed094aa24c8bc884fa02f, type: 3}
---- !u!114 &2387911730802479831 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8464993116144618977, guid: 15b519b0064ed094aa24c8bc884fa02f, type: 3}
-  m_PrefabInstance: {fileID: 6078209621847514934}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07bb4e6a3f6fdb8489fa4c426d856474, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SkillButton
 --- !u!224 &4374448278360804718 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7561274371668890200, guid: 15b519b0064ed094aa24c8bc884fa02f, type: 3}
@@ -2318,14 +2283,3 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7561274371668890200, guid: 15b519b0064ed094aa24c8bc884fa02f, type: 3}
   m_PrefabInstance: {fileID: 7546444110485315183}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2144813536813880206 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8464993116144618977, guid: 15b519b0064ed094aa24c8bc884fa02f, type: 3}
-  m_PrefabInstance: {fileID: 7546444110485315183}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07bb4e6a3f6fdb8489fa4c426d856474, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SkillButton

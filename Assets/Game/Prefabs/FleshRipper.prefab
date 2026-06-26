@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1093938309411313879}
   m_Layer: 0
-  m_Name: FloorDetect
+  m_Name: Tbottom
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -44,7 +44,7 @@ GameObject:
   m_Layer: 6
   m_Name: Arms_Col
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -77,37 +77,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LimbNode
   limbType: 1
   parentLimbsManager: {fileID: 6757668871874450761}
---- !u!1 &1340794225122742710
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1370340987831597067}
-  m_Layer: 0
-  m_Name: Outline
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1370340987831597067
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1340794225122742710}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0075215953, y: 0.24341209, z: 0}
-  m_LocalScale: {x: 1.085387, y: 0.5239852, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7677830470400958208}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3867576581121016761
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,7 +92,7 @@ GameObject:
   m_Layer: 0
   m_Name: CancelNode
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -259,7 +228,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef9b1192a904a5e40a0aea3157c65b1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ActionCancelNode
-  cancelCaster: {fileID: 5012289450544244105}
+  body: {fileID: 0}
+--- !u!1 &4114747785451813803
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9041168440356229633}
+  m_Layer: 0
+  m_Name: Tforward
+  m_TagString: Untagged
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9041168440356229633
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4114747785451813803}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.288, y: -0.75, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7677830470400958208}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6336108549668732773
 GameObject:
   m_ObjectHideFlags: 0
@@ -273,7 +273,7 @@ GameObject:
   m_Layer: 6
   m_Name: Head_Col
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -319,13 +319,12 @@ GameObject:
   - component: {fileID: 5583807489712717475}
   - component: {fileID: 2716032082624753156}
   - component: {fileID: 6588384766902915105}
-  - component: {fileID: 5012289450544244105}
   - component: {fileID: 6757668871874450761}
   - component: {fileID: 2220355130601514789}
   m_Layer: 6
   m_Name: FleshRipper
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -346,8 +345,8 @@ Transform:
   - {fileID: 8579898712011359780}
   - {fileID: 4546502734996933394}
   - {fileID: 3161197009600051045}
-  - {fileID: 1370340987831597067}
   - {fileID: 1093938309411313879}
+  - {fileID: 9041168440356229633}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5198950846039202975
@@ -423,7 +422,7 @@ Rigidbody2D:
   m_UseAutoMass: 1
   m_Mass: 3.2530959
   m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_AngularDamping: 0
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -494,44 +493,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 944da9f06948a964e85520da6567b988, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FleshRipper
-  speed: 3
-  health: 11
-  maxHealth: 11
-  frenzyVisionRange: 6
-  dashMultiplier: 3
-  civilianLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  ripperPrefab: {fileID: 8939549028696894721}
-  mainSpriteRenderer: {fileID: 5198950846039202975}
-  normalColor: {r: 1, g: 1, b: 1, a: 1}
-  selectedColor: {r: 0, g: 1, b: 0, a: 1}
-  legLessSprite: {fileID: 0}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 1024
-  _rb: {fileID: 5583807489712717475}
-  _boxCollider: {fileID: 2716032082624753156}
---- !u!114 &5012289450544244105
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8939549028696894721}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 172d6040765a00d438acb575641e5ace, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FleshCaster
-  cancelNodeObject: {fileID: 3867576581121016761}
-  frenzySpeedMultiplier: 2.5
-  soresJumpForceX: 12.5
-  soresJumpForceY: 25.9
-  _sizeDetector: 0.1
-  _groundMask:
-    serializedVersion: 2
-    m_Bits: 1024
+  ripperSO: {fileID: 11400000, guid: 69bd96b0960c9df4abc9f0c6ecafff31, type: 2}
+  Tbottom: {fileID: 1093938309411313879}
+  Tforward: {fileID: 0}
+  sp: {fileID: 5198950846039202975}
+  anim: {fileID: 2220355130601514789}
+  rb: {fileID: 5583807489712717475}
+  col: {fileID: 2716032082624753156}
+  cancelNode: {fileID: 3867576581121016761}
 --- !u!114 &6757668871874450761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -588,7 +557,7 @@ GameObject:
   m_Layer: 6
   m_Name: Legs_Col
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
