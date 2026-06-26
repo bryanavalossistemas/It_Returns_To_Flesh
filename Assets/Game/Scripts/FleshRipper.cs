@@ -1,5 +1,7 @@
 using UnityEngine;
 using static BehaviourPlus;
+using UnityEngine.SceneManagement;
+using System.Collections;
 
 [RequireComponent(typeof(SpriteRenderer),typeof(Animator)), RequireComponent(typeof(Rigidbody2D),typeof(BoxCollider2D))]
 public class FleshRipper : MonoBehaviour, IHoverable,ISelectable
@@ -40,6 +42,8 @@ public class FleshRipper : MonoBehaviour, IHoverable,ISelectable
     private float _stunTimer = 0f;
     private int _savedDirection = 1;
     public int FacingDirection => _direction;
+
+    private Animator _animator;
     
     public void SetSelectedVisual(bool selected)
     {
@@ -53,6 +57,7 @@ public class FleshRipper : MonoBehaviour, IHoverable,ISelectable
     {
         CurrentSpeed = speed;
         //UpdateFacing();
+        _animator = GetComponent<Animator>();
     }
 
     void Start()
@@ -142,7 +147,31 @@ public class FleshRipper : MonoBehaviour, IHoverable,ISelectable
         {
             ConvertCivilian(col.gameObject);
         }
+
+        if (col.CompareTag("KillButton"))
+        {
+            CompleteLevel();
+            // ConvertCivilian(col.gameObject);
+        }
     }
+
+    private void CompleteLevel()
+    {
+      StartCoroutine(CompleteLevelRoutine());
+    }
+
+    private IEnumerator CompleteLevelRoutine()
+{
+    if (_animator)
+    {
+        CurrentSpeed = 0f;
+        _animator.SetTrigger("Jump");
+    }
+
+    yield return new WaitForSeconds(1.5f);
+
+    SceneManager.LoadScene(2);
+}
 
     private void ConvertCivilian(GameObject civilian)
     {
