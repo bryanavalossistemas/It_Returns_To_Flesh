@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   cameraController: {fileID: 1840134684906731062}
-  normalMat: {fileID: 0}
-  ripperSelectedMat: {fileID: 0}
+  normalMat: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  ripperSelectedMat: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   selectedSkill: -1
   groundLayer:
     serializedVersion: 2

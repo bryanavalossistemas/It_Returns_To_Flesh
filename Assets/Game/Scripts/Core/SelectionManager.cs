@@ -40,12 +40,12 @@ public class SelectionManager : MonoBehaviour_UU, IUpdatable
     }
 
     public void TryHover(Vector2 screenPos) => HandlePointer<IHoverable>(screenPos, EnterHover, ExitHover);
-    public void EnterHover(IHoverable hoverable) => HandlePointerActivation(ref Hovered, hoverable);
-    public void ExitHover() => HandlePointerDeactivation(ref Hovered);
+    public void EnterHover(IHoverable hoverable) => HandlePointerActivation(ref Hovered, hoverable, h => h.EnterHover(), h => h.ExitHover());
+    public void ExitHover() => HandlePointerDeactivation(ref Hovered, h => h.ExitHover());
 
     public void TrySelect(Vector2 screenPos) => HandlePointer<ISelectable>(screenPos, Select, null);
-    public void Select(ISelectable selectable) => HandlePointerActivation(ref Selected, selectable, true);
-    public void Deselect() => HandlePointerDeactivation(ref Selected);
+    public void Select(ISelectable selectable) => HandlePointerActivation(ref Selected, selectable, s => s.Select(), s => s.Deselect(), true);
+    public void Deselect() => HandlePointerDeactivation(ref Selected, s => s.Deselect());
 
     private void HandlePointer<T>(Vector2 screenPos, Action<T> onHit, Action onMiss) where T : class
     {
@@ -74,7 +74,7 @@ public class SelectionManager : MonoBehaviour_UU, IUpdatable
             return uiResults.Count > 0;
         }
     }
-    private void HandlePointerActivation<T>(ref T current, T next, bool allowRepeated = false) where T : class
+    private void HandlePointerActivation<T>(ref T current, T next, Action<T> onEnter, Action<T> onExit, bool allowRepeated = false) where T : class
     {
         if (ReferenceEquals(current, next))
         {
@@ -82,38 +82,14 @@ public class SelectionManager : MonoBehaviour_UU, IUpdatable
         }
         else
         {
-            if (current != null) ExitDeselect(current);
+            if (current != null) onExit(current);
             current = next;
         }
-        EnterSelect(current);
+        onEnter(current);
     }
-    private void HandlePointerDeactivation<T>(ref T current) where T : class
+    private void HandlePointerDeactivation<T>(ref T current, Action<T> onExit) where T : class
     {
-        ExitDeselect(current);
+        if (current != null) onExit(current);
         current = null;
-    }
-    private void EnterSelect<T>(T current)
-    {
-        switch (current)
-        {
-            case IHoverable h:
-                h.EnterHover();
-                break;
-            case ISelectable s:
-                s.Select();
-                break;
-        }
-    }
-    private void ExitDeselect<T>(T current)
-    {
-        switch (current)
-        {
-            case IHoverable h:
-                h.ExitHover();
-                break;
-            case ISelectable s:
-                s.Deselect();
-                break;
-        }
     }
 }
