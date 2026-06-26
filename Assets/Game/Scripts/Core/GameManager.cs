@@ -7,7 +7,7 @@ using static BehaviourPlus;
 public class GameManager : MonoBehaviour_UU, IUpdatable
 {
     public const int CivilianLayer = 9, ExplodableLayer = 11, InstakillLayer = 8;
-    public const float RayLength = 0.05f;
+    public const float RayLength = 0.5f;
     [SerializeField] private CameraController cameraController;
     public Material normalMat, ripperSelectedMat;
     [HideInInspector] public int selectedSkill = -1;

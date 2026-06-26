@@ -71,7 +71,7 @@ public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatab
 
         //audioManager.UpdateSound(rb.linearVelocity.x != 0 && isGrounded);
         Vector2 v = rb.linearVelocity;
-        v.x = speed;
+        v.x = speed * transform.right.x;
         //if (canJump) v.y = ripperData.jumpForce;
         //rb.gravityScale = ripperData.gravityScale * (v.y < 0f ? 1f : gameManager.fallScale);
         rb.linearVelocity = v;
@@ -277,7 +277,7 @@ public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatab
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, transform.position + transform.right * GameManager.RayLength);
+        Gizmos.DrawLine(Tforward.position, Tforward.position + transform.right * GameManager.RayLength);
     }
 #endif
 }
