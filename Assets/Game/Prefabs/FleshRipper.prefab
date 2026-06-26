@@ -495,7 +495,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FleshRipper
   ripperSO: {fileID: 11400000, guid: 69bd96b0960c9df4abc9f0c6ecafff31, type: 2}
   Tbottom: {fileID: 1093938309411313879}
-  Tforward: {fileID: 0}
+  Tforward: {fileID: 9041168440356229633}
   sp: {fileID: 5198950846039202975}
   anim: {fileID: 2220355130601514789}
   rb: {fileID: 5583807489712717475}

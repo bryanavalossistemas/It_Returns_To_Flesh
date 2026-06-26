@@ -61,8 +61,7 @@ public class AudioManager : MonoBehaviour
     {
         volume = value;
         bus.setMute(volume == 0);
-        float db = Mathf.Lerp(-80f, 0f, volume / 100f);
-        bus.setVolume(db);
+        bus.setVolume(value / 100f);
         prefsManager.SetInt(key, value);
     }
 

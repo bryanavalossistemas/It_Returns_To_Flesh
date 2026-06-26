@@ -22,6 +22,8 @@ public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatab
     public static FleshRipper SelectedRipper;
     [SerializeField] private GameObject cancelNode;
 
+    void Start() => PoolStart();
+
     public void PoolStart()
     {
         gameManager.OnAA += AA;

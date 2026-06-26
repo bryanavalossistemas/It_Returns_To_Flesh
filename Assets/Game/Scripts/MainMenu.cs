@@ -1,5 +1,4 @@
 using System.Linq;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UIElements;
 using static BehaviourPlus;
@@ -27,14 +26,14 @@ public class MainMenu : MonoBehaviour
         btnOptions.clicked += ShowOptions;
         btnQuit.clicked += OnQuit;
 
-        async void SetPanelOptions()
+        void SetPanelOptions()
         {
             Button _btnCloseOptions = root.Q<Button>("btn_close");
 
             DropdownField _dropdownLanguage = root.Q<DropdownField>("drop_languages");
-            _dropdownLanguage.choices = Core.LocaleNames.ToList();
-            _dropdownLanguage.value = Core.CurrentLocaleName;
-            _dropdownLanguage.RegisterValueChangedCallback(evt => core.ChangeLanguage(evt.newValue));
+            //_dropdownLanguage.choices = Core.LocaleNames.ToList();
+            //_dropdownLanguage.value = Core.CurrentLocaleName;
+            //_dropdownLanguage.RegisterValueChangedCallback(evt => core.ChangeLanguage(evt.newValue));
 
             // Sliders de volumen
             SliderInt _sliderMaster = root.Q<SliderInt>("vol_master");
@@ -48,7 +47,6 @@ public class MainMenu : MonoBehaviour
 
             _btnCloseOptions.clicked += HideOptions;
 
-            await Task.Yield();
             // Inicializar sliders con los valores actuales del AudioManager
             _sliderMaster.value = audioManager.masterVolume;
             _sliderMusic.value = audioManager.musicVolume;

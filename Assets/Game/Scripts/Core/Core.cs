@@ -29,11 +29,16 @@ public class Core : MonoBehaviour
         MainCamera = Camera.main;
     }
 
-    async UniTaskVoid Start()
+    void Start()
     {
         prefsManager.LoadPlayerPrefs();
-        await LocalizationSettings.InitializationOperation.Task.AsUniTask();
-        LocaleNames = LocalizationSettings.AvailableLocales.Locales.Select(locale => locale.LocaleName).ToArray();
+        StartTask().Forget();
+
+        static async UniTaskVoid StartTask()
+        {
+            await LocalizationSettings.InitializationOperation.Task.AsUniTask();
+            LocaleNames = LocalizationSettings.AvailableLocales.Locales.Select(locale => locale.LocaleName).ToArray();
+        }
     }
 
     public void ChangeLanguage(string localeName)

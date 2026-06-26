@@ -13,7 +13,7 @@ GameObject:
   m_Layer: 0
   m_Name: GameplayOnly
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -46,9 +46,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   cameraController: {fileID: 1840134684906731062}
-  ripperPrefab: {fileID: 0}
+  normalMat: {fileID: 0}
+  ripperSelectedMat: {fileID: 0}
   selectedSkill: -1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  pushableLayer:
+    serializedVersion: 2
+    m_Bits: 320
   selectionTarget: 0
+  ripperSO: {fileID: 11400000, guid: 69bd96b0960c9df4abc9f0c6ecafff31, type: 2}
 --- !u!1 &571192459602958783
 GameObject:
   m_ObjectHideFlags: 0

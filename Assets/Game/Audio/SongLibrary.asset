@@ -14,6 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SongLibraries
   Events_BGM:
     _serializedList:
+    - Key: Menu
+      Value:
+        Guid:
+          Data1: 990297111
+          Data2: 1182551728
+          Data3: -362796670
+          Data4: -53932228
     - Key: Game
       Value:
         Guid:
@@ -23,8 +30,9 @@ MonoBehaviour:
           Data4: -53932228
   Scene_Themes:
     _serializedList:
+    - Key: Menu
+      Value: Menu
     - Key: L0__
       Value: Game
     - Key: FleshProto
       Value: Game
-  Parameter: PlayState
