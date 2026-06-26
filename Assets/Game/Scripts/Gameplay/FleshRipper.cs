@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using static BehaviourPlus;
 
 [RequireComponent(typeof(SpriteRenderer),typeof(Animator)), RequireComponent(typeof(Rigidbody2D),typeof(BoxCollider2D))]
@@ -91,6 +93,20 @@ public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatab
                 RipperDead();
                 break;
         }
+        if (col.CompareTag("KillButton")) CompleteLevel();
+    }
+
+    private void CompleteLevel()
+    {
+        StartCoroutine(CompleteLevelRoutine());
+    }
+
+    private IEnumerator CompleteLevelRoutine()
+    {
+        //CurrentSpeed = 0f;
+        anim.SetTrigger("Jump");
+        yield return new WaitForSeconds(1.5f);
+        core.NextScene();
     }
 
     private void ConvertCivilian(Transform civilian)
