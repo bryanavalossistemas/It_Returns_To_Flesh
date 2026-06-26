@@ -261,6 +261,7 @@ public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatab
     public bool CanCastSores() => !isVomiting && isGrounded;
     public void CastSores()
     {
+        Debug.Log(isGrounded);
         if (!CanCastSores()) return;
         gameManager.ModifyHP(-2);
         //anim.SetFloat("Llagas", _soresCastCount);
@@ -278,6 +279,7 @@ public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatab
     {
         Gizmos.color = Color.red;
         Gizmos.DrawLine(Tforward.position, Tforward.position + transform.right * GameManager.RayLength);
+        Gizmos.DrawLine(Tbottom.position, Tbottom.position -transform.up * GameManager.RayLength);
     }
 #endif
 }
