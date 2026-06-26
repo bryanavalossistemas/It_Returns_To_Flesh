@@ -106,7 +106,7 @@ public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatab
     private IEnumerator CompleteLevelRoutine()
     {
         //CurrentSpeed = 0f;
-        anim.SetTrigger("Jump");
+        anim.SetTrigger("Dead");
         yield return new WaitForSeconds(1.5f);
         core.NextScene();
     }
