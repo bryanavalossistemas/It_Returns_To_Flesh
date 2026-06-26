@@ -176,16 +176,30 @@ public class FleshRipper : MonoBehaviour, IHoverable,ISelectable
         }
     }
 
-    public void Die()
-    {
-        if (SelectedRipper == this)
-        {
-            SelectedRipper = null;
-            uiManager.ClearUI();
-        }
-        gameManager.DeadRipper();
-        Destroy(gameObject);
+    public void Die(){
+    if (SelectedRipper == this){
+        SelectedRipper = null;
+        uiManager.ClearUI();
     }
+    gameManager.DeadRipper();
+
+    this.enabled = false;
+    if (_rb != null) _rb.linearVelocity = Vector2.zero; _rb.bodyType = RigidbodyType2D.Kinematic;
+    if (_boxCollider != null) _boxCollider.enabled = false;
+
+    Animator animator = GetComponent<Animator>();
+    if (animator != null)
+    {
+        animator.SetTrigger("Die");
+    }
+    else
+    {
+        Destroy(gameObject); 
+    }
+}
+public void OnDeathAnimationComplete(){
+    Destroy(gameObject);
+}
 
     public void ApplyLegLoss()
     {
