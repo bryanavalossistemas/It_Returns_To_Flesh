@@ -183,10 +183,9 @@ public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatab
         //if (!_isPushed) _savedDirection = _direction;
         _isPushed = true;
         stunTimer = 0.5f;
-        rb.linearVelocity = new Vector2(0, Mathf.Min(rb.linearVelocity.y, 0));
-        rb.AddForce(force, ForceMode2D.Impulse);
-
         force.x *= transform.right.x;
+        //rb.linearVelocity = new Vector2(0, Mathf.Min(rb.linearVelocity.y, 0));
+        rb.AddForce(force, ForceMode2D.Impulse);
         //UpdateFacing();
     }
 
@@ -261,7 +260,6 @@ public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatab
     public bool CanCastSores() => !isVomiting && isGrounded;
     public void CastSores()
     {
-        Debug.Log(isGrounded);
         if (!CanCastSores()) return;
         gameManager.ModifyHP(-2);
         //anim.SetFloat("Llagas", _soresCastCount);

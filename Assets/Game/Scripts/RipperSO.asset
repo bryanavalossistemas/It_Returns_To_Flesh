@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 183869c32b266624ea4f4993a867708f, type: 3}
   m_Name: RipperSO
   m_EditorClassIdentifier: Shared::RipperSO
+  initialHP: 10
+  buffHP: 5
   speed: 3
-  hp: 5
+  jumpForce: {x: 10, y: -30}
+  frenzyDuration: 3
   frenzySpeed: 2.5
   visionRange: 6
   speedMultiplier: 3
