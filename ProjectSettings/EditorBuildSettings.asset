@@ -11,12 +11,39 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Game/Scenes/L0/L0.unity
     guid: 314ef0f318f875f42811faa1691e46e6
-  - enabled: 1
+  - enabled: 0
     path: Assets/Game/Scenes/L0__.unity
     guid: 4676bbe4340aeca4b9ecb87320ff3a5c
-  - enabled: 1
+  - enabled: 0
     path: Assets/Game/Scenes/FleshProto.unity
     guid: 29c4f93acb4982f469c4e4b0bf37fdf1
+  - enabled: 1
+    path: Assets/Game/Scenes/Tutorial/1.unity
+    guid: 651b905e4f149c5459c52cf919ee39f8
+  - enabled: 1
+    path: Assets/Game/Scenes/Tutorial/2.unity
+    guid: 268651b09f190444598755db9a8faf1d
+  - enabled: 1
+    path: Assets/Game/Scenes/Tutorial/3.unity
+    guid: ad8ced00bd2b6114d8e68c8f708add81
+  - enabled: 1
+    path: Assets/Game/Scenes/Tutorial/4.unity
+    guid: 6083d2384f33d844fb9d3c9d9129da27
+  - enabled: 1
+    path: Assets/Game/Scenes/Tutorial/5.unity
+    guid: b8e98e4feb49cec4a95cc011010547e3
+  - enabled: 1
+    path: Assets/Game/Scenes/Tutorial/6.unity
+    guid: 21e1a273e4623144eabad7e84d4fb059
+  - enabled: 1
+    path: Assets/Game/Scenes/Tutorial/7.unity
+    guid: 91b9562cfc0484d41b2488881097024f
+  - enabled: 0
+    path: Assets/Game/Scenes/Tutorial/8.unity
+    guid: d7fc6e3a3b654144d9f272921cdcbc3f
+  - enabled: 0
+    path: Assets/Game/Scenes/Tutorial/9.unity
+    guid: df961753e006f9d4889e66c5fb7ef4c6
   m_configObjects:
     com.unity.adaptivePerformance.basic.provider_settings: {fileID: 11400000, guid: e6f08786113cd9d4bbfd0ef8745dd0c7, type: 2}
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: eb1b8ea972cb55741aa53b99c20b44d2, type: 2}
