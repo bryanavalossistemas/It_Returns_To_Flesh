@@ -1,13 +1,11 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using System.Collections;
 using static BehaviourPlus;
 
 [RequireComponent(typeof(SpriteRenderer),typeof(Animator)), RequireComponent(typeof(Rigidbody2D),typeof(BoxCollider2D))]
 public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatable, IHoverable,ISelectable, IPool
 {
     [SerializeField] private RipperSO ripperSO;
-    [Header("Punteros")]
     [SerializeField] private Transform Tbottom, Tforward;
     [SerializeField] private SpriteRenderer sp;
     [SerializeField] private Animator anim;
@@ -23,6 +21,7 @@ public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatab
     [SerializeField] private GameObject cancelNode;
 
     void Start() => PoolStart();
+    void OnDestroy() => PoolEnd();
 
     public void PoolStart()
     {
@@ -84,18 +83,25 @@ public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatab
         anim.SetBool("IsGrounded", isGrounded);
     }
 
-    void OnTriggerEnter2D(Collider2D col)
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        switch (col.gameObject.layer)
+        switch (collision.gameObject.layer)
         {
             case GameManager.CivilianLayer:
-                ConvertCivilian(col.transform);
+                gameManager.ConvertCivilian(collision.transform);
                 break;
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        switch (collider.gameObject.layer)
+        {
             case GameManager.InstakillLayer:
                 RipperDead();
                 break;
         }
-        if (col.CompareTag("KillButton")) CompleteLevel();
+        if (collider.CompareTag("KillButton")) CompleteLevel();
     }
 
     private void CompleteLevel()
@@ -106,15 +112,10 @@ public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatab
     private IEnumerator CompleteLevelRoutine()
     {
         //CurrentSpeed = 0f;
-        anim.SetTrigger("Dead");
+        anim.SetTrigger("Death");
+        isVomiting = true;
         yield return new WaitForSeconds(1.5f);
         core.NextScene();
-    }
-
-    private void ConvertCivilian(Transform civilian)
-    {
-        Destroy(civilian.gameObject);
-        gameManager.SpawnRipper(civilian);
     }
 
     public void RipperDead()
@@ -129,7 +130,7 @@ public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatab
         rb.linearVelocity = Vector2.zero;
         rb.bodyType = RigidbodyType2D.Kinematic;
         col.enabled = false;
-        anim.SetTrigger("Die");
+        anim.SetTrigger("Death");
     }
 
     public void OnDeathAnimationComplete()
@@ -261,6 +262,7 @@ public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatab
     public void CastSores()
     {
         if (!CanCastSores()) return;
+        isGrounded = false;
         gameManager.ModifyHP(-2);
         //anim.SetFloat("Llagas", _soresCastCount);
         anim.SetTrigger("Jump");

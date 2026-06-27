@@ -49,7 +49,11 @@ public class Core : MonoBehaviour
 
     public void ChangeScene(int buildIndex) => SceneManager.LoadScene(buildIndex);
     public void ReloadScene() => ChangeScene(SceneManager.GetActiveScene().buildIndex);
-    public void NextScene() => ChangeScene(SceneManager.GetActiveScene().buildIndex+1);
+    public void NextScene()
+    {
+        int n = (SceneManager.GetActiveScene().buildIndex + 1) % SceneManager.sceneCountInBuildSettings;
+        ChangeScene(n);
+    }
 
     public void QuitGame()
     {

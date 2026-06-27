@@ -6,7 +6,7 @@ using static BehaviourPlus;
 
 public class GameManager : MonoBehaviour_UU, IUpdatable
 {
-    public const int CivilianLayer = 9, ExplodableLayer = 11, InstakillLayer = 8;
+    public const int CivilianLayer = 7, ExplodableLayer = 8, InstakillLayer = 9;
     public const float RayLength = 0.5f;
     [SerializeField] private CameraController cameraController;
     public Material normalMat, ripperSelectedMat;
@@ -37,8 +37,10 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
         Time.timeScale = 1f;
         if (!inGameplay) return;
 
+        nRippers = 0;
         MaxHP = ripperSO.initialHP;
         HP = MaxHP;
+        uiManager.UpdateHealth(HP, MaxHP);
     }
 
     public void SetLevelData(Transform spawnPoint, Tilemap tilemap)
@@ -82,6 +84,15 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
     }
     public void SpawnRipper(Transform transform) => OnSpawnRipper(transform.position);
 
+    public void ConvertCivilian(Transform civilian)
+    {
+        Destroy(civilian.gameObject);
+        SpawnRipper(civilian);
+        MaxHP += ripperSO.buffHP;
+        HP += ripperSO.buffHP;
+        uiManager.UpdateHealth(HP, MaxHP);
+    }
+
     public void TriggerSkill(int pos)
     {
         Action[] skills = { SkillVomit, SkillSores, SkillExplode, SkillCephalic, SkillFrenzy };
@@ -101,5 +112,6 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
         HP += n;
         if (HP > MaxHP) HP = MaxHP;
         if (HP <= 0) RestartLevel();
+        uiManager.UpdateHealth(HP, MaxHP);
     }
 }

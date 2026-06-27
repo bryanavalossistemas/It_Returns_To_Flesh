@@ -1,7 +1,8 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using static BehaviourPlus;
 
 public interface IHoverable
@@ -23,6 +24,16 @@ public class SelectionManager : MonoBehaviour_UU, IUpdatable
     private LayerMask selectableMask = ~0;
     private float timer;
     private Vector2 lastPos;
+
+    void Awake() => SceneManager.sceneLoaded += SceneLoaded;
+    void OnDestroy() => SceneManager.sceneLoaded -= SceneLoaded;
+
+    private void SceneLoaded(Scene scene, LoadSceneMode loadMode)
+    {
+        Hovered = null;
+        Selected = null;
+        timer = 0f;
+    }
 
     void Start() => pointerData = new(EventSystem.current);
 

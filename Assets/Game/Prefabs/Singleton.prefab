@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   cameraController: {fileID: 1840134684906731062}
   normalMat: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  ripperSelectedMat: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  ripperSelectedMat: {fileID: 2100000, guid: 7b2580638996b4a4bbf38c9c45990707, type: 2}
   selectedSkill: -1
   groundLayer:
     serializedVersion: 2
@@ -204,7 +204,7 @@ GameObject:
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -451,7 +451,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -476,7 +476,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 13
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -641,7 +641,7 @@ MonoBehaviour:
     CustomLookAtTarget: 0
   Lens:
     FieldOfView: 60
-    OrthographicSize: 10
+    OrthographicSize: 13
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -714,7 +714,7 @@ GameObject:
   m_Layer: 5
   m_Name: Health
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -735,7 +735,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -433, y: 0.0000036755}
+  m_AnchoredPosition: {x: -318.8, y: 10}
   m_SizeDelta: {x: 185.9634, y: 51.4037}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6599785702093034693
@@ -890,7 +890,7 @@ GameObject:
   m_Layer: 5
   m_Name: Skills
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -932,7 +932,7 @@ GameObject:
   m_Layer: 5
   m_Name: --/--
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -952,7 +952,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 37.500008, y: 0}
+  m_AnchoredPosition: {x: -26.6, y: -24.3}
   m_SizeDelta: {x: -74.99999, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4761509595023258587
@@ -1145,7 +1145,7 @@ GameObject:
   - component: {fileID: 6824098999739228230}
   - component: {fileID: 4083985135925532170}
   m_Layer: 0
-  m_Name: CinemachineCamera (1)
+  m_Name: MiniCamera
   m_TagString: Untagged
   m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -1433,8 +1433,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -472, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: -483.1021, y: 11.102}
+  m_SizeDelta: {x: 125, y: 125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5213531086659886915
 CanvasRenderer:
@@ -1580,7 +1580,7 @@ GameObject:
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1685,6 +1685,12 @@ MonoBehaviour:
   _dangerColor: {r: 1, g: 0, b: 0, a: 1}
   _disabledColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   _selectedColor: {r: 0, g: 1, b: 0, a: 1}
+  skillButtons:
+  - {fileID: 4374448278360804718}
+  - {fileID: 7317893406583317454}
+  - {fileID: 3075766462251946558}
+  - {fileID: 24013425323936823}
+  - {fileID: 2477749021229373886}
 --- !u!1001 &964170210821321110
 PrefabInstance:
   m_ObjectHideFlags: 0

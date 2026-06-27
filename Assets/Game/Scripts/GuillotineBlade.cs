@@ -2,21 +2,18 @@
 
 public class GuillotineBlade : MonoBehaviour
 {
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D collider)
     {
-        Debug.Log("TRIGGER TOCADO por: " + other.name + " | Layer: " + LayerMask.LayerToName(other.gameObject.layer));
+        Debug.Log("TRIGGER TOCADO por: " + collider.name + " | Layer: " + LayerMask.LayerToName(collider.gameObject.layer));
 
-        FleshRipper ripper = other.GetComponent<FleshRipper>()
-                          ?? other.GetComponentInParent<FleshRipper>();
+        FleshRipper ripper = collider.GetComponent<FleshRipper>()
+                          ?? collider.GetComponentInParent<FleshRipper>();
 
         if (ripper != null)
         {
             Debug.Log("Ripper encontrado → muriendo");
             ripper.RipperDead();
         }
-        else
-        {
-            Debug.Log("NO se encontró FleshRipper en: " + other.name);
-        }
+        else Debug.Log("NO se encontró FleshRipper en: " + collider.name);
     }
 }
