@@ -19,6 +19,7 @@ public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatab
     private int _savedDirection = 1;
     public static FleshRipper SelectedRipper;
     [SerializeField] private GameObject cancelNode;
+    private bool touchedButton;
 
     void Start() => PoolStart();
     void OnDestroy() => PoolEnd();
@@ -100,22 +101,21 @@ public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatab
             case GameManager.InstakillLayer:
                 RipperDead();
                 break;
+            case GameManager.CheckpointLayer:
+                CompleteLevel();
+                break;
         }
-        if (collider.CompareTag("KillButton")) CompleteLevel();
     }
 
-    private void CompleteLevel()
-    {
-        StartCoroutine(CompleteLevelRoutine());
-    }
-
+    private void CompleteLevel() => StartCoroutine(CompleteLevelRoutine());
     private IEnumerator CompleteLevelRoutine()
     {
         //CurrentSpeed = 0f;
+        touchedButton = true;
         anim.SetTrigger("Death");
         isVomiting = true;
         yield return new WaitForSeconds(1.5f);
-        core.NextScene();
+        gameManager.NextPhase();
     }
 
     public void RipperDead()
@@ -135,6 +135,7 @@ public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatab
 
     public void OnDeathAnimationComplete()
     {
+        if (touchedButton) return;
         Destroy(gameObject); //Return Pool
         gameManager.RipperDead();
     }
@@ -144,6 +145,7 @@ public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatab
     
     public void Select()
     {
+        gameManager.FollowRipper(transform);
         switch (gameManager.selectionTarget)
         {
             case GameManager.SelectionTarget.None:

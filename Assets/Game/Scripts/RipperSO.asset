@@ -15,7 +15,7 @@ MonoBehaviour:
   initialHP: 10
   buffHP: 5
   speed: 3
-  jumpForce: {x: 7, y: 25}
+  jumpForce: {x: 7, y: 120}
   frenzyDuration: 3
   frenzySpeed: 2.5
   visionRange: 6

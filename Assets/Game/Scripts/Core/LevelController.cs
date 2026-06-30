@@ -9,16 +9,16 @@ public class LevelController : MonoBehaviour
     [SerializeField] private LevelSO[] levels;
     private int[] phases;
     private GameObject[] wrappers;
-    private int faseIndex;
+    private int phaseIndex;
     private float offsetX;
     private Coroutine changeFase;
 
-    public void LoadLevel(int n)
+    public void StartLevel(int n)
     {
         phases = levels[n].phases;
         offsetX = 0f;
         wrappers = new GameObject[3]; //[0]=prev, [1]=current, [2]=next
-        faseIndex = 0;
+        phaseIndex = 0;
         SceneManager.sceneLoaded += OnSceneLoaded;
         core.ChangeScene(phases[0]);
     }
@@ -26,8 +26,8 @@ public class LevelController : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode loadMode)
     {
         if (scene.buildIndex == 0) return;
-        GameObject cameraLevel = scene.GetRootGameObjects()[1];
-        cameraLevel.GetComponentInChildren<CinemachineCamera>().Target.TrackingTarget = GameObject.FindGameObjectWithTag("Player").transform;
+        //GameObject cameraLevel = scene.GetRootGameObjects()[1];
+        //cameraLevel.GetComponentInChildren<CinemachineCamera>().Target.TrackingTarget = GameObject.FindGameObjectWithTag("Player").transform;
         GameObject wrapper = new("_Wrapper");
         SceneManager.MoveGameObjectToScene(wrapper, scene);
         foreach (GameObject root in scene.GetRootGameObjects()) if (root != wrapper) root.transform.SetParent(wrapper.transform);
@@ -40,24 +40,24 @@ public class LevelController : MonoBehaviour
         else
         {
             wrapper.SetActive(false);
-            wrappers[wrappers[2] == null ? 2 : 0] = wrapper;
+            wrappers[wrappers[2] == null? 2 : 0] = wrapper;
             wrapper.transform.position = Vector2.right * offsetX;
         }
-        offsetX += cameraLevel.GetComponent<BoxCollider2D>().size.x;
+        //offsetX += cameraLevel.GetComponent<BoxCollider2D>().size.x;
     }
 
     private void LoadNextFase(bool forward = true)
     {
-        bool cond = forward ? faseIndex < phases.Length - 1 : faseIndex > 0;
+        bool cond = forward ? phaseIndex < phases.Length - 1 : phaseIndex > 0;
         if (cond)
         {
-            SceneManager.LoadSceneAsync(phases[faseIndex + (forward ? 1 : -1)], LoadSceneMode.Additive);
+            SceneManager.LoadSceneAsync(phases[phaseIndex + (forward ? 1 : -1)], LoadSceneMode.Additive);
         }
     }
 
-    public void NextFase()
+    public void NextPhase()
     {
-        if (faseIndex + 1 == phases.Length)
+        if (phaseIndex + 1 == phases.Length)
         {
             core.ChangeScene(0);
             return;
@@ -66,7 +66,7 @@ public class LevelController : MonoBehaviour
         changeFase = StartCoroutine(ChangeFase(true));
     }
 
-    public void PrevFase()
+    public void PrevPhase()
     {
         if (changeFase != null) return;
         changeFase = StartCoroutine(ChangeFase(false));
@@ -81,7 +81,7 @@ public class LevelController : MonoBehaviour
         wrappers[1].SetActive(true);
         wrappers[n2] = null;
 
-        faseIndex += forward ? 1 : -1;
+        phaseIndex += forward ? 1 : -1;
         LoadNextFase(forward);
 
         yield return new WaitForSeconds(2f);

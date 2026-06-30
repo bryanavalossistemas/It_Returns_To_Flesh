@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 8223675144845237065}
   - component: {fileID: 5737282081267671294}
   - component: {fileID: 6814169484615610798}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: KillButton
-  m_TagString: KillButton
+  m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

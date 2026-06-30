@@ -6,7 +6,7 @@ using static BehaviourPlus;
 
 public class GameManager : MonoBehaviour_UU, IUpdatable
 {
-    public const int CivilianLayer = 7, ExplodableLayer = 8, InstakillLayer = 9;
+    public const int CivilianLayer = 7, ExplodableLayer = 8, InstakillLayer = 9, CheckpointLayer = 11;
     public const float RayLength = 0.5f;
     [SerializeField] private CameraController cameraController;
     public Material normalMat, ripperSelectedMat;
@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
     public int MaxHP {  get; private set; }
     public int HP { get; private set; }
     [SerializeField] private RipperSO ripperSO;
+    private Transform followedRipper;
+    [SerializeField] private LevelController levelController;
 
     void Awake() => SceneManager.sceneLoaded += SceneLoaded;
     void OnDestroy() => SceneManager.sceneLoaded -= SceneLoaded;
@@ -114,4 +116,17 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
         if (HP <= 0) RestartLevel();
         uiManager.UpdateHealth(HP, MaxHP);
     }
+
+    public void FollowRipper(Transform t)
+    {
+        if (followedRipper == t) return;
+        followedRipper = t;
+        cameraController.SetMiniCamera(followedRipper);
+    }
+
+    public void StartLevel(int n)
+    {
+        levelController.StartLevel(n);
+    }
+    public void NextPhase() => levelController.NextPhase();
 }
