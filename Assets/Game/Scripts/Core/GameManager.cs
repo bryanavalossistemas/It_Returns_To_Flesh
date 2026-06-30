@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
         {
             selectedSkill = -1;
             //cameraController target = null
-            OnAA();
+            OnAA?.Invoke();
             uiManager.ClearUI();
         }
     }
@@ -80,13 +80,26 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
         nRippers--;
         if (nRippers <= 0) RestartLevel();
     }
-    public void SpawnRipper(Transform transform) => OnSpawnRipper(transform.position);
+    public void SpawnRipper(Transform transform)
+    {
+        if (OnSpawnRipper == null)
+        {
+            Debug.LogError("SpawnRipper: no listeners registered on OnSpawnRipper");
+            return;
+        }
+        OnSpawnRipper(transform.position);
+    }
 
     public void TriggerSkill(int pos)
     {
         Action[] skills = { SkillVomit, SkillSores, SkillExplode, SkillCephalic, SkillFrenzy };
+        if (pos < 0 || pos >= skills.Length)
+        {
+            Debug.LogError($"TriggerSkill: invalid skill index {pos} (valid range 0–{skills.Length - 1})");
+            return;
+        }
         skills[pos].Invoke();
-        OnAA2();
+        OnAA2?.Invoke();
         uiManager.ClearUI();
     }
 

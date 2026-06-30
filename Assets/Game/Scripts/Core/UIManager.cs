@@ -14,13 +14,13 @@ public class UIManager : MonoBehaviour
     public void ClearUI()
     {
         healthText.text = "--/--";
-        SetColor(_normalColor);
+        SetColor?.Invoke(_normalColor);
     }
 
     public void UpdateHealth(int currentHealth, int maxHealth)
     {
         healthText.text = $"{currentHealth}/{maxHealth}";
-        SetColor(null);
+        SetColor?.Invoke(null);
     }
 
     public void ResetSkillHighlight()

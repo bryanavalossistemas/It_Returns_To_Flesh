@@ -36,14 +36,26 @@ public class Core : MonoBehaviour
 
         static async UniTaskVoid StartTask()
         {
-            await LocalizationSettings.InitializationOperation.Task.AsUniTask();
-            LocaleNames = LocalizationSettings.AvailableLocales.Locales.Select(locale => locale.LocaleName).ToArray();
+            try
+            {
+                await LocalizationSettings.InitializationOperation.Task.AsUniTask();
+                LocaleNames = LocalizationSettings.AvailableLocales.Locales.Select(locale => locale.LocaleName).ToArray();
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError($"Core: localization initialization failed: {ex}");
+            }
         }
     }
 
     public void ChangeLanguage(string localeName)
     {
         Locale newLocale = LocalizationSettings.AvailableLocales.Locales.FirstOrDefault(l => l.LocaleName == localeName);
+        if (newLocale == null)
+        {
+            Debug.LogWarning($"Core: locale '{localeName}' not found; language unchanged");
+            return;
+        }
         LocalizationSettings.SelectedLocale = newLocale;
     }
 

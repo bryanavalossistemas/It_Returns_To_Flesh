@@ -31,9 +31,21 @@ public class AudioManager : MonoBehaviour
         SceneManager.sceneLoaded -= SceneLoaded;
         ReleaseBGMInstance();
     }
-    private void SceneLoaded(Scene scene, LoadSceneMode loadMode) => PlayBGM(songs.Scene_Themes[scene.name]);
+    private void SceneLoaded(Scene scene, LoadSceneMode loadMode)
+    {
+        if (songs.Scene_Themes.TryGetValue(scene.name, out string bgmName))
+            PlayBGM(bgmName);
+        else
+            Debug.LogWarning($"AudioManager: no BGM theme mapped for scene '{scene.name}'");
+    }
 
-    public EventReference GetEventFromName(string bgmName) => songs.Events_BGM[bgmName];
+    public EventReference GetEventFromName(string bgmName)
+    {
+        if (songs.Events_BGM.TryGetValue(bgmName, out EventReference eventRef))
+            return eventRef;
+        Debug.LogError($"AudioManager: no EventReference found for BGM '{bgmName}'");
+        return default;
+    }
     public EventInstance CreateEventInstance(string bgmName) => CreateEventInstance(GetEventFromName(bgmName));
     public EventInstance CreateEventInstance(EventReference soundEvent) => RuntimeManager.CreateInstance(soundEvent);
 

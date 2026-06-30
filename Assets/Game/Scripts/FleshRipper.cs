@@ -177,17 +177,20 @@ public class FleshRipper : MonoBehaviour, IHoverable,ISelectable
     {
         Vector3 spawnPosition = civilian.transform.position;
         Destroy(civilian);
-        if (ripperPrefab != null)
+        if (ripperPrefab == null)
         {
-            GameObject newRipper =Instantiate(ripperPrefab, spawnPosition, Quaternion.identity);
-        FleshRipper zombieStats = newRipper.GetComponent<FleshRipper>();           
+            Debug.LogError("FleshRipper: ripperPrefab is not assigned");
+            return;
+        }
+        GameObject newRipper = Instantiate(ripperPrefab, spawnPosition, Quaternion.identity);
+        FleshRipper zombieStats = newRipper.GetComponent<FleshRipper>();
+        if (zombieStats == null)
+        {
+            Debug.LogError("FleshRipper: spawned ripperPrefab has no FleshRipper component");
+            return;
+        }
         zombieStats.maxHealth = zombieStats.MaxHealth;
-        if (zombieStats != null)
-        {
-            
-            zombieStats.ModifyHealth(zombieStats.MaxHealth); 
-        }
-        }
+        zombieStats.ModifyHealth(zombieStats.MaxHealth);
     }
 
     public void ModifyHealth(int amount)
@@ -212,7 +215,7 @@ public class FleshRipper : MonoBehaviour, IHoverable,ISelectable
             SelectedRipper = null;
             uiManager.ClearUI();
         }
-        gameManager.DeadRipper();
+        gameManager.RipperDead();
         Destroy(gameObject);
     }
 
