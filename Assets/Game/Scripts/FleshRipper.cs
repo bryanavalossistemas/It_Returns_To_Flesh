@@ -1,7 +1,9 @@
+using System.Diagnostics;
 using UnityEngine;
 using static BehaviourPlus;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using Debug = UnityEngine.Debug;
 
 [RequireComponent(typeof(SpriteRenderer),typeof(Animator)), RequireComponent(typeof(Rigidbody2D),typeof(BoxCollider2D))]
 public class FleshRipper : MonoBehaviour, IHoverable,ISelectable
@@ -128,8 +130,11 @@ public class FleshRipper : MonoBehaviour, IHoverable,ISelectable
             //uiManager.ConfigureBiologicalLimits(caster.CanCastVomit(), caster.CanCastSores(), true, true, caster.CanCastFrenzy());
         }
 
-        Debug.Log("flesh selected");
+        LogFleshSelected();
     }
+
+    [Conditional("UNITY_EDITOR")]
+    private static void LogFleshSelected() => Debug.Log("flesh selected");
 
     /*private void OnCollisionEnter2D(Collision2D col)
     {
@@ -230,8 +235,11 @@ public class FleshRipper : MonoBehaviour, IHoverable,ISelectable
         {
             mainSpriteRenderer.sprite = legLessSprite;
         }
-        Debug.Log("no legs");
+        LogNoLegs();
     }
+
+    [Conditional("UNITY_EDITOR")]
+    private static void LogNoLegs() => Debug.Log("no legs");
 
     public void ApplyKnockback(Vector2 force)
     {
@@ -295,7 +303,8 @@ public class FleshRipper : MonoBehaviour, IHoverable,ISelectable
 
     public void Select()
     {
-Debug.Log("Clic detectado en el Ripper. Target actual: " + gameManager.selectionTarget + " | Habilidad: " + gameManager.selectedSkill);        switch (gameManager.selectionTarget)
+        LogSelectInfo();
+        switch (gameManager.selectionTarget)
         {
             case GameManager.SelectionTarget.None:
                 //_lockedTarget = ripperToLock.transform;
@@ -332,6 +341,10 @@ Debug.Log("Clic detectado en el Ripper. Target actual: " + gameManager.selection
                 break;
         }
     }
+
+    [Conditional("UNITY_EDITOR")]
+    private void LogSelectInfo() =>
+        Debug.Log("Clic detectado en el Ripper. Target actual: " + gameManager.selectionTarget + " | Habilidad: " + gameManager.selectedSkill);
 
     public void Deselect()
     {
