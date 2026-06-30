@@ -10,6 +10,24 @@ public static class TransformExtensions
     }
 }
 
+public static class ColliderExtensions
+{
+    public static bool TryGetRipper(this Collider2D col, out FleshRipper ripper)
+    {
+        ripper = col.GetComponent<FleshRipper>() ?? col.GetComponentInParent<FleshRipper>();
+        return ripper != null;
+    }
+}
+
+public static class HealthHelper
+{
+    public static bool ModifyClamp(ref int current, int delta, int max)
+    {
+        current = Mathf.Clamp(current + delta, 0, max);
+        return current <= 0;
+    }
+}
+
 public interface IPool
 {
     void PoolStart();

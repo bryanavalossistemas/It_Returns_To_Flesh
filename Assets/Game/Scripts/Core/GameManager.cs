@@ -98,8 +98,8 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
 
     public void ModifyHP(int n)
     {
-        HP += n;
-        if (HP > MaxHP) HP = MaxHP;
-        if (HP <= 0) RestartLevel();
+        int hp = HP;
+        if (HealthHelper.ModifyClamp(ref hp, n, MaxHP)) RestartLevel();
+        HP = hp;
     }
 }

@@ -18,54 +18,36 @@ public class FleshLimbs : MonoBehaviour
         _body = GetComponent<FleshRipper>();
     }
 
+    private GameObject GetLimbObject(LimbType limb) => limb switch
+    {
+        LimbType.Head => headObject,
+        LimbType.Arms => armsObject,
+        LimbType.Legs => legsObject,
+        _ => null
+    };
+
     public void DetonateLimb (LimbType limb, bool applyExplosionRadius = true)
     {
-        float currentRadius = applyExplosionRadius ? baseExplosionRadius : 0f;
         float currentForceX = explosionForceX;
         float currentForceY = explosionForceY;
-        int damageToTake = 4;
-        Vector2 explosionCenter = transform.position;
-        float radius = applyExplosionRadius ? currentRadius : 0f;
-        Collider2D[] objectsInRange = Physics2D.OverlapCircleAll(explosionCenter, radius, whatCanBePushed);
-        //if (limb == LimbType.Head && !_body.HasHead) return;
-        //if (limb == LimbType.Arms && !_body.HasArms) return;
-        //if (limb == LimbType.Legs && !_body.HasLegs) return;
 
+        GameObject limbObj = GetLimbObject(limb);
+        if (limbObj != null) limbObj.SetActive(false);
 
         switch (limb)
         {
             case LimbType.Head:
-                //_body.HasHead = false;
-                if (headObject != null) headObject.SetActive(false);
-                currentRadius *= 1.5f;
                 currentForceX *= 1.5f;
                 currentForceY *= 1.5f;
-                //damageToTake = _body.MaxHealth;
                 break;
-
-            case LimbType.Arms:
-                //_body.HasArms = false;
-                if (armsObject !=null) armsObject.SetActive(false);
-                break;
-
             case LimbType.Legs:
-                //_body.HasLegs = false;
-                if (legsObject !=null) legsObject.SetActive(false);
                 _body.ApplyLegLoss();
                 break;
         }
-        switch (limb)
-        {
-            case LimbType.Head:
-                if (headObject != null) explosionCenter = headObject.transform.position; 
-                break;
-            case LimbType.Arms:
-                if (armsObject != null) explosionCenter = armsObject.transform.position;
-                break;
-            case LimbType.Legs:
-                if (legsObject != null) explosionCenter = legsObject.transform.position;
-                break;
-        }
+
+        Vector2 explosionCenter = limbObj != null ? (Vector2)limbObj.transform.position : (Vector2)transform.position;
+        float radius = applyExplosionRadius ? baseExplosionRadius * (limb == LimbType.Head ? 1.5f : 1f) : 0f;
+        Collider2D[] objectsInRange = Physics2D.OverlapCircleAll(explosionCenter, radius, whatCanBePushed);
 
         System.Collections.Generic.HashSet<Rigidbody2D> pushedBodies = new System.Collections.Generic.HashSet<Rigidbody2D>();
 

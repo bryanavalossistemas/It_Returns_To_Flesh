@@ -8,13 +8,10 @@ public class Checkpoint : MonoBehaviour
     void OnTriggerEnter2D(Collider2D col)
     {
         if (isActivated) return;
-
-        FleshRipper ripper = col.GetComponentInParent<FleshRipper>();
-
-        if (ripper != null)
+        if (col.TryGetRipper(out _))
         {
             isActivated = true;
-             gameManager.UpdateCheckPoint(transform);
+            gameManager.UpdateCheckPoint(transform);
         }
     }
 }
