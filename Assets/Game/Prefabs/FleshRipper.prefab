@@ -453,7 +453,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 1
-  m_Mass: 14.539134
+  m_Mass: 3.5891337
   m_LinearDamping: 0
   m_AngularDamping: 0
   m_GravityScale: 1
@@ -553,7 +553,7 @@ MonoBehaviour:
   baseExplosionRadius: 9.73
   whatCanBePushed:
     serializedVersion: 2
-    m_Bits: 448
+    m_Bits: 320
   explosionForceX: 43.7
   explosionForceY: 15.4
 --- !u!95 &2220355130601514789
@@ -608,7 +608,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0

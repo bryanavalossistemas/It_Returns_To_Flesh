@@ -71,6 +71,7 @@ public class FleshLimbs : MonoBehaviour
 
         foreach (Collider2D col in objectsInRange)
         {
+            Debug.Log(col.name);
             if (col.gameObject.layer == 8)
             {
                 Destroy(col.gameObject);
