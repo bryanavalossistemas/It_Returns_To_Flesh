@@ -550,7 +550,7 @@ MonoBehaviour:
   headObject: {fileID: 6336108549668732773}
   armsObject: {fileID: 1250590116831475279}
   legsObject: {fileID: 9135181200109489689}
-  baseExplosionRadius: 9.73
+  baseExplosionRadius: 30
   whatCanBePushed:
     serializedVersion: 2
     m_Bits: 448

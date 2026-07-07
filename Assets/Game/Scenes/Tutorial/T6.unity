@@ -11411,6 +11411,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1123317155}
   - component: {fileID: 1123317154}
+  - component: {fileID: 1123317156}
   m_Layer: 0
   m_Name: fondo 6_0
   m_TagString: Untagged
@@ -11492,6 +11493,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1123317156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1123317153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 571daf23a7ea1cb43aa6938b7f56eb45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: General::GuillotineBlade
 --- !u!1001 &1244196277
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11702,12 +11715,24 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 231174341517947638, guid: 15eafa0561bd3b54cac2e7f00b75a2cc, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.0842307
+      objectReference: {fileID: 0}
+    - target: {fileID: 231174341517947638, guid: 15eafa0561bd3b54cac2e7f00b75a2cc, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 9.305534
+      objectReference: {fileID: 0}
+    - target: {fileID: 231174341517947638, guid: 15eafa0561bd3b54cac2e7f00b75a2cc, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.3158119
+      objectReference: {fileID: 0}
+    - target: {fileID: 231174341517947638, guid: 15eafa0561bd3b54cac2e7f00b75a2cc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.11448
       objectReference: {fileID: 0}
     - target: {fileID: 231174341517947638, guid: 15eafa0561bd3b54cac2e7f00b75a2cc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10
+      value: 65.771
       objectReference: {fileID: 0}
     - target: {fileID: 231174341517947638, guid: 15eafa0561bd3b54cac2e7f00b75a2cc, type: 3}
       propertyPath: m_LocalPosition.z
@@ -11741,21 +11766,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 231174341517947638, guid: 15eafa0561bd3b54cac2e7f00b75a2cc, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1272220373878397876, guid: 15eafa0561bd3b54cac2e7f00b75a2cc, type: 3}
       propertyPath: m_Name
       value: Guillotine
       objectReference: {fileID: 0}
     - target: {fileID: 2752998026152972234, guid: 15eafa0561bd3b54cac2e7f00b75a2cc, type: 3}
       propertyPath: m_LocalScale.x
-      value: 6.5
+      value: 2.816645
       objectReference: {fileID: 0}
     - target: {fileID: 2752998026152972234, guid: 15eafa0561bd3b54cac2e7f00b75a2cc, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.5
+      value: 0.6947188
       objectReference: {fileID: 0}
     - target: {fileID: 8847005963462663760, guid: 15eafa0561bd3b54cac2e7f00b75a2cc, type: 3}
       propertyPath: swingSpeed
       value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9074102123543525764, guid: 15eafa0561bd3b54cac2e7f00b75a2cc, type: 3}
+      propertyPath: m_Size.y
+      value: 0.91
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
