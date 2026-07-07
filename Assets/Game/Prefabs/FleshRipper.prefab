@@ -239,7 +239,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9041168440356229633}
   m_Layer: 0
-  m_Name: Tforward
+  m_Name: Tforward1
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -255,6 +255,37 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.288, y: -0.75, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7677830470400958208}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4221193223161475457
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2620498007593555912}
+  m_Layer: 0
+  m_Name: Tforward2
+  m_TagString: Untagged
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2620498007593555912
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4221193223161475457}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.288, y: 0.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -348,6 +379,7 @@ Transform:
   - {fileID: 3161197009600051045}
   - {fileID: 1093938309411313879}
   - {fileID: 9041168440356229633}
+  - {fileID: 2620498007593555912}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5198950846039202975
@@ -496,7 +528,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FleshRipper
   ripperSO: {fileID: 11400000, guid: 69bd96b0960c9df4abc9f0c6ecafff31, type: 2}
   Tbottom: {fileID: 1093938309411313879}
-  Tforward: {fileID: 9041168440356229633}
+  Tforward1: {fileID: 9041168440356229633}
+  Tforward2: {fileID: 2620498007593555912}
   sp: {fileID: 5198950846039202975}
   anim: {fileID: 2220355130601514789}
   rb: {fileID: 5583807489712717475}

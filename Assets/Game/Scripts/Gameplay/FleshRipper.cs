@@ -6,7 +6,7 @@ using static BehaviourPlus;
 public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatable, IHoverable,ISelectable, IPool
 {
     [SerializeField] private RipperSO ripperSO;
-    [SerializeField] private Transform Tbottom, Tforward;
+    [SerializeField] private Transform Tbottom, Tforward1, Tforward2;
     [SerializeField] private SpriteRenderer sp;
     [SerializeField] private Animator anim;
     [SerializeField] private Rigidbody2D rb;
@@ -51,8 +51,13 @@ public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatab
         float speed = isVomiting? 0f : ripperSO.speed;
 
         //Choque contra pared
-        bool hitWall = TRaycast(Tforward, transform.right);
-        if (hitWall) transform.InvertAxis();
+        bool hitWall = TRaycast(Tforward1, transform.right);
+        if (hitWall)
+        {
+            if (TRaycast(Tforward2, transform.right)) transform.InvertAxis();
+            else ApplyKnockback(ripperSO.jumpForce * 0.6f);
+
+        }
         //if (_isPushed) _savedDirection *= -1;
         //_turnCoolDown = 0.5f;
 
@@ -62,7 +67,7 @@ public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatab
         if (frenzyTimer > 0)
         {
             frenzyTimer -= Time.fixedDeltaTime;
-            bool hitCivilian = TRaycast(Tforward, transform.right * ripperSO.visionRange, GameManager.CivilianLayer);
+            bool hitCivilian = TRaycast(Tforward1, transform.right * ripperSO.visionRange, GameManager.CivilianLayer);
             speed *= hitCivilian? ripperSO.frenzySpeed : ripperSO.speedMultiplier;
         }
 
@@ -75,9 +80,8 @@ public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatab
         //if (canJump) v.y = ripperData.jumpForce;
         //rb.gravityScale = ripperData.gravityScale * (v.y < 0f ? 1f : gameManager.fallScale);
         rb.linearVelocity = v;
-
-        static RaycastHit2D TRaycast(Transform t, Vector2 direction, LayerMask layerMask = default) => Physics2D.Raycast(t.position, direction, GameManager.RayLength, layerMask == default? gameManager.groundLayer : layerMask);
     }
+    RaycastHit2D TRaycast(Transform t, Vector2 direction, LayerMask layerMask = default) => Physics2D.Raycast(t.position, direction, GameManager.RayLength, layerMask == default ? gameManager.groundLayer : layerMask);
 
     public void OnLateUpdate()
     {
@@ -280,7 +284,8 @@ public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatab
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(Tforward.position, Tforward.position + transform.right * GameManager.RayLength);
+        Gizmos.DrawLine(Tforward1.position, Tforward1.position + transform.right * GameManager.RayLength);
+        Gizmos.DrawLine(Tforward2.position, Tforward2.position + transform.right * GameManager.RayLength);
         Gizmos.DrawLine(Tbottom.position, Tbottom.position -transform.up * GameManager.RayLength);
     }
 #endif
