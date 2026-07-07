@@ -54,7 +54,7 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-    private void OnPlay() => gameManager.StartLevel(0);
+    private void OnPlay() => core.NextScene();
     private void OnQuit() => core.QuitGame();
     private void ShowOptions() => panelOptions.style.display = DisplayStyle.Flex;
     private void HideOptions() => panelOptions.style.display = DisplayStyle.None;

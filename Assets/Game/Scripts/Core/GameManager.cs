@@ -128,5 +128,5 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
     {
         levelController.StartLevel(n);
     }
-    public void NextPhase() => levelController.NextPhase();
+    public void NextPhase() => core.NextScene();//levelController.NextPhase();
 }
