@@ -21,5 +21,5 @@
 .text {
     font-size: 200%;
     -unity-text-align: middle-center;
-    -unity-font-definition: resource("FlatSkin/Font/Roboto-Bold");
+    -unity-font-definition: url("project://database/Assets/Roboto-Bold.ttf?fileID=12800000&guid=2512426cb7cfe6d4294a14f8b53a5091&type=3#Roboto-Bold");
 }
