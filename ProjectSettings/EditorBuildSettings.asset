@@ -6,8 +6,49 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
+    path: Assets/Game/Scenes/Menu.unity
+    guid: 00ef812970e6c9049b8fb8a68ad1c30c
+  - enabled: 1
+    path: Assets/Game/Scenes/Tutorial/T1.unity
+    guid: 651b905e4f149c5459c52cf919ee39f8
+  - enabled: 1
+    path: Assets/Game/Scenes/Tutorial/T2.unity
+    guid: 268651b09f190444598755db9a8faf1d
+  - enabled: 1
+    path: Assets/Game/Scenes/Tutorial/T3.unity
+    guid: ad8ced00bd2b6114d8e68c8f708add81
+  - enabled: 1
+    path: Assets/Game/Scenes/Tutorial/T4.unity
+    guid: 6083d2384f33d844fb9d3c9d9129da27
+  - enabled: 1
+    path: Assets/Game/Scenes/Tutorial/T5.unity
+    guid: b8e98e4feb49cec4a95cc011010547e3
+  - enabled: 1
+    path: Assets/Game/Scenes/Tutorial/T6.unity
+    guid: 21e1a273e4623144eabad7e84d4fb059
+  - enabled: 1
+    path: Assets/Game/Scenes/Tutorial/T7.unity
+    guid: 91b9562cfc0484d41b2488881097024f
+  - enabled: 0
+    path: Assets/Game/Scenes/L0/L0.unity
+    guid: 314ef0f318f875f42811faa1691e46e6
+  - enabled: 0
+    path: Assets/Game/Scenes/L0__.unity
+    guid: 4676bbe4340aeca4b9ecb87320ff3a5c
+  - enabled: 0
+    path: Assets/Game/Scenes/FleshProto.unity
+    guid: 29c4f93acb4982f469c4e4b0bf37fdf1
+  - enabled: 0
+    path: Assets/Game/Scenes/Tutorial/8.unity
+    guid: d7fc6e3a3b654144d9f272921cdcbc3f
+  - enabled: 0
+    path: Assets/Game/Scenes/Tutorial/9.unity
+    guid: df961753e006f9d4889e66c5fb7ef4c6
   m_configObjects:
+    com.unity.adaptivePerformance.basic.provider_settings: {fileID: 11400000, guid: e6f08786113cd9d4bbfd0ef8745dd0c7, type: 2}
+    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: eb1b8ea972cb55741aa53b99c20b44d2, type: 2}
+    com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 64a209537d1ec2b479f48b9a00137b46, type: 2}
+    com.unity.addressableassets: {fileID: 11400000, guid: a5cfb7134e116a541a175dab6a6b7416, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+    com.unity.localization.settings: {fileID: 11400000, guid: d3d1b14b5aa730d46ad937aa63e9bd44, type: 2}
   m_UseUCBPForAssetBundles: 0

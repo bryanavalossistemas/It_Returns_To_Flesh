@@ -1,0 +1,25 @@
+:root {
+}
+
+.h1 {
+    color: rgb(255, 0, 0);
+    -unity-font-style: bold;
+    font-size: 800%;
+    -unity-text-align: middle-center;
+    -unity-text-outline-color: rgb(255, 255, 255);
+    text-shadow: 0 0 0 rgb(0, 255, 20);
+    -unity-text-outline-width: 1.5px;
+    -unity-font-definition: url("project://database/Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Fonts/PerfectDOSVGA437.ttf?fileID=12800000&guid=74a5091d8707f334b9a5c31ef71a64ba&type=3#PerfectDOSVGA437");
+}
+
+.h2 {
+    font-size: 25px;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+}
+
+.text {
+    font-size: 200%;
+    -unity-text-align: middle-center;
+    -unity-font-definition: url("project://database/Assets/Roboto-Bold.ttf?fileID=12800000&guid=2512426cb7cfe6d4294a14f8b53a5091&type=3#Roboto-Bold");
+}
