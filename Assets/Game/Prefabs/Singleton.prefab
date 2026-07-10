@@ -60,6 +60,9 @@ MonoBehaviour:
   selectionTarget: 0
   ripperSO: {fileID: 11400000, guid: 69bd96b0960c9df4abc9f0c6ecafff31, type: 2}
   levelController: {fileID: 1288079840641242997}
+  whatCanBePushed:
+    serializedVersion: 2
+    m_Bits: 320
 --- !u!114 &6426159650690866707
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
     [SerializeField] private RipperSO ripperSO;
     private Transform followedRipper;
     [SerializeField] private LevelController levelController;
+    public LayerMask whatCanBePushed;
 
     void Awake() => SceneManager.sceneLoaded += SceneLoaded;
     void OnDestroy() => SceneManager.sceneLoaded -= SceneLoaded;
@@ -97,17 +98,18 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
 
     public void TriggerSkill(int pos)
     {
-        Action[] skills = { SkillVomit, SkillSores, SkillExplode, SkillCephalic, SkillFrenzy };
-        skills[pos].Invoke();
+        //Action[] skills = { SkillVomit, SkillSores, SkillExplode, SkillCephalic, SkillFrenzy };
+        //skills[pos].Invoke();
+        selectionTarget = SelectionTarget.Ripper;
         OnAA2();
         uiManager.ClearUI();
     }
 
-    private void SkillVomit() => selectionTarget = SelectionTarget.Ripper;
+    /*private void SkillVomit() => selectionTarget = SelectionTarget.Ripper;
     private void SkillSores() => selectionTarget = SelectionTarget.Ripper;
     private void SkillExplode() => selectionTarget = SelectionTarget.Limb;
     private void SkillCephalic() => selectionTarget = SelectionTarget.Ripper;
-    private void SkillFrenzy() => selectionTarget = SelectionTarget.Ripper;
+    private void SkillFrenzy() => selectionTarget = SelectionTarget.Ripper;*/
 
     public void ModifyHP(int n)
     {

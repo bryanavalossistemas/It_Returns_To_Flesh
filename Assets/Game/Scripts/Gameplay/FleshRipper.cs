@@ -1,6 +1,9 @@
 using UnityEngine;
 using System.Collections;
 using static BehaviourPlus;
+using System.Collections.Generic;
+using System;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(SpriteRenderer),typeof(Animator)), RequireComponent(typeof(Rigidbody2D),typeof(BoxCollider2D))]
 public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatable, IHoverable,ISelectable, IPool
@@ -51,16 +54,18 @@ public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatab
         float speed = isVomiting? 0f : ripperSO.speed;
 
         //Choque contra pared
-        bool hitWall = TRaycast(Tforward1, transform.right);
-        if (hitWall)
+        if (isGrounded)
         {
-            if (TRaycast(Tforward2, transform.right)) transform.InvertAxis();
-            else ApplyKnockback(ripperSO.jumpForce * 0.6f);
+            bool hitWall = TRaycast(Tforward1, transform.right);
+            if (hitWall)
+            {
+                if (TRaycast(Tforward2, transform.right)) transform.InvertAxis();
+                else ApplyKnockback(ripperSO.jumpForce * 0.6f);
 
+            }
         }
         //if (_isPushed) _savedDirection *= -1;
         //_turnCoolDown = 0.5f;
-
         //if (_turnCoolDown > 0) _turnCoolDown -= Time.fixedDeltaTime;
 
         //Frenzy
@@ -162,10 +167,6 @@ public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatab
                 ExecuteQuickCast();
                 break;
             case GameManager.SelectionTarget.Limb:
-                if (TryGetComponent(out FleshLimbs limbs))
-                {
-                    limbs.DetonateLimb(FleshLimbs.LimbType.Arms);
-                }
                 break;
         }
     }
@@ -210,21 +211,8 @@ public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatab
 
     private void ExecuteQuickCast()
     {
-        switch (gameManager.selectedSkill)
-        {
-            case 0:
-                CastVomit();
-                break;
-            case 1:
-                CastSores();
-                break;
-            case 3:
-                RipperDead();
-                break;
-            case 4:
-                CastFrenzy();
-                break;
-        }
+        Action[] skills = { CastVomit, CastSores, CastExplosion, CastCephalic, CastFrenzy };
+        skills[gameManager.selectedSkill].Invoke();
     }
 
     public void AA()
@@ -256,14 +244,6 @@ public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatab
         isVomiting = false;
     }
 
-    public bool CanCastFrenzy() => !isVomiting;
-    public void CastFrenzy()
-    {
-        if (!CanCastFrenzy()) return;
-        gameManager.ModifyHP(-3);
-        frenzyTimer += ripperSO.frenzyDuration;
-    }
-
     public bool CanCastSores() => !isVomiting && isGrounded;
     public void CastSores()
     {
@@ -278,6 +258,53 @@ public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatab
             //SelectThisUnit();
             uiManager.ResetSkillHighlight();
         }
+    }
+
+    public bool CanCastExplosion() => true;
+    public void CastExplosion()
+    {
+        if (!CanCastExplosion()) return;
+        gameManager.ModifyHP(-5);
+
+        Vector2 force = ripperSO.explosionForce, explosionCenter = transform.position;
+        Collider2D[] objectsInRange = Physics2D.OverlapCircleAll(explosionCenter, ripperSO.explosionRadius, gameManager.whatCanBePushed);
+        HashSet<Rigidbody2D> pushedBodies = new();
+
+        foreach (Collider2D col in objectsInRange)
+        {
+            if (col.gameObject.layer == GameManager.ExplodableLayer)
+            {
+                Destroy(col.gameObject);
+                continue;
+            }
+            if (col.TryGetComponent(out Rigidbody2D rb))
+            {
+                if (rb.gameObject != gameObject && pushedBodies.Add(rb))
+                {
+                    float directionX = Mathf.Sign(rb.transform.position.x - explosionCenter.x);
+                    if (Mathf.Abs(rb.transform.position.x - explosionCenter.x) < 0.1f) directionX = Random.Range(0f, 1f) > 0.5f ? 1f : -1;
+                    force.x *= directionX;
+
+                    if (rb.TryGetComponent(out FleshRipper r)) r.ApplyKnockback(force);
+                    else rb.AddForce(force, ForceMode2D.Impulse);
+                }
+            }
+        }
+        RipperDead();
+    }
+
+    public void CastCephalic()
+    {
+        gameManager.ModifyHP(5);
+        RipperDead();
+    }
+
+    public bool CanCastFrenzy() => !isVomiting;
+    public void CastFrenzy()
+    {
+        if (!CanCastFrenzy()) return;
+        gameManager.ModifyHP(-3);
+        frenzyTimer += ripperSO.frenzyDuration;
     }
 
 #if UNITY_EDITOR
