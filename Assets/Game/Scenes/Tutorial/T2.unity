@@ -158,13 +158,49 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5737282081267671294, guid: 57008dc01c8c9db4da80d4926da0e4cf, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1844925599163996119, guid: 4ad6eab1802e1d8478d29d83d39c9039, type: 3}
+    - target: {fileID: 5737282081267671294, guid: 57008dc01c8c9db4da80d4926da0e4cf, type: 3}
+      propertyPath: m_Color.b
+      value: 0.31268537
+      objectReference: {fileID: 0}
+    - target: {fileID: 5737282081267671294, guid: 57008dc01c8c9db4da80d4926da0e4cf, type: 3}
+      propertyPath: m_Color.g
+      value: 0.31268537
+      objectReference: {fileID: 0}
+    - target: {fileID: 5737282081267671294, guid: 57008dc01c8c9db4da80d4926da0e4cf, type: 3}
+      propertyPath: m_Color.r
+      value: 0.6415094
+      objectReference: {fileID: 0}
+    - target: {fileID: 6814169484615610798, guid: 57008dc01c8c9db4da80d4926da0e4cf, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6814169484615610798, guid: 57008dc01c8c9db4da80d4926da0e4cf, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 4.43
+      objectReference: {fileID: 0}
+    - target: {fileID: 6814169484615610798, guid: 57008dc01c8c9db4da80d4926da0e4cf, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8223675144845237065, guid: 57008dc01c8c9db4da80d4926da0e4cf, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8446
+      objectReference: {fileID: 0}
+    - target: {fileID: 8223675144845237065, guid: 57008dc01c8c9db4da80d4926da0e4cf, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.8562
+      objectReference: {fileID: 0}
     - target: {fileID: 8223675144845237065, guid: 57008dc01c8c9db4da80d4926da0e4cf, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 18.25
+      value: 18.21
       objectReference: {fileID: 0}
     - target: {fileID: 8223675144845237065, guid: 57008dc01c8c9db4da80d4926da0e4cf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.28
+      value: -3.48
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10607,6 +10643,18 @@ PrefabInstance:
     - target: {fileID: 3022593971531005316, guid: 86f277a5ad1b2b643a58b61ca1c55a08, type: 3}
       propertyPath: m_Name
       value: CanvasMonitor
+      objectReference: {fileID: 0}
+    - target: {fileID: 4629392237834420118, guid: 86f277a5ad1b2b643a58b61ca1c55a08, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4629392237834420118, guid: 86f277a5ad1b2b643a58b61ca1c55a08, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4629392237834420118, guid: 86f277a5ad1b2b643a58b61ca1c55a08, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8926268986826691897, guid: 86f277a5ad1b2b643a58b61ca1c55a08, type: 3}
       propertyPath: m_Pivot.x

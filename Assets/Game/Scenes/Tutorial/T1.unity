@@ -253,6 +253,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanvasMonitor
       objectReference: {fileID: 0}
+    - target: {fileID: 4629392237834420118, guid: 86f277a5ad1b2b643a58b61ca1c55a08, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4629392237834420118, guid: 86f277a5ad1b2b643a58b61ca1c55a08, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4629392237834420118, guid: 86f277a5ad1b2b643a58b61ca1c55a08, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8926268986826691897, guid: 86f277a5ad1b2b643a58b61ca1c55a08, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -11177,11 +11189,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8223675144845237065, guid: 57008dc01c8c9db4da80d4926da0e4cf, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 18.47
+      value: 18.078
       objectReference: {fileID: 0}
     - target: {fileID: 8223675144845237065, guid: 57008dc01c8c9db4da80d4926da0e4cf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.4
+      value: -6.461
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
