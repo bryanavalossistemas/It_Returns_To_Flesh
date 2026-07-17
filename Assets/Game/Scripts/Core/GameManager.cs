@@ -1,7 +1,9 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
+using UnityEngine.UIElements;
 using static BehaviourPlus;
 
 public class GameManager : MonoBehaviour_UU, IUpdatable
@@ -35,6 +37,8 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
 
     private void SceneLoaded(Scene scene, LoadSceneMode loadMode)
     {
+        Debug.Log($"{EventSystem.current} {EventSystem.current.currentInputModule}");
+        Debug.Log(FindObjectsByType<EventSystem>(FindObjectsSortMode.None).Length);
         bool inGameplay = scene.buildIndex > Core.MenusIndex;
         gameObject.SetActive(inGameplay);
         Time.timeScale = 1f;

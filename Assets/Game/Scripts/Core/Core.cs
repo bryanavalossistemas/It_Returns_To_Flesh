@@ -5,16 +5,17 @@ using UnityEngine.Localization.Settings;
 using UnityEngine.SceneManagement;
 using Cysharp.Threading.Tasks;
 using static BehaviourPlus;
-using System.Threading.Tasks;
+using UnityEngine.EventSystems;
 
 public class Core : MonoBehaviour
 {
-    public const int MenusIndex = 0;
+    public const int MenusIndex = 1;
     [SerializeField] private GameManager _game;
     [SerializeField] private InputManager _input;
     [SerializeField] private AudioManager _audio;
     [SerializeField] private UIManager _ui;
     [SerializeField] private PrefsManager _prefs;
+    [SerializeField] private GameObject eventSystem;
     public static string[] LocaleNames { get; private set; }
     public static string CurrentLocaleName => LocalizationSettings.SelectedLocale.LocaleName;
     public Camera MainCamera { get; private set; }
@@ -27,6 +28,7 @@ public class Core : MonoBehaviour
             return;
         }
         DontDestroyOnLoad(gameObject);
+        eventSystem.SetActive(true);
         MainCamera = Camera.main;
     }
 
