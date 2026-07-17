@@ -162,6 +162,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanvasMonitor
       objectReference: {fileID: 0}
+    - target: {fileID: 4629392237834420118, guid: 86f277a5ad1b2b643a58b61ca1c55a08, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4629392237834420118, guid: 86f277a5ad1b2b643a58b61ca1c55a08, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4629392237834420118, guid: 86f277a5ad1b2b643a58b61ca1c55a08, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7538509497333981602, guid: 86f277a5ad1b2b643a58b61ca1c55a08, type: 3}
+      propertyPath: iconoHabilidad
+      value: 
+      objectReference: {fileID: 2800000, guid: 68dbfbf61eb8c9d46bd6a6a5e61ab4aa, type: 3}
     - target: {fileID: 8926268986826691897, guid: 86f277a5ad1b2b643a58b61ca1c55a08, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -12125,6 +12141,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1788727578}
     m_Modifications:
+    - target: {fileID: 5198950846039202975, guid: b9766f3e2c79e2b409b32fe8ab36fca9, type: 3}
+      propertyPath: m_Size.x
+      value: 2.0725
+      objectReference: {fileID: 0}
+    - target: {fileID: 5198950846039202975, guid: b9766f3e2c79e2b409b32fe8ab36fca9, type: 3}
+      propertyPath: m_Size.y
+      value: 2.5875
+      objectReference: {fileID: 0}
     - target: {fileID: 7677830470400958208, guid: b9766f3e2c79e2b409b32fe8ab36fca9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -17.521172

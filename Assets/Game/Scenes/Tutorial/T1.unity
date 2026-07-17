@@ -265,6 +265,14 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7538509497333981602, guid: 86f277a5ad1b2b643a58b61ca1c55a08, type: 3}
+      propertyPath: iconosHabilidad.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7538509497333981602, guid: 86f277a5ad1b2b643a58b61ca1c55a08, type: 3}
+      propertyPath: 'iconosHabilidad.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2800000, guid: f162d4bbb05d93f49b5830cfc37bfe3b, type: 3}
     - target: {fileID: 8926268986826691897, guid: 86f277a5ad1b2b643a58b61ca1c55a08, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
