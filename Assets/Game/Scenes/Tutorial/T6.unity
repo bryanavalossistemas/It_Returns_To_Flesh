@@ -11517,6 +11517,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanvasMonitor
       objectReference: {fileID: 0}
+    - target: {fileID: 4629392237834420118, guid: 86f277a5ad1b2b643a58b61ca1c55a08, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4629392237834420118, guid: 86f277a5ad1b2b643a58b61ca1c55a08, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4629392237834420118, guid: 86f277a5ad1b2b643a58b61ca1c55a08, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7538509497333981602, guid: 86f277a5ad1b2b643a58b61ca1c55a08, type: 3}
+      propertyPath: iconosHabilidad.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7538509497333981602, guid: 86f277a5ad1b2b643a58b61ca1c55a08, type: 3}
+      propertyPath: 'iconosHabilidad.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2800000, guid: 68dbfbf61eb8c9d46bd6a6a5e61ab4aa, type: 3}
+    - target: {fileID: 7538509497333981602, guid: 86f277a5ad1b2b643a58b61ca1c55a08, type: 3}
+      propertyPath: 'iconosHabilidad.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2800000, guid: 038b8a03f9b5c4446ba7435e49f16eaa, type: 3}
+    - target: {fileID: 7538509497333981602, guid: 86f277a5ad1b2b643a58b61ca1c55a08, type: 3}
+      propertyPath: 'iconosHabilidad.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2800000, guid: 7eb25bd27e2a61142b4747b899286eef, type: 3}
     - target: {fileID: 8926268986826691897, guid: 86f277a5ad1b2b643a58b61ca1c55a08, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

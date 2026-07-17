@@ -127,8 +127,8 @@ MonoBehaviour:
   videoPlayer: {fileID: 9067273365371687601}
   aspectFitter: {fileID: 6364477519346134168}
   videoTexture: {fileID: 8400000, guid: bd208578c67bf9d49abede9d4274dae4, type: 2}
-  iconoHabilidad: {fileID: 2800000, guid: f162d4bbb05d93f49b5830cfc37bfe3b, type: 3}
-  tiempoVideo: 3
+  iconosHabilidad: []
+  tiempoVideo: 2
   tiempoIcono: 2
 --- !u!114 &6364477519346134168
 MonoBehaviour:

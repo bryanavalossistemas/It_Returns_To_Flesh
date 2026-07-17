@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: b67be9ddcdd931d4ebeb3453065bd882
+guid: 51aaf3b3ef5503f4e8ac2763f6d0442e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6130115853772443134
-    second: Aterrizaje 15_0
+      213: -255083746040163195
+    second: dbtm78ks-removebg-preview_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,12 +46,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 400
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Aterrizaje 15_0
+      name: dbtm78ks-removebg-preview_0
       rect:
         serializedVersion: 2
-        x: 97
-        y: 28
-        width: 943
-        height: 896
+        x: 115
+        y: 13
+        width: 443
+        height: 350
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 20237e71c147deaa0800000000000000
-      internalID: -6130115853772443134
+      spriteID: 584dc493fa2c57cf0800000000000000
+      internalID: -255083746040163195
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Aterrizaje 15_0: -6130115853772443134
+      dbtm78ks-removebg-preview_0: -255083746040163195
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
