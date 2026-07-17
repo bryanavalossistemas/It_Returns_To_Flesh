@@ -94,6 +94,7 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
         MaxHP += ripperSO.buffHP;
         HP += ripperSO.buffHP;
         uiManager.UpdateHealth(HP, MaxHP);
+        audioManager.PlaySfx(SFXEnum.Eating, civilian.position);
     }
 
     public void TriggerSkill(int pos)
