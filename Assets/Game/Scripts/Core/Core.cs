@@ -5,6 +5,7 @@ using UnityEngine.Localization.Settings;
 using UnityEngine.SceneManagement;
 using Cysharp.Threading.Tasks;
 using static BehaviourPlus;
+using System.Threading.Tasks;
 
 public class Core : MonoBehaviour
 {
@@ -29,12 +30,17 @@ public class Core : MonoBehaviour
         MainCamera = Camera.main;
     }
 
-    void Start()
+    async void Start()
     {
-        prefsManager.LoadPlayerPrefs();
-        StartTask().Forget();
+        await UniTask.WhenAll(Init(), LocalizationInit());
+        NextScene();
 
-        static async UniTaskVoid StartTask()
+        static async UniTask Init()
+        {
+            prefsManager.LoadPlayerPrefs();
+        }
+
+        static async UniTask LocalizationInit()
         {
             await LocalizationSettings.InitializationOperation.Task.AsUniTask();
             LocaleNames = LocalizationSettings.AvailableLocales.Locales.Select(locale => locale.LocaleName).ToArray();
