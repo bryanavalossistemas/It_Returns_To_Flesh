@@ -24,12 +24,12 @@ MonoBehaviour:
     isExpanded: 1
   - id: a466d0754ddddb144a29f003c0540abf
     noteTag: a3712d04b9754944ac2948e359faf304
-    name: Singleton
+    name: Bounds2D
     data:
       statusIndex: -1
       flagMask: 258
       notes: Renovar UI
-    order: 5
+    order: 4
     isExpanded: 1
   - id: b549289e3dd583342b7bcbeaea054cd7
     noteTag: 2ef2a2d5fe614d4ea91450b766947fdc
@@ -38,7 +38,7 @@ MonoBehaviour:
       statusIndex: -1
       flagMask: 40
       notes: Corregir esquinas
-    order: 3
+    order: 2
     isExpanded: 1
   - id: b549289e3dd583342b7bcbeaea054cd7
     noteTag: f36d22c2c5204346abfbd357cc85f17c
@@ -47,16 +47,16 @@ MonoBehaviour:
       statusIndex: -1
       flagMask: 34
       notes: Lockear Ripper
-    order: 2
+    order: 1
     isExpanded: 1
   - id: a466d0754ddddb144a29f003c0540abf
     noteTag: ab818fa96ff743239312cc41df175b10
-    name: Singleton
+    name: Bounds2D
     data:
       statusIndex: -1
       flagMask: 164
       notes: "Di\xE1logos de cient\xEDficos"
-    order: 6
+    order: 5
     isExpanded: 1
   - id: 9363caf8d17bd9849b3500db78034750
     noteTag: d412b6dff7464593bd7913ae8a465194
@@ -80,28 +80,28 @@ MonoBehaviour:
     noteTag: 60255cc5456343c9b0dea1e18a4f5a65
     name: FleshRipper
     data:
-      statusIndex: -1
-      flagMask: 36
+      statusIndex: 0
+      flagMask: 480
       notes: "Trazo de movimiento de Salto / Explosi\xF3n"
     order: 1
     isExpanded: 1
   - id: a466d0754ddddb144a29f003c0540abf
     noteTag: 4946366e293c46dbb5d199e750539c63
-    name: Singleton
+    name: Bounds2D
     data:
       statusIndex: -1
       flagMask: 68
       notes: "Ventana de UI reactiva + detecci\xF3n de Game Over"
-    order: 4
+    order: 3
     isExpanded: 1
   - id: a466d0754ddddb144a29f003c0540abf
     noteTag: 7968f956893241d7a29be994a60e3597
-    name: Singleton
+    name: Bounds2D
     data:
       statusIndex: -1
       flagMask: 0
       notes: "Cinem\xE1tica de Ripper comiendo cient\xEDficos"
-    order: 8
+    order: 7
     isExpanded: 1
   - id: b9766f3e2c79e2b409b32fe8ab36fca9
     noteTag: 1ee0234a22c34151863d6298b05b231a
@@ -110,7 +110,7 @@ MonoBehaviour:
       statusIndex: -1
       flagMask: 0
       notes: Hacer que si se supoerponen vayan a diferentes velocidades
-    order: 7
+    order: 6
     isExpanded: 1
   columns:
   - name: LATER
