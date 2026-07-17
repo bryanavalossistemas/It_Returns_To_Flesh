@@ -11784,7 +11784,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8847005963462663760, guid: 15eafa0561bd3b54cac2e7f00b75a2cc, type: 3}
       propertyPath: swingSpeed
-      value: 2.5
+      value: 1.36
       objectReference: {fileID: 0}
     - target: {fileID: 9074102123543525764, guid: 15eafa0561bd3b54cac2e7f00b75a2cc, type: 3}
       propertyPath: m_Size.y
