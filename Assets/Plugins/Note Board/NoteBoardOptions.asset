@@ -24,7 +24,7 @@ MonoBehaviour:
     isExpanded: 1
   - id: a466d0754ddddb144a29f003c0540abf
     noteTag: a3712d04b9754944ac2948e359faf304
-    name: Canvas
+    name: CinemachineCamera
     data:
       statusIndex: -1
       flagMask: 258
@@ -51,7 +51,7 @@ MonoBehaviour:
     isExpanded: 1
   - id: a466d0754ddddb144a29f003c0540abf
     noteTag: ab818fa96ff743239312cc41df175b10
-    name: Canvas
+    name: CinemachineCamera
     data:
       statusIndex: -1
       flagMask: 164
@@ -87,7 +87,7 @@ MonoBehaviour:
     isExpanded: 1
   - id: a466d0754ddddb144a29f003c0540abf
     noteTag: 4946366e293c46dbb5d199e750539c63
-    name: Canvas
+    name: CinemachineCamera
     data:
       statusIndex: -1
       flagMask: 68
@@ -96,7 +96,7 @@ MonoBehaviour:
     isExpanded: 1
   - id: a466d0754ddddb144a29f003c0540abf
     noteTag: 7968f956893241d7a29be994a60e3597
-    name: Canvas
+    name: CinemachineCamera
     data:
       statusIndex: -1
       flagMask: 0
