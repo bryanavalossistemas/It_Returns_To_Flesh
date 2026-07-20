@@ -14,7 +14,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float maxZoom = 30f;
     private bool isCameraMoving;
     private LensSettings lens;
-
+    [SerializeField] private CinemachineImpulseSource impulseSource;
     void Start()
     {
         lens = cam.Lens;
@@ -47,5 +47,12 @@ public class CameraController : MonoBehaviour
         bounds2D.offset = offset;
         bounds2D.size = size;
         confiner.InvalidateBoundingShapeCache();
+    }
+    public void ShakeCamera(float intensity = 1f)
+    {
+        if (impulseSource != null)
+        {
+            impulseSource.GenerateImpulseWithForce(intensity);
+        }
     }
 }

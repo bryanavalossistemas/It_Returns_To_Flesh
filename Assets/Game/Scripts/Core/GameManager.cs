@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
 {
     public const int CivilianLayer = 7, ExplodableLayer = 8, InstakillLayer = 9, CheckpointLayer = 11;
     public const float RayLength = 0.5f;
+    [SerializeField] public LevelSO currentLevelData;
     [SerializeField] private CameraController cameraController;
     public Material normalMat, ripperSelectedMat;
     [HideInInspector] public int selectedSkill = -1;
@@ -68,7 +69,10 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
         bool[] _numbers = { inputManager._1, inputManager._2, inputManager._3, inputManager._4, inputManager._5 };
         for (int i = 0; i < _numbers.Length; i++)
         {
-            if (_numbers[i]) uiManager.SelectButton(i);
+            if (_numbers[i] && currentLevelData != null && currentLevelData.unlockedSkills[i]) 
+            {
+                uiManager.SelectButton(i);
+            }
         }
         if (inputManager.Deselect)
         {
@@ -134,4 +138,11 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
         levelController.StartLevel(n);
     }
     public void NextPhase() => core.NextScene();//levelController.NextPhase();
+    public void TriggerCameraShake(float intensity)
+{
+    if (cameraController != null)
+    {
+        cameraController.ShakeCamera(intensity);
+    }
+}
 }

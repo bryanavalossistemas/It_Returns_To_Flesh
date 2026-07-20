@@ -11435,6 +11435,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Singleton
       objectReference: {fileID: 0}
+    - target: {fileID: 8849794092704661988, guid: a466d0754ddddb144a29f003c0540abf, type: 3}
+      propertyPath: currentLevelData
+      value: 
+      objectReference: {fileID: 11400000, guid: e00b2eaf23a78914f9a5efaeab3b173d, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -50,7 +50,7 @@ public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatab
         }
         isGrounded = TRaycast(Tbottom, -transform.up);
 
-        //Movimiento automático
+        //Movimiento automï¿½tico
         float speed = isVomiting? 0f : ripperSO.speed;
 
         //Choque contra pared
@@ -290,6 +290,7 @@ public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatab
                 }
             }
         }
+        gameManager.TriggerCameraShake(3f);
         RipperDead();
     }
 

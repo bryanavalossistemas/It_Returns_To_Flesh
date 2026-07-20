@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f49a9ec6d53d583498baf6c1dd1784a3, type: 3}
-  m_Name: LevelSO
-  m_EditorClassIdentifier: General::LevelSO
-  phases: 01000000020000000300000004000000050000000600000007000000
-  unlockedSkills: 0101010001
+  m_Name: LevelSO_T3
+  m_EditorClassIdentifier: Shared::LevelSO
+  phases: 
+  unlockedSkills: 0101000000
