@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: LevelSO
   m_EditorClassIdentifier: General::LevelSO
   phases: 01000000020000000300000004000000050000000600000007000000
+  unlockedSkills: 0101010001

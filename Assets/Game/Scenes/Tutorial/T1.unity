@@ -11076,10 +11076,6 @@ PrefabInstance:
       propertyPath: m_Icon
       value: 
       objectReference: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
-    - target: {fileID: 1840134684906731062, guid: a466d0754ddddb144a29f003c0540abf, type: 3}
-      propertyPath: impulseSource
-      value: 
-      objectReference: {fileID: 2136249687}
     - target: {fileID: 2477749021229373886, guid: a466d0754ddddb144a29f003c0540abf, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 395.5
@@ -11102,19 +11098,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2991430906305684802, guid: a466d0754ddddb144a29f003c0540abf, type: 3}
       propertyPath: field of view
-      value: 60
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 2991430906305684802, guid: a466d0754ddddb144a29f003c0540abf, type: 3}
       propertyPath: far clip plane
-      value: 1000
+      value: 5000
       objectReference: {fileID: 0}
     - target: {fileID: 2991430906305684802, guid: a466d0754ddddb144a29f003c0540abf, type: 3}
       propertyPath: near clip plane
-      value: 0.3
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 2991430906305684802, guid: a466d0754ddddb144a29f003c0540abf, type: 3}
       propertyPath: orthographic size
-      value: 13
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3011877650232771207, guid: a466d0754ddddb144a29f003c0540abf, type: 3}
       propertyPath: m_Icon
@@ -11307,96 +11303,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3617712336057408101, guid: a466d0754ddddb144a29f003c0540abf, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2136249687}
-    - targetCorrespondingSourceObject: {fileID: 3617712336057408101, guid: a466d0754ddddb144a29f003c0540abf, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2136249688}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a466d0754ddddb144a29f003c0540abf, type: 3}
---- !u!1 &2136249686 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3617712336057408101, guid: a466d0754ddddb144a29f003c0540abf, type: 3}
-  m_PrefabInstance: {fileID: 2136249685}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2136249687
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2136249686}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineImpulseSource
-  ImpulseDefinition:
-    ImpulseChannel: 1
-    ImpulseShape: 2
-    CustomImpulseShape:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    ImpulseDuration: 0.2
-    ImpulseType: 3
-    DissipationRate: 0.25
-    RawSignal: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
-    AmplitudeGain: 2
-    FrequencyGain: 1
-    RepeatMode: 0
-    Randomize: 1
-    TimeEnvelope:
-      AttackShape:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      DecayShape:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      AttackTime: 0
-      SustainTime: 0.2
-      DecayTime: 0.7
-      ScaleWithImpact: 1
-      HoldForever: 0
-    ImpactRadius: 100
-    DirectionMode: 0
-    DissipationMode: 2
-    DissipationDistance: 100
-    PropagationSpeed: 343
-  DefaultVelocity: {x: 0, y: -1, z: 0}
---- !u!114 &2136249688
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2136249686}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00b2d199b96b516448144ab30fb26aed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineImpulseListener
-  ApplyAfter: 2
-  ChannelMask: 1
-  Gain: 1
-  Use2DDistance: 0
-  UseCameraSpace: 1
-  SignalCombinationMode: 0
-  ReactionSettings:
-    m_SecondaryNoise: {fileID: 0}
-    AmplitudeGain: 1
-    FrequencyGain: 1
-    Duration: 1
-    m_NoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1001 &4503867690698343750
 PrefabInstance:
   m_ObjectHideFlags: 0

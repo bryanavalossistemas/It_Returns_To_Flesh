@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9363caf8d17bd9849b3500db78034750, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  currentLevelData: {fileID: 11400000, guid: 7b3185c29c8c5d8418519b36526ed42d, type: 2}
   cameraController: {fileID: 1840134684906731062}
   normalMat: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   ripperSelectedMat: {fileID: 2100000, guid: 7b2580638996b4a4bbf38c9c45990707, type: 2}
@@ -105,7 +106,7 @@ GameObject:
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -374,7 +375,7 @@ GameObject:
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -505,11 +506,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
+  near clip plane: 0.1
+  far clip plane: 5000
+  field of view: 40
   orthographic: 1
-  orthographic size: 13
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -627,6 +628,8 @@ GameObject:
   - component: {fileID: 6100203260620696905}
   - component: {fileID: 2938690047417260710}
   - component: {fileID: 1840134684906731062}
+  - component: {fileID: 6099115290898093140}
+  - component: {fileID: 4537817346046699253}
   m_Layer: 0
   m_Name: CinemachineCamera
   m_TagString: Untagged
@@ -733,6 +736,84 @@ MonoBehaviour:
   zoomSensitivity: 0.5
   minZoom: 1
   maxZoom: 20
+  impulseSource: {fileID: 6099115290898093140}
+--- !u!114 &6099115290898093140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3617712336057408101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineImpulseSource
+  ImpulseDefinition:
+    ImpulseChannel: 1
+    ImpulseShape: 2
+    CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    ImpulseDuration: 0.2
+    ImpulseType: 3
+    DissipationRate: 0.25
+    RawSignal: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+    AmplitudeGain: 3
+    FrequencyGain: 1
+    RepeatMode: 0
+    Randomize: 1
+    TimeEnvelope:
+      AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      AttackTime: 0
+      SustainTime: 0.2
+      DecayTime: 0.7
+      ScaleWithImpact: 1
+      HoldForever: 0
+    ImpactRadius: 100
+    DirectionMode: 0
+    DissipationMode: 2
+    DissipationDistance: 100
+    PropagationSpeed: 343
+  DefaultVelocity: {x: 0, y: -1, z: 0}
+--- !u!114 &4537817346046699253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3617712336057408101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b2d199b96b516448144ab30fb26aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineImpulseListener
+  ApplyAfter: 2
+  ChannelMask: 1
+  Gain: 1
+  Use2DDistance: 0
+  UseCameraSpace: 1
+  SignalCombinationMode: 0
+  ReactionSettings:
+    m_SecondaryNoise: {fileID: 0}
+    AmplitudeGain: 1
+    FrequencyGain: 1
+    Duration: 1
+    m_NoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &5030725106648786681
 GameObject:
   m_ObjectHideFlags: 0
@@ -1778,10 +1859,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8ec920b75e29ce44841bf3148c2ef59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIManager
+  lockedIcon: {fileID: -1661125215562442467, guid: 8d7e2fd59ae47cb468f63eb4535f7c85, type: 3}
   healthText: {fileID: 3534011916556671767}
   _normalColor: {r: 0.5647059, g: 0.14509805, b: 0.14509805, a: 1}
   _dangerColor: {r: 1, g: 0, b: 0, a: 1}
-  _disabledColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   _selectedColor: {r: 0, g: 1, b: 0, a: 1}
   skillButtons:
   - {fileID: 4374448278360804718}
@@ -1797,6 +1878,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 381022174379637097}
     m_Modifications:
+    - target: {fileID: 2570592083168127563, guid: 15b519b0064ed094aa24c8bc884fa02f, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2570592083168127563, guid: 15b519b0064ed094aa24c8bc884fa02f, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2570592083168127563, guid: 15b519b0064ed094aa24c8bc884fa02f, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2570592083168127563, guid: 15b519b0064ed094aa24c8bc884fa02f, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3132988229849123898, guid: 15b519b0064ed094aa24c8bc884fa02f, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 3132988229849123898, guid: 15b519b0064ed094aa24c8bc884fa02f, type: 3}
       propertyPath: m_Name
       value: Sores
@@ -1919,6 +2020,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 381022174379637097}
     m_Modifications:
+    - target: {fileID: 2570592083168127563, guid: 15b519b0064ed094aa24c8bc884fa02f, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2570592083168127563, guid: 15b519b0064ed094aa24c8bc884fa02f, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2570592083168127563, guid: 15b519b0064ed094aa24c8bc884fa02f, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2570592083168127563, guid: 15b519b0064ed094aa24c8bc884fa02f, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3132988229849123898, guid: 15b519b0064ed094aa24c8bc884fa02f, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 3132988229849123898, guid: 15b519b0064ed094aa24c8bc884fa02f, type: 3}
       propertyPath: m_Name
       value: Explode
@@ -2041,6 +2162,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 381022174379637097}
     m_Modifications:
+    - target: {fileID: 2570592083168127563, guid: 15b519b0064ed094aa24c8bc884fa02f, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2570592083168127563, guid: 15b519b0064ed094aa24c8bc884fa02f, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2570592083168127563, guid: 15b519b0064ed094aa24c8bc884fa02f, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2570592083168127563, guid: 15b519b0064ed094aa24c8bc884fa02f, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3132988229849123898, guid: 15b519b0064ed094aa24c8bc884fa02f, type: 3}
       propertyPath: m_Name
       value: Frenzy
@@ -2159,6 +2296,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 381022174379637097}
     m_Modifications:
+    - target: {fileID: 2570592083168127563, guid: 15b519b0064ed094aa24c8bc884fa02f, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2570592083168127563, guid: 15b519b0064ed094aa24c8bc884fa02f, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2570592083168127563, guid: 15b519b0064ed094aa24c8bc884fa02f, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2570592083168127563, guid: 15b519b0064ed094aa24c8bc884fa02f, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3132988229849123898, guid: 15b519b0064ed094aa24c8bc884fa02f, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 3132988229849123898, guid: 15b519b0064ed094aa24c8bc884fa02f, type: 3}
       propertyPath: m_Name
       value: Vomit
@@ -2293,6 +2450,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 381022174379637097}
     m_Modifications:
+    - target: {fileID: 2570592083168127563, guid: 15b519b0064ed094aa24c8bc884fa02f, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2570592083168127563, guid: 15b519b0064ed094aa24c8bc884fa02f, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2570592083168127563, guid: 15b519b0064ed094aa24c8bc884fa02f, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2570592083168127563, guid: 15b519b0064ed094aa24c8bc884fa02f, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3132988229849123898, guid: 15b519b0064ed094aa24c8bc884fa02f, type: 3}
       propertyPath: m_Name
       value: Cephalic
