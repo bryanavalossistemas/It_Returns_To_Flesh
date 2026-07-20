@@ -37,13 +37,11 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
 
     private void SceneLoaded(Scene scene, LoadSceneMode loadMode)
     {
-        Debug.Log($"{EventSystem.current} {EventSystem.current.currentInputModule}");
-        Debug.Log(FindObjectsByType<EventSystem>(FindObjectsSortMode.None).Length);
         bool inGameplay = scene.buildIndex > Core.MenusIndex;
         gameObject.SetActive(inGameplay);
         Time.timeScale = 1f;
         if (!inGameplay) return;
-
+        inputManager.Refresh();
         nRippers = 0;
         MaxHP = ripperSO.initialHP;
         HP = MaxHP;

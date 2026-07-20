@@ -387,6 +387,7 @@ GameObject:
   - component: {fileID: 8200923876633667085}
   - component: {fileID: 825788862521996619}
   - component: {fileID: 8006407072441638832}
+  - component: {fileID: 83030486717177960}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -455,6 +456,30 @@ MonoBehaviour:
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
   m_ScrollDeltaPerTick: 6
+--- !u!114 &83030486717177960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3011877650232771207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad631d08ddbd8814aa44cdd42a69d529, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InputManager
+  moveAction: {fileID: 497469923386048288, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  panAction: {fileID: -2018140766406845618, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  zoomAction: {fileID: 7762212343192942875, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  pauseAction: {fileID: 5187799899868384099, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  _1Action: {fileID: -2005444852687853336, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  _2Action: {fileID: 7736414204305748541, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  _3Action: {fileID: -8698227757634464462, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  _4Action: {fileID: 2648885315527614094, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  _5Action: {fileID: 1550600631267827703, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  deselectAction: {fileID: 2932674152201632102, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  pointerPosAction: {fileID: 1431184514859085871, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  pointerClickAction: {fileID: -6936088188447603565, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
 --- !u!1 &3062044081181203808
 GameObject:
   m_ObjectHideFlags: 0
@@ -521,11 +546,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
+  near clip plane: 0.1
+  far clip plane: 5000
+  field of view: 40
   orthographic: 1
-  orthographic size: 13
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1388,7 +1413,6 @@ GameObject:
   - component: {fileID: 6342506370883500296}
   - component: {fileID: 3637858096429089721}
   - component: {fileID: 1142410005317995247}
-  - component: {fileID: 293731676226154935}
   m_Layer: 0
   m_Name: Singleton
   m_TagString: Untagged
@@ -1427,7 +1451,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Core
   _game: {fileID: 8849794092704661988}
-  _input: {fileID: 293731676226154935}
+  _input: {fileID: 83030486717177960}
   _audio: {fileID: 1142410005317995247}
   _ui: {fileID: 6553777428056829156}
   _prefs: {fileID: 3637858096429089721}
@@ -1473,30 +1497,6 @@ MonoBehaviour:
   sfxVolume: 100
   songs: {fileID: 11400000, guid: ba6fe0a9892f7334a87751395208410c, type: 2}
   playState: PlayState
---- !u!114 &293731676226154935
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7373287120759380130}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad631d08ddbd8814aa44cdd42a69d529, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InputManager
-  moveAction: {fileID: 497469923386048288, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  panAction: {fileID: -2018140766406845618, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  zoomAction: {fileID: 7762212343192942875, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  pauseAction: {fileID: 5187799899868384099, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  _1Action: {fileID: -2005444852687853336, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  _2Action: {fileID: 7736414204305748541, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  _3Action: {fileID: -8698227757634464462, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  _4Action: {fileID: 2648885315527614094, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  _5Action: {fileID: 1550600631267827703, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  deselectAction: {fileID: 2932674152201632102, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  pointerPosAction: {fileID: 1431184514859085871, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  pointerClickAction: {fileID: -6936088188447603565, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
 --- !u!1 &7781536668160931544
 GameObject:
   m_ObjectHideFlags: 0
