@@ -30,6 +30,8 @@ MonoBehaviour:
           Data4: -53932228
   Scene_Themes:
     _serializedList:
+    - Key: Loading...
+      Value: Menu
     - Key: Menu
       Value: Menu
     - Key: L0__
@@ -50,3 +52,9 @@ MonoBehaviour:
       Value: Game
     - Key: T7
       Value: Game
+  eatingSfx:
+    Guid:
+      Data1: -298975033
+      Data2: 1197489383
+      Data3: 472634511
+      Data4: -102468472

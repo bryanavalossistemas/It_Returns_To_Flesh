@@ -7,13 +7,12 @@
   <Project Path="FMODUnityResonanceEditor.csproj" />
   <Project Path="FMODUnityEditor.csproj" />
   <Project Path="FMODUnity.csproj" />
+  <Project Path="Shared.csproj" />
   <Project Path="AYellowpaper.SerializedCollections.Editor.csproj" />
   <Project Path="FMODUnityHaptics.csproj" />
   <Project Path="Core.csproj" />
   <Project Path="Unity.PlayerPrefsEditor.Editor.csproj" />
-  <Project Path="NoteBoard.csproj" />
   <Project Path="Gameplay.csproj" />
-  <Project Path="Shared.csproj" />
   <Project Path="FMODUnityResonance.csproj" />
   <Project Path="Unity.PlayerPrefsEditor.EditorResources.csproj" />
 </Solution>

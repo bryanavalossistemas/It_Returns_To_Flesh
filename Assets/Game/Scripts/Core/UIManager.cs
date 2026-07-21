@@ -59,12 +59,12 @@ public class UIManager : MonoBehaviour
     }
     public void UpdateSkillsUI()
     {
-        if (skills == null || gameManager.currentLevelData == null) return;
+        if (skills == null || gameManager.phaseSO == null) return;
 
         for (int i = 0; i < skills.Length; i++) 
     {
         // Revisamos si la habilidad está desbloqueada en el nivel actual
-        bool isUnlocked = gameManager.currentLevelData.unlockedSkills[i];
+        bool isUnlocked = gameManager.phaseSO.unlockedSkills[i];
         if (skillImages[i] != null)
             {
                 skillImages[i].sprite = isUnlocked ? originalIcons[i] : lockedIcon;
@@ -100,7 +100,7 @@ public class UIManager : MonoBehaviour
     {
         // SOLUCIÓN AL BUG DEL CLICK: Verificamos si la habilidad está bloqueada.
         // Si está bloqueada (false) en el LevelSO actual, abortamos la función con "return" y no hace nada.
-        if (gameManager.currentLevelData != null && !gameManager.currentLevelData.unlockedSkills[pos]) 
+        if (gameManager.phaseSO != null && !gameManager.phaseSO.unlockedSkills[pos]) 
         {
             return; 
         }
