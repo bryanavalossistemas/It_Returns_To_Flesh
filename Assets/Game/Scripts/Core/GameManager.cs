@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
     [SerializeField] private LevelSO[] allLevelDatas; 
     [SerializeField] public LevelSO currentLevelData;
     [SerializeField] private CameraController cameraController;
+    [SerializeField] private GameObject pauseEffectPanel;
     public Material normalMat, ripperSelectedMat;
     [HideInInspector] public int selectedSkill = -1;
     public LayerMask groundLayer, pushableLayer;
@@ -68,8 +69,14 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
         {
             bool isPaused = Time.timeScale == 0f;
             Time.timeScale = isPaused? 1f : 0f;
-            //PauseMenu.instance.TogglePauseMenu();
+            if (pauseEffectPanel != null)
+        {
+            pauseEffectPanel.SetActive(!isPaused); 
         }
+            //PauseMenu.instance.TogglePauseMenu();
+            
+        }
+        
         bool[] _numbers = { inputManager._1, inputManager._2, inputManager._3, inputManager._4, inputManager._5 };
         for (int i = 0; i < _numbers.Length; i++)
         {

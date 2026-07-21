@@ -11004,6 +11004,11 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!1 &1179426765 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7791668876232800804, guid: a466d0754ddddb144a29f003c0540abf, type: 3}
+  m_PrefabInstance: {fileID: 2136249685}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1391859792
 GameObject:
   m_ObjectHideFlags: 0
@@ -11344,6 +11349,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 1288079840641242997, guid: a466d0754ddddb144a29f003c0540abf, type: 3}
+      propertyPath: levels.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1288079840641242997, guid: a466d0754ddddb144a29f003c0540abf, type: 3}
+      propertyPath: 'levels.Array.data[0]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1288079840641242997, guid: a466d0754ddddb144a29f003c0540abf, type: 3}
       propertyPath: 'levels.Array.data[7]'
       value: 
       objectReference: {fileID: 11400000, guid: 7b3185c29c8c5d8418519b36526ed42d, type: 2}
@@ -11369,19 +11382,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2991430906305684802, guid: a466d0754ddddb144a29f003c0540abf, type: 3}
       propertyPath: field of view
-      value: 60
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 2991430906305684802, guid: a466d0754ddddb144a29f003c0540abf, type: 3}
       propertyPath: far clip plane
-      value: 1000
+      value: 5000
       objectReference: {fileID: 0}
     - target: {fileID: 2991430906305684802, guid: a466d0754ddddb144a29f003c0540abf, type: 3}
       propertyPath: near clip plane
-      value: 0.3
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 2991430906305684802, guid: a466d0754ddddb144a29f003c0540abf, type: 3}
       propertyPath: orthographic size
-      value: 13
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3011877650232771207, guid: a466d0754ddddb144a29f003c0540abf, type: 3}
       propertyPath: m_Icon
@@ -11567,6 +11580,10 @@ PrefabInstance:
       propertyPath: currentLevelData
       value: 
       objectReference: {fileID: 11400000, guid: e0837f9454eb85847b1ea53c3ccbc8b6, type: 2}
+    - target: {fileID: 8849794092704661988, guid: a466d0754ddddb144a29f003c0540abf, type: 3}
+      propertyPath: pauseEffectPanel
+      value: 
+      objectReference: {fileID: 1179426765}
     - target: {fileID: 9160531926240858892, guid: a466d0754ddddb144a29f003c0540abf, type: 3}
       propertyPath: m_Icon
       value: 
