@@ -47,6 +47,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9363caf8d17bd9849b3500db78034750, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  allLevelDatas:
+  - {fileID: 11400000, guid: e0837f9454eb85847b1ea53c3ccbc8b6, type: 2}
+  - {fileID: 11400000, guid: f242849c7ff2c914aa28756c75d1da04, type: 2}
+  - {fileID: 11400000, guid: d7c358b07727d8c42aea6aeec18c249f, type: 2}
+  - {fileID: 11400000, guid: d5ad0af9b9388e640a8007bb7d503921, type: 2}
+  - {fileID: 11400000, guid: e00b2eaf23a78914f9a5efaeab3b173d, type: 2}
+  - {fileID: 11400000, guid: 9bb3e418f903cdc4080ff41542225267, type: 2}
+  - {fileID: 11400000, guid: 71bce0b9ae2f648499a06b3d06c0008d, type: 2}
   currentLevelData: {fileID: 11400000, guid: 7b3185c29c8c5d8418519b36526ed42d, type: 2}
   cameraController: {fileID: 1840134684906731062}
   normalMat: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
@@ -90,7 +98,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: General::LevelController
   levels:
-  - {fileID: 11400000, guid: 7b3185c29c8c5d8418519b36526ed42d, type: 2}
+  - {fileID: 11400000, guid: e0837f9454eb85847b1ea53c3ccbc8b6, type: 2}
+  - {fileID: 11400000, guid: f242849c7ff2c914aa28756c75d1da04, type: 2}
+  - {fileID: 11400000, guid: d7c358b07727d8c42aea6aeec18c249f, type: 2}
+  - {fileID: 11400000, guid: d5ad0af9b9388e640a8007bb7d503921, type: 2}
+  - {fileID: 11400000, guid: e00b2eaf23a78914f9a5efaeab3b173d, type: 2}
+  - {fileID: 11400000, guid: 9bb3e418f903cdc4080ff41542225267, type: 2}
+  - {fileID: 11400000, guid: 71bce0b9ae2f648499a06b3d06c0008d, type: 2}
 --- !u!1 &571192459602958783
 GameObject:
   m_ObjectHideFlags: 0

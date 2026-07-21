@@ -11389,6 +11389,10 @@ PrefabInstance:
       propertyPath: m_Icon
       value: 
       objectReference: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
+    - target: {fileID: 1288079840641242997, guid: a466d0754ddddb144a29f003c0540abf, type: 3}
+      propertyPath: 'levels.Array.data[7]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 7b3185c29c8c5d8418519b36526ed42d, type: 2}
     - target: {fileID: 2477749021229373886, guid: a466d0754ddddb144a29f003c0540abf, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 395.5

@@ -11994,19 +11994,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2991430906305684802, guid: a466d0754ddddb144a29f003c0540abf, type: 3}
       propertyPath: field of view
-      value: 60
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 2991430906305684802, guid: a466d0754ddddb144a29f003c0540abf, type: 3}
       propertyPath: far clip plane
-      value: 1000
+      value: 5000
       objectReference: {fileID: 0}
     - target: {fileID: 2991430906305684802, guid: a466d0754ddddb144a29f003c0540abf, type: 3}
       propertyPath: near clip plane
-      value: 0.3
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 2991430906305684802, guid: a466d0754ddddb144a29f003c0540abf, type: 3}
       propertyPath: orthographic size
-      value: 13
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6380891523433051109, guid: a466d0754ddddb144a29f003c0540abf, type: 3}
       propertyPath: m_LocalPosition.x

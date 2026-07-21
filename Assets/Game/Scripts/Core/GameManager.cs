@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
 {
     public const int CivilianLayer = 7, ExplodableLayer = 8, InstakillLayer = 9, CheckpointLayer = 11;
     public const float RayLength = 0.5f;
+    [SerializeField] private LevelSO[] allLevelDatas; 
     [SerializeField] public LevelSO currentLevelData;
     [SerializeField] private CameraController cameraController;
     public Material normalMat, ripperSelectedMat;
@@ -43,6 +44,12 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
         Time.timeScale = 1f;
         if (!inGameplay) return;
         inputManager.Refresh();
+        int levelIndex = scene.buildIndex - Core.MenusIndex - 1;
+        if (allLevelDatas != null && levelIndex >= 0 && levelIndex < allLevelDatas.Length)
+        {
+            currentLevelData = allLevelDatas[levelIndex];
+        }
+        uiManager.UpdateSkillsUI();
         nRippers = 0;
         MaxHP = ripperSO.initialHP;
         HP = MaxHP;
