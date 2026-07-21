@@ -1,97 +1,93 @@
-using System.Collections;
-using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Collections;
 using static BehaviourPlus;
 
 public class LevelController : MonoBehaviour
 {
     [SerializeField] private LevelSO[] levels;
-    private int[] phases;
-    private GameObject[] wrappers;
+    private PhaseSO[] phases;
     private int phaseIndex;
-    private float offsetX;
-    private Coroutine changeFase;
+    private RawImage leftImage, rightImage;
+    [SerializeField] private float duration = 0.6f;
 
-   public void StartLevel(int n)
+    public void StartLevel(int n)
     {
-        gameManager.currentLevelData = levels[n];
-
         uiManager.UpdateSkillsUI();
 
         phases = levels[n].phases;
-        offsetX = 0f;
-        wrappers = new GameObject[3]; //[0]=prev, [1]=current, [2]=next
         phaseIndex = 0;
-        SceneManager.sceneLoaded += OnSceneLoaded;
-        core.ChangeScene(phases[0]);
+        core.LoadScene(GetPhaseSO().sceneIndex);
     }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode loadMode)
+    private PhaseSO GetPhaseSO()
     {
-        if (scene.buildIndex == 0) return;
-        //GameObject cameraLevel = scene.GetRootGameObjects()[1];
-        //cameraLevel.GetComponentInChildren<CinemachineCamera>().Target.TrackingTarget = GameObject.FindGameObjectWithTag("Player").transform;
-        GameObject wrapper = new("_Wrapper");
-        SceneManager.MoveGameObjectToScene(wrapper, scene);
-        foreach (GameObject root in scene.GetRootGameObjects()) if (root != wrapper) root.transform.SetParent(wrapper.transform);
-
-        if (loadMode is LoadSceneMode.Single)
-        {
-            wrappers[1] = wrapper;
-            LoadNextFase();
-        }
-        else
-        {
-            wrapper.SetActive(false);
-            wrappers[wrappers[2] == null? 2 : 0] = wrapper;
-            wrapper.transform.position = Vector2.right * offsetX;
-        }
-        //offsetX += cameraLevel.GetComponent<BoxCollider2D>().size.x;
-    }
-
-    private void LoadNextFase(bool forward = true)
-    {
-        bool cond = forward ? phaseIndex < phases.Length - 1 : phaseIndex > 0;
-        if (cond)
-        {
-            SceneManager.LoadSceneAsync(phases[phaseIndex + (forward ? 1 : -1)], LoadSceneMode.Additive);
-        }
+        PhaseSO p = phases[phaseIndex];
+        gameManager.phaseSO = p;
+        return p;
     }
 
     public void NextPhase()
     {
-        if (phaseIndex + 1 == phases.Length)
+        phaseIndex++;
+        if (phaseIndex >= phases.Length)
         {
-            core.ChangeScene(0);
+            core.LoadScene(SceneTypes.Menu);
             return;
         }
-        if (changeFase != null) return;
-        changeFase = StartCoroutine(ChangeFase(true));
+        GetPhaseSO();
+        StartCoroutine(MakeTransition());
     }
 
-    public void PrevPhase()
+    private IEnumerator MakeTransition()
     {
-        if (changeFase != null) return;
-        changeFase = StartCoroutine(ChangeFase(false));
+        Texture2D currentScreenshot = ScreenCapture();
+
+        leftImage.texture = currentScreenshot;
+        Texture2D preview;
+        rightImage.texture = preview;
+
+        // Ajustar escala de la preview según zoom
+        float scale = nextLevel.previewZoom / Camera.main.orthographicSize;
+        rightImage.rectTransform.localScale = Vector3.one * scale;
+
+        canvas.alpha = 1;
+        canvas.gameObject.SetActive(true);
+
+        AsyncOperation load = SceneManager.LoadSceneAsync(phases[phaseIndex].sceneIndex);
+        load.allowSceneActivation = false;
+
+        float t = 0;
+        while (t < duration)
+        {
+            t += Time.unscaledDeltaTime;
+
+            float progress = t / duration;
+
+            Slide(progress);
+
+            yield return null;
+        }
+
+        load.allowSceneActivation = true;
+
+        while (!load.isDone)
+            yield return null;
+
+
+        canvas.gameObject.SetActive(false);
+
+
+        Destroy(currentScreenshot);
     }
 
-    private IEnumerator ChangeFase(bool forward)
+
+    private Texture2D ScreenCapture()
     {
-        int n1 = forward ? 0 : 2, n2 = forward ? 2 : 0;
-        if (wrappers[n1] != null) SceneManager.UnloadSceneAsync(wrappers[n1].scene);
-        wrappers[n1] = wrappers[1];
-        wrappers[1] = wrappers[n2];
-        wrappers[1].SetActive(true);
-        wrappers[n2] = null;
-
-        phaseIndex += forward ? 1 : -1;
-        LoadNextFase(forward);
-
-        yield return new WaitForSeconds(2f);
-        wrappers[n1].SetActive(false);
-        changeFase = null;
+        Texture2D tex = new(Screen.width, Screen.height, TextureFormat.RGB24, false);
+        tex.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
+        tex.Apply();
+        return tex;
     }
-    //public Action OnWrapperPlaced, OnResetFase;
-    //levelManager.OnResetFase();
 }

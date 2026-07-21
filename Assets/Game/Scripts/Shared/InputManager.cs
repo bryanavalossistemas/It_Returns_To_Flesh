@@ -8,7 +8,7 @@ public class InputManager : MonoBehaviour_UL, ILateUpdatable
     [SerializeField] private InputActionReference _1Action, _2Action, _3Action, _4Action, _5Action, deselectAction;
     [SerializeField] private InputActionReference pointerPosAction, pointerClickAction;
 
-    public void Refresh()
+    void Start()
     {
         EnableValue(moveAction, MoveInput);
         EnableValue(panAction, PanInput);

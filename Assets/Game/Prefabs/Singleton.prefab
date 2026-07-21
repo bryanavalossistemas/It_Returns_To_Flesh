@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 109943153818835833}
   - component: {fileID: 8849794092704661988}
   - component: {fileID: 6426159650690866707}
-  - component: {fileID: 1288079840641242997}
+  - component: {fileID: 2273554949788944229}
   m_Layer: 0
   m_Name: GameplayOnly
   m_TagString: Untagged
@@ -68,7 +68,7 @@ MonoBehaviour:
     m_Bits: 320
   selectionTarget: 0
   ripperSO: {fileID: 11400000, guid: 69bd96b0960c9df4abc9f0c6ecafff31, type: 2}
-  levelController: {fileID: 1288079840641242997}
+  levelController: {fileID: 2273554949788944229}
   whatCanBePushed:
     serializedVersion: 2
     m_Bits: 320
@@ -85,7 +85,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Gameplay::RipperPool
   ripperPrefab: {fileID: 6588384766902915105, guid: b9766f3e2c79e2b409b32fe8ab36fca9, type: 3}
---- !u!114 &1288079840641242997
+--- !u!114 &2273554949788944229
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 51a119e13a061294baa79f457fb2d492, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: General::LevelController
+  m_EditorClassIdentifier: Core::LevelController
   levels:
   - {fileID: 11400000, guid: e0837f9454eb85847b1ea53c3ccbc8b6, type: 2}
   - {fileID: 11400000, guid: f242849c7ff2c914aa28756c75d1da04, type: 2}
@@ -556,11 +556,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
+  near clip plane: 0.1
+  far clip plane: 5000
+  field of view: 40
   orthographic: 1
-  orthographic size: 13
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

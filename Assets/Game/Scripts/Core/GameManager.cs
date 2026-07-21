@@ -1,17 +1,14 @@
 using System;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
-using UnityEngine.UIElements;
 using static BehaviourPlus;
 
 public class GameManager : MonoBehaviour_UU, IUpdatable
 {
     public const int CivilianLayer = 7, ExplodableLayer = 8, InstakillLayer = 9, CheckpointLayer = 11;
     public const float RayLength = 0.5f;
-    [SerializeField] private LevelSO[] allLevelDatas; 
-    [SerializeField] public LevelSO currentLevelData;
+    [HideInInspector] public PhaseSO phaseSO;
     [SerializeField] private CameraController cameraController;
     public Material normalMat, ripperSelectedMat;
     [HideInInspector] public int selectedSkill = -1;
@@ -43,12 +40,8 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
         gameObject.SetActive(inGameplay);
         Time.timeScale = 1f;
         if (!inGameplay) return;
-        inputManager.Refresh();
-        int levelIndex = scene.buildIndex - Core.MenusIndex - 1;
-        if (allLevelDatas != null && levelIndex >= 0 && levelIndex < allLevelDatas.Length)
-        {
-            currentLevelData = allLevelDatas[levelIndex];
-        }
+
+        LoadLevelData(scene.buildIndex - Core.MenusIndex - 1);
         uiManager.UpdateSkillsUI();
         nRippers = 0;
         MaxHP = ripperSO.initialHP;
@@ -75,7 +68,7 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
         bool[] _numbers = { inputManager._1, inputManager._2, inputManager._3, inputManager._4, inputManager._5 };
         for (int i = 0; i < _numbers.Length; i++)
         {
-            if (_numbers[i] && currentLevelData != null && currentLevelData.unlockedSkills[i]) 
+            if (_numbers[i] && currentLevelData != null && currentLevelData.unlockedSkills[i])
             {
                 uiManager.SelectButton(i);
             }
@@ -139,16 +132,13 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
         cameraController.SetMiniCamera(followedRipper);
     }
 
-    public void StartLevel(int n)
-    {
-        levelController.StartLevel(n);
-    }
-    public void NextPhase() => core.NextScene();//levelController.NextPhase();
+    public void StartLevel(int n) => levelController.StartLevel(n);
+    public void NextPhase() => levelController.NextPhase();
     public void TriggerCameraShake(float intensity)
-{
-    if (cameraController != null)
     {
-        cameraController.ShakeCamera(intensity);
+        if (cameraController != null)
+        {
+            cameraController.ShakeCamera(intensity);
+        }
     }
-}
 }

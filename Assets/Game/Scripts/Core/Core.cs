@@ -56,12 +56,13 @@ public class Core : MonoBehaviour
         LocalizationSettings.SelectedLocale = newLocale;
     }
 
-    public void ChangeScene(int buildIndex) => SceneManager.LoadScene(buildIndex);
-    public void ReloadScene() => ChangeScene(SceneManager.GetActiveScene().buildIndex);
+    public void LoadScene(SceneTypes sceneType) => LoadScene((int)sceneType);
+    public void LoadScene(int buildIndex) => SceneManager.LoadScene(buildIndex);
+    public void ReloadScene() => LoadScene(SceneManager.GetActiveScene().buildIndex);
     public void NextScene()
     {
         int n = (SceneManager.GetActiveScene().buildIndex + 1) % SceneManager.sceneCountInBuildSettings;
-        ChangeScene(n);
+        LoadScene(n);
     }
 
     public void QuitGame()
@@ -74,4 +75,9 @@ public class Core : MonoBehaviour
         Debug.LogError("No compatible");
 #endif
     }
+}
+
+public enum SceneTypes
+{
+    Menu = 1,
 }
