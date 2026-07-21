@@ -1,14 +1,15 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using System.Collections;
 using static BehaviourPlus;
+using System.Collections.Generic;
+using System;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(SpriteRenderer),typeof(Animator)), RequireComponent(typeof(Rigidbody2D),typeof(BoxCollider2D))]
 public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatable, IHoverable,ISelectable, IPool
 {
     [SerializeField] private RipperSO ripperSO;
-    [Header("Punteros")]
-    [SerializeField] private Transform Tbottom, Tforward;
+    [SerializeField] private Transform Tbottom, Tforward1, Tforward2;
     [SerializeField] private SpriteRenderer sp;
     [SerializeField] private Animator anim;
     [SerializeField] private Rigidbody2D rb;
@@ -21,8 +22,10 @@ public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatab
     private int _savedDirection = 1;
     public static FleshRipper SelectedRipper;
     [SerializeField] private GameObject cancelNode;
+    private bool touchedButton;
 
     void Start() => PoolStart();
+    void OnDestroy() => PoolEnd();
 
     public void PoolStart()
     {
@@ -47,22 +50,33 @@ public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatab
         }
         isGrounded = TRaycast(Tbottom, -transform.up);
 
-        //Movimiento automático
+        //Movimiento automatico
         float speed = isVomiting? 0f : ripperSO.speed;
 
         //Choque contra pared
-        bool hitWall = TRaycast(Tforward, transform.right);
-        if (hitWall) transform.InvertAxis();
+        if (isGrounded)
+        {
+            bool hitWall = TRaycast(Tforward1, transform.right);
+            if (hitWall)
+            {
+                if (TRaycast(Tforward2, transform.right)) transform.InvertAxis();
+                else
+                {
+                    isGrounded = false;
+                    ApplyKnockback(ripperSO.jumpForce * 0.6f);
+                }
+
+            }
+        }
         //if (_isPushed) _savedDirection *= -1;
         //_turnCoolDown = 0.5f;
-
         //if (_turnCoolDown > 0) _turnCoolDown -= Time.fixedDeltaTime;
 
         //Frenzy
         if (frenzyTimer > 0)
         {
             frenzyTimer -= Time.fixedDeltaTime;
-            bool hitCivilian = TRaycast(Tforward, transform.right * ripperSO.visionRange, GameManager.CivilianLayer);
+            bool hitCivilian = TRaycast(Tforward1, transform.right * ripperSO.visionRange, GameManager.CivilianLayer);
             speed *= hitCivilian? ripperSO.frenzySpeed : ripperSO.speedMultiplier;
         }
 
@@ -75,46 +89,47 @@ public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatab
         //if (canJump) v.y = ripperData.jumpForce;
         //rb.gravityScale = ripperData.gravityScale * (v.y < 0f ? 1f : gameManager.fallScale);
         rb.linearVelocity = v;
-
-        static RaycastHit2D TRaycast(Transform t, Vector2 direction, LayerMask layerMask = default) => Physics2D.Raycast(t.position, direction, GameManager.RayLength, layerMask == default? gameManager.groundLayer : layerMask);
     }
+    RaycastHit2D TRaycast(Transform t, Vector2 direction, LayerMask layerMask = default) => Physics2D.Raycast(t.position, direction, GameManager.RayLength, layerMask == default ? gameManager.groundLayer : layerMask);
 
     public void OnLateUpdate()
     {
         anim.SetBool("IsGrounded", isGrounded);
     }
 
-    void OnTriggerEnter2D(Collider2D col)
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        switch (col.gameObject.layer)
+        switch (collision.gameObject.layer)
         {
             case GameManager.CivilianLayer:
-                ConvertCivilian(col.transform);
+                gameManager.ConvertCivilian(collision.transform);
                 break;
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        switch (collider.gameObject.layer)
+        {
             case GameManager.InstakillLayer:
                 RipperDead();
                 break;
+            case GameManager.CheckpointLayer:
+                CompleteLevel();
+                break;
         }
-        if (col.CompareTag("KillButton")) CompleteLevel();
     }
 
-    private void CompleteLevel()
-    {
-        StartCoroutine(CompleteLevelRoutine());
-    }
-
+    private void CompleteLevel() => StartCoroutine(CompleteLevelRoutine());
     private IEnumerator CompleteLevelRoutine()
     {
+        if (touchedButton) yield break;
+        gameManager.PhaseCompleted();
         //CurrentSpeed = 0f;
-        anim.SetTrigger("Jump");
+        touchedButton = true;
+        anim.SetTrigger("Death");
+        isVomiting = true;
         yield return new WaitForSeconds(1.5f);
-        core.NextScene();
-    }
-
-    private void ConvertCivilian(Transform civilian)
-    {
-        Destroy(civilian.gameObject);
-        gameManager.SpawnRipper(civilian);
     }
 
     public void RipperDead()
@@ -129,11 +144,12 @@ public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatab
         rb.linearVelocity = Vector2.zero;
         rb.bodyType = RigidbodyType2D.Kinematic;
         col.enabled = false;
-        anim.SetTrigger("Die");
+        anim.SetTrigger("Death");
     }
 
     public void OnDeathAnimationComplete()
     {
+        if (touchedButton) return;
         Destroy(gameObject); //Return Pool
         gameManager.RipperDead();
     }
@@ -143,6 +159,7 @@ public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatab
     
     public void Select()
     {
+        gameManager.FollowRipper(transform);
         switch (gameManager.selectionTarget)
         {
             case GameManager.SelectionTarget.None:
@@ -155,10 +172,6 @@ public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatab
                 ExecuteQuickCast();
                 break;
             case GameManager.SelectionTarget.Limb:
-                if (TryGetComponent(out FleshLimbs limbs))
-                {
-                    limbs.DetonateLimb(FleshLimbs.LimbType.Arms);
-                }
                 break;
         }
     }
@@ -203,21 +216,8 @@ public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatab
 
     private void ExecuteQuickCast()
     {
-        switch (gameManager.selectedSkill)
-        {
-            case 0:
-                CastVomit();
-                break;
-            case 1:
-                CastSores();
-                break;
-            case 3:
-                RipperDead();
-                break;
-            case 4:
-                CastFrenzy();
-                break;
-        }
+        Action[] skills = { CastVomit, CastSores, CastExplosion, CastCephalic, CastFrenzy };
+        skills[gameManager.selectedSkill].Invoke();
     }
 
     public void AA()
@@ -249,18 +249,11 @@ public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatab
         isVomiting = false;
     }
 
-    public bool CanCastFrenzy() => !isVomiting;
-    public void CastFrenzy()
-    {
-        if (!CanCastFrenzy()) return;
-        gameManager.ModifyHP(-3);
-        frenzyTimer += ripperSO.frenzyDuration;
-    }
-
     public bool CanCastSores() => !isVomiting && isGrounded;
     public void CastSores()
     {
         if (!CanCastSores()) return;
+        isGrounded = false;
         gameManager.ModifyHP(-2);
         //anim.SetFloat("Llagas", _soresCastCount);
         anim.SetTrigger("Jump");
@@ -272,11 +265,60 @@ public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatab
         }
     }
 
+    public bool CanCastExplosion() => true;
+    public void CastExplosion()
+    {
+        if (!CanCastExplosion()) return;
+        gameManager.ModifyHP(-5);
+
+        Vector2 force = ripperSO.explosionForce, explosionCenter = transform.position;
+        Collider2D[] objectsInRange = Physics2D.OverlapCircleAll(explosionCenter, ripperSO.explosionRadius, gameManager.whatCanBePushed);
+        HashSet<Rigidbody2D> pushedBodies = new();
+
+        foreach (Collider2D col in objectsInRange)
+        {
+            if (col.gameObject.layer == GameManager.ExplodableLayer)
+            {
+                Destroy(col.gameObject);
+                continue;
+            }
+            if (col.TryGetComponent(out Rigidbody2D rb))
+            {
+                if (rb.gameObject != gameObject && pushedBodies.Add(rb))
+                {
+                    float directionX = Mathf.Sign(rb.transform.position.x - explosionCenter.x);
+                    if (Mathf.Abs(rb.transform.position.x - explosionCenter.x) < 0.1f) directionX = Random.Range(0f, 1f) > 0.5f ? 1f : -1;
+                    force.x *= directionX;
+
+                    if (rb.TryGetComponent(out FleshRipper r)) r.ApplyKnockback(force);
+                    else rb.AddForce(force, ForceMode2D.Impulse);
+                }
+            }
+        }
+        gameManager.TriggerCameraShake(3f);
+        RipperDead();
+    }
+
+    public void CastCephalic()
+    {
+        gameManager.ModifyHP(5);
+        RipperDead();
+    }
+
+    public bool CanCastFrenzy() => !isVomiting;
+    public void CastFrenzy()
+    {
+        if (!CanCastFrenzy()) return;
+        gameManager.ModifyHP(-3);
+        frenzyTimer += ripperSO.frenzyDuration;
+    }
+
 #if UNITY_EDITOR
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(Tforward.position, Tforward.position + transform.right * GameManager.RayLength);
+        Gizmos.DrawLine(Tforward1.position, Tforward1.position + transform.right * GameManager.RayLength);
+        Gizmos.DrawLine(Tforward2.position, Tforward2.position + transform.right * GameManager.RayLength);
         Gizmos.DrawLine(Tbottom.position, Tbottom.position -transform.up * GameManager.RayLength);
     }
 #endif

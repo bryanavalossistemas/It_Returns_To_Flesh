@@ -10,6 +10,12 @@ public static class TransformExtensions
     }
 }
 
+public interface IColor
+{
+    void SetColor(Color color);
+    void PaintSelected();
+}
+
 public interface IPool
 {
     void PoolStart();

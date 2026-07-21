@@ -1,50 +1,104 @@
-using UnityEngine;
+using System.Collections;
 using Unity.Cinemachine;
+using UnityEngine;
+using UnityEngine.Tilemaps;
 using static BehaviourPlus;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] private CinemachineCamera cam;
-    [SerializeField] private CinemachineConfiner2D confiner;
-    [SerializeField] private BoxCollider2D bounds2D;
+    [SerializeField] private CinemachineCamera cam, miniCamera;
     [SerializeField] private float speed = 15f, pan = 10f;
     private float minX, maxX, minY, maxY;
+    private Vector2 worldMin, worldMax;
     [SerializeField] private float zoomSensitivity = 1f;
     [SerializeField] private float minZoom = 5f;
     [SerializeField] private float maxZoom = 30f;
     private bool isCameraMoving;
     private LensSettings lens;
+    [SerializeField] private CinemachineImpulseSource impulseSource;
 
     void Start()
     {
         lens = cam.Lens;
-        lens.OrthographicSize = Mathf.Clamp(lens.OrthographicSize, minZoom, maxZoom);
+        ClampZoom();
+    }
+
+    public void ControllerUpdate()
+    {
+        float newZoom = inputManager.Zoom;
+        if (newZoom != 0)
+        {
+            ClampZoom(newZoom * zoomSensitivity);
+            CalculateEdges();
+        }
+
+        Vector2 moveV = speed * Time.unscaledDeltaTime * inputManager.Move + pan * inputManager.Pan;
+        Vector3 pos = transform.position;
+        pos.x = Mathf.Clamp(pos.x + moveV.x, minX, maxX);
+        pos.y = Mathf.Clamp(pos.y + moveV.y, minY, maxY);
+        transform.position = pos;
+
+        if (moveV != Vector2.zero) SetFollow(null);
+    }
+
+    private void ClampZoom(float newZoom = 0f)
+    {
+        lens.OrthographicSize = Mathf.Clamp(lens.OrthographicSize - newZoom, minZoom, maxZoom);
         cam.Lens = lens;
     }
 
-    void Update()
+    public void SetFollow(Transform t) => cam.Follow = t;
+    public void SetMiniCamera(Transform t) => miniCamera.Follow = t;
+
+    public void UpdateBounds(Tilemap tilemap)
     {
-        Vector3 newPos = transform.position + speed * Time.unscaledDeltaTime * (Vector3)inputManager.Move + pan * (Vector3)inputManager.Pan;
-        //newPos.x = Mathf.Clamp(newPos.x, minX, maxX);
-        //newPos.y = Mathf.Clamp(newPos.y, minY, maxY);
-        transform.position = newPos;
-
-        float zoom = inputManager.Zoom;
-        if (zoom != 0)
-        {
-            lens.OrthographicSize = Mathf.Clamp(lens.OrthographicSize - zoom * zoomSensitivity, minZoom, maxZoom);
-            cam.Lens = lens;
-        }
-
-        if ((inputManager.Move + inputManager.Pan).magnitude > 0) SetFollow(null);
+        BoundsInt bounds = tilemap.cellBounds;
+        worldMin = tilemap.CellToWorld(bounds.min);
+        worldMax = tilemap.CellToWorld(bounds.max);
+        CalculateEdges();
     }
 
-    public void SetFollow(Transform t) => cam.Follow = t;
-
-    public void UpdateConfiner(Vector3 offset, Vector3 size)
+    private void CalculateEdges()
     {
-        bounds2D.offset = offset;
-        bounds2D.size = size;
-        confiner.InvalidateBoundingShapeCache();
+        float halfHeight = lens.OrthographicSize, halfWidth = halfHeight * lens.Aspect;
+        minX = worldMin.x + halfWidth;
+        maxX = worldMax.x - halfWidth;
+        minY = worldMin.y + halfHeight;
+        maxY = worldMax.y - halfHeight;
+        ScreenTooBig(ref minX, ref maxX, worldMin.x, worldMax.x);
+        ScreenTooBig(ref minY, ref maxY, worldMin.y, worldMax.y);
+
+        static void ScreenTooBig(ref float min, ref float max, float worldMin, float worldMax)
+        {
+            if (min > max)
+                min = max = (worldMin + worldMax) * 0.5f;
+        }
+    }
+
+    public void ShakeCamera(float intensity = 1f)
+    {
+        if (impulseSource != null)
+        {
+            impulseSource.GenerateImpulseWithForce(intensity);
+        }
+    }
+
+    public IEnumerator Slide(Vector3 to, float dur)
+    {
+        Vector3 sizeB;
+        //transform.position -= sizeB;
+        Vector3 from = transform.position;
+        float elapsed = 0f;
+        while (elapsed < dur)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            float t = Mathf.Clamp01(elapsed / dur);
+            t = Mathf.SmoothStep(0f, 1f, t);
+
+            transform.position = Vector3.LerpUnclamped(from, to, t);
+
+            yield return null;
+        }
+        transform.position = to;
     }
 }

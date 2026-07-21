@@ -4,11 +4,7 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Wall
-  - Civilian
-  - Floor
   - SpawnPoint
-  - KillButton
   layers:
   - Default
   - TransparentFX
@@ -16,12 +12,12 @@ TagManager:
   - 
   - Water
   - UI
-  - FleshRipperLayer
-  - CivilianLayer
+  - FleshRipper
+  - Civilian
   - Destruible
-  - DeadZone
+  - Instakill
   - Floor
-  - 
+  - Checkpoint
   - 
   - 
   - 
