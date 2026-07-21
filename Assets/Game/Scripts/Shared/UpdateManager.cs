@@ -36,7 +36,6 @@ public class UpdateManager : MonoBehaviour
 
     void Update()
     {
-        Debug.Log($"Updatables: {updatables.Count}");
         for (int i = 0; i < updatables.Count; i++) updatables[i].OnUpdate();
     }
     #endregion

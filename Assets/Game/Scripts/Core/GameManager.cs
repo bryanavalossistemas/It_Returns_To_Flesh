@@ -15,9 +15,6 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
     public LayerMask groundLayer, pushableLayer;
     private Transform spawnPoint;
     private int nRippers;
-    public Material normalMat, ripperSelectedMat;
-    [HideInInspector] public int selectedSkill = -1;
-    public LayerMask groundLayer, pushableLayer;
     public enum SelectionTarget
     {
         None,
@@ -25,8 +22,6 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
         Limb
     }
     [HideInInspector] public SelectionTarget selectionTarget;
-    private int nRippers;
-    private Transform spawnPoint;
     public event Action OnAA, OnAA2;
     public event Action<Vector3> OnSpawnRipper;
     public int MaxHP {  get; private set; }
@@ -47,7 +42,7 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
         Time.timeScale = 1f;
         if (!inGameplay) return;
 
-        LoadLevelData(scene.buildIndex - Core.MenusIndex - 1);
+        //LoadLevelData(scene.buildIndex - Core.MenusIndex - 1);
         uiManager.UpdateSkillsUI();
         nRippers = 0;
         MaxHP = ripperSO.initialHP;
@@ -97,7 +92,7 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
         bool[] _numbers = { inputManager._1, inputManager._2, inputManager._3, inputManager._4, inputManager._5 };
         for (int i = 0; i < _numbers.Length; i++)
         {
-            if (_numbers[i] && currentLevelData != null && currentLevelData.unlockedSkills[i])
+            if (_numbers[i] && phaseSO != null && phaseSO.unlockedSkills[i])
             {
                 uiManager.SelectButton(i);
             }
@@ -162,7 +157,7 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
     }
 
     public void StartLevel(int n) => levelController.StartLevel(n);
-    public void NextPhase() => levelController.NextPhase();
+    public void PhaseCompleted() => levelController.PhaseCompleted();
     public void TriggerCameraShake(float intensity)
     {
         if (cameraController != null)

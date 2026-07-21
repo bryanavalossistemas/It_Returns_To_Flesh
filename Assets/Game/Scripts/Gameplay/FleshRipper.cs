@@ -123,12 +123,13 @@ public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatab
     private void CompleteLevel() => StartCoroutine(CompleteLevelRoutine());
     private IEnumerator CompleteLevelRoutine()
     {
+        if (touchedButton) yield break;
+        gameManager.PhaseCompleted();
         //CurrentSpeed = 0f;
         touchedButton = true;
         anim.SetTrigger("Death");
         isVomiting = true;
         yield return new WaitForSeconds(1.5f);
-        gameManager.NextPhase();
     }
 
     public void RipperDead()

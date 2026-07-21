@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -80,5 +81,24 @@ public class CameraController : MonoBehaviour
         {
             impulseSource.GenerateImpulseWithForce(intensity);
         }
+    }
+
+    public IEnumerator Slide(Vector3 to, float dur)
+    {
+        Vector3 sizeB;
+        //transform.position -= sizeB;
+        Vector3 from = transform.position;
+        float elapsed = 0f;
+        while (elapsed < dur)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            float t = Mathf.Clamp01(elapsed / dur);
+            t = Mathf.SmoothStep(0f, 1f, t);
+
+            transform.position = Vector3.LerpUnclamped(from, to, t);
+
+            yield return null;
+        }
+        transform.position = to;
     }
 }
