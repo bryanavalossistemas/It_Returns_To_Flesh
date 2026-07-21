@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bec5979527b0b94582b1ed583b595d7, type: 3}
   m_Name: T1
   m_EditorClassIdentifier: Shared::PhaseSO
-  sceneIndex: 2
+  sceneIndex: 3
   unlockedSkills: 0101010101
