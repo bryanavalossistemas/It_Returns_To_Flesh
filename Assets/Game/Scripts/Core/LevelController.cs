@@ -13,8 +13,12 @@ public class LevelController : MonoBehaviour
     private float offsetX;
     private Coroutine changeFase;
 
-    public void StartLevel(int n)
+   public void StartLevel(int n)
     {
+        gameManager.currentLevelData = levels[n];
+
+        uiManager.UpdateSkillsUI();
+
         phases = levels[n].phases;
         offsetX = 0f;
         wrappers = new GameObject[3]; //[0]=prev, [1]=current, [2]=next
