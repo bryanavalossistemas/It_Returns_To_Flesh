@@ -1,15 +1,17 @@
 using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.Tilemaps;
 using static BehaviourPlus;
 
 public class GameManager : MonoBehaviour
 {
-    public const int CivilianLayer = 9, ExplodableLayer = 11, InstakillLayer = 8;
-    public const float RayLength = 0.05f;
-    [Header("Respawn")]
-    [SerializeField] private GameObject ripperPrefab;
+    public const int CivilianLayer = 7, ExplodableLayer = 8, InstakillLayer = 9, CheckpointLayer = 11;
+    public const float RayLength = 0.5f;
+    [SerializeField] public LevelSO currentLevelData;
+    [SerializeField] private CameraController cameraController;
+    public Material normalMat, ripperSelectedMat;
+    [HideInInspector] public int selectedSkill = -1;
     public LayerMask groundLayer, pushableLayer;
     private Transform spawnPoint;
     private int nRippers;
@@ -21,7 +23,18 @@ public class GameManager : MonoBehaviour
         Ripper,
         Limb
     }
-    public SelectionTarget selectionTarget;
+    [HideInInspector] public SelectionTarget selectionTarget;
+    private int nRippers;
+    private Transform spawnPoint;
+    public event Action OnAA, OnAA2;
+    public event Action<Vector3> OnSpawnRipper;
+    public int MaxHP {  get; private set; }
+    public int HP { get; private set; }
+    [SerializeField] private RipperSO ripperSO;
+    private Transform followedRipper;
+    [SerializeField] private LevelController levelController;
+    public LayerMask whatCanBePushed;
+    private bool isRestarting;
 
     void Awake() => SceneManager.sceneLoaded += SceneLoaded;
     void OnDestroy() => SceneManager.sceneLoaded -= SceneLoaded;
@@ -33,7 +46,11 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         if (!inGameplay) return;
 
-        spawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint").transform;
+        nRippers = 0;
+        MaxHP = ripperSO.initialHP;
+        HP = MaxHP;
+        isRestarting = false;
+        uiManager.UpdateHealth(HP, MaxHP);
     }
 
     public void RegisterRipper() => nRippers++;
@@ -43,22 +60,36 @@ public class GameManager : MonoBehaviour
         nRippers--;
         if (nRippers <= 0) SpawnRipper(spawnPoint);
     }
-<<<<<<< Updated upstream
+    /// <summary>
+    /// Pide que mueran todos los Rippers vivos (con su animaciÃ³n de muerte individual).
+    /// GameManager (ensamblado Core) no conoce el tipo FleshRipper (ensamblado Gameplay),
+    /// asÃ­ que solo dispara este evento; RipperPool (en Gameplay) escucha y hace el trabajo.
+    /// El reinicio real del nivel ocurre solo cuando el Ãºltimo Ripper termina su animaciÃ³n
+    /// y llama a RipperDead() de este GameManager (mismo flujo que cuando mueren en combate).
+    /// Ãšsalo para HP <= 0 y para el botÃ³n de Reiniciar.
+    /// </summary>
+    public event Action OnRequestKillAllRippers;
 
-    private void SpawnRipper(Transform transform)
+    public void KillAllRippers()
     {
-        Instantiate(ripperPrefab, transform.position, Quaternion.identity);
-    }
-    public void UpdateCheckPoint(Transform newCheckPoint)
-    {
-        spawnPoint = newCheckPoint;
-        Debug.Log("¡Checkpoint actualizado!");
+        Debug.Log("KillAllRippers llamado");
+        if (isRestarting) return;
+        isRestarting = true;
+
+        Debug.Log("Suscriptores de OnRequestKillAllRippers: " + (OnRequestKillAllRippers?.GetInvocationList().Length ?? 0));
+
+        if (OnRequestKillAllRippers != null) OnRequestKillAllRippers();
+        else RestartLevel(); // Nadie escuchando -> reinicia directo
     }
 
-    void Update()
+    public void OnUpdate()
     {
-        if (inputManager.Pause) Time.timeScale = Time.timeScale == 0f ? 1f : 0f;
-        //PauseMenu.instance.TogglePauseMenu();
+        if (inputManager.Pause)
+        {
+            bool isPaused = Time.timeScale == 0f;
+            Time.timeScale = isPaused? 1f : 0f;
+            //PauseMenu.instance.TogglePauseMenu();
+        }
         bool[] _numbers = { inputManager._1, inputManager._2, inputManager._3, inputManager._4, inputManager._5 };
         for (int i = 0; i < _numbers.Length; i++)
         {
@@ -79,31 +110,33 @@ public class GameManager : MonoBehaviour
 =======
     private void SpawnRipper(Transform transform)
     {
-        if (transform == null)
-        {
-            Debug.LogError("SpawnPoint no asignado en GameManager");
-            return;
-        }
-        if (ripperPrefab == null)
-        {
-            Debug.LogError("RipperPrefab no asignado en GameManager");
-            return;
-        }
-        Instantiate(ripperPrefab, transform.position, Quaternion.identity);
+        nRippers--;
+        if (nRippers <= 0) RestartLevel();
     }
->>>>>>> Stashed changes
+    public void SpawnRipper(Transform transform) => OnSpawnRipper(transform.position);
+
+    public void ConvertCivilian(Transform civilian)
+    {
+        Destroy(civilian.gameObject);
+        SpawnRipper(civilian);
+        MaxHP += ripperSO.buffHP;
+        HP += ripperSO.buffHP;
+        uiManager.UpdateHealth(HP, MaxHP);
+    }
 
     public void TriggerSkill(int pos)
     {
-        Action[] skills = { SkillVomit, SkillSores, SkillExplode, SkillCephalic, SkillFrenzy };
-        skills[pos].Invoke();
-        FleshRipper.SelectedRipper = null;
+        selectionTarget = SelectionTarget.Ripper;
+        OnAA2();
         uiManager.ClearUI();
     }
 
-    private void SkillVomit()
+    public void ModifyHP(int n)
     {
-        selectionTarget = SelectionTarget.Ripper;
+        HP += n;
+        if (HP > MaxHP) HP = MaxHP;
+        if (HP <= 0) KillAllRippers();
+        uiManager.UpdateHealth(HP, MaxHP);
     }
 
     private void SkillSores()
@@ -115,14 +148,13 @@ public class GameManager : MonoBehaviour
     {
         selectionTarget = SelectionTarget.Limb;
     }
+    public void NextPhase() => core.NextScene();
 
-    private void SkillCephalic()
+    public void TriggerCameraShake(float intensity)
     {
-
-    }
-
-    private void SkillFrenzy()
-    {
-        selectionTarget = SelectionTarget.Ripper;
+        if (cameraController != null)
+        {
+            cameraController.ShakeCamera(intensity);
+        }
     }
 }

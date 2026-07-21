@@ -56,6 +56,7 @@ public class InputManager : MonoBehaviour_UL, ILateUpdatable
     private void MoveInput(InputAction.CallbackContext c)
     {
         Move = c.ReadValue<Vector2>();
+        Debug.Log($"Move input: {Move}");
     }
 
     public Vector2 Pan { get; private set; }
@@ -74,7 +75,11 @@ public class InputManager : MonoBehaviour_UL, ILateUpdatable
     private void PauseButton(InputAction.CallbackContext _) => Pause = true;
 
     public bool _1 { get; private set; }
-    private void _1Button(InputAction.CallbackContext _) => _1 = true;
+    private void _1Button(InputAction.CallbackContext _)
+    {
+        _1 = true;
+        Debug.Log("Tecla 1 presionada");
+    }
     public bool _2 { get; private set; }
     private void _2Button(InputAction.CallbackContext _) => _2 = true;
     public bool _3 { get; private set; }
