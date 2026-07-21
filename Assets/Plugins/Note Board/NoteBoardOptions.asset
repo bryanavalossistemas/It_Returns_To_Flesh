@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecad5aea56b7a4647a5754ded403d93e, type: 3}
   m_Name: NoteBoardOptions
   m_EditorClassIdentifier: NoteBoard::Tornadoally.NoteBoard.NoteBoardOptions
+<<<<<<< HEAD
   records:
   - id: 3e6d7424a302dbf4c8c0e992cbf83c02
     noteTag: 16c225dbeea3485286000ac77b476ff1
@@ -112,10 +113,10 @@ MonoBehaviour:
       notes: Hacer que si se supoerponen vayan a diferentes velocidades
     order: 6
     isExpanded: 1
+=======
+  records: []
+>>>>>>> 28ed6581b7cd054597486919822290ab7a5fdf89
   columns:
-  - name: LATER
-    emoji: "\U0001F552"
-    color: {r: 1, g: 1, b: 1, a: 1}
   - name: TODO
     emoji: "\U0001F4CB"
     color: {r: 0.6117647, g: 0.23529412, b: 0.1882353, a: 1}
@@ -141,15 +142,3 @@ MonoBehaviour:
   - name: Placeholder
     emoji: "\U0001F6A7"
     color: {r: 0.5882353, g: 0.54901963, b: 0.15686275, a: 1}
-  - name: "Adri\xE1n"
-    emoji: "\U0001F913"
-    color: {r: 0, g: 0, b: 0, a: 1}
-  - name: Sherlock
-    emoji: "\U0001F913"
-    color: {r: 0, g: 0, b: 0, a: 1}
-  - name: Diego
-    emoji: "\U0001F913"
-    color: {r: 0, g: 0, b: 0, a: 1}
-  - name: Bryan
-    emoji: "\U0001F913"
-    color: {r: 0, g: 0, b: 0, a: 1}
