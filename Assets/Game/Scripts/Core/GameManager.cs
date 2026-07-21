@@ -10,9 +10,13 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
 {
     public const int CivilianLayer = 7, ExplodableLayer = 8, InstakillLayer = 9, CheckpointLayer = 11;
     public const float RayLength = 0.5f;
-    [SerializeField] private LevelSO[] allLevelDatas; 
     [SerializeField] public LevelSO currentLevelData;
     [SerializeField] private CameraController cameraController;
+    public Material normalMat, ripperSelectedMat;
+    [HideInInspector] public int selectedSkill = -1;
+    public LayerMask groundLayer, pushableLayer;
+    private Transform spawnPoint;
+    private int nRippers;
     public Material normalMat, ripperSelectedMat;
     [HideInInspector] public int selectedSkill = -1;
     public LayerMask groundLayer, pushableLayer;
@@ -33,6 +37,7 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
     private Transform followedRipper;
     [SerializeField] private LevelController levelController;
     public LayerMask whatCanBePushed;
+    private bool isRestarting;
 
     void Awake() => SceneManager.sceneLoaded += SceneLoaded;
     void OnDestroy() => SceneManager.sceneLoaded -= SceneLoaded;
@@ -53,6 +58,7 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
         nRippers = 0;
         MaxHP = ripperSO.initialHP;
         HP = MaxHP;
+        isRestarting = false;
         uiManager.UpdateHealth(HP, MaxHP);
     }
 
@@ -62,6 +68,28 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
         cameraController.UpdateBounds(tilemap);
     }
     public void RestartLevel() => core.ReloadScene();
+
+    /// <summary>
+    /// Pide que mueran todos los Rippers vivos (con su animacion de muerte individual).
+    /// GameManager (ensamblado Core) no conoce el tipo FleshRipper (ensamblado Gameplay),
+    /// asÃ­ que solo dispara este evento; RipperPool (en Gameplay) escucha y hace el trabajo.
+    /// El reinicio real del nivel ocurre solo cuando el Ãºltimo Ripper termina su animacion
+    /// y llama a RipperDead() de este GameManager (mismo flujo que cuando mueren en combate).
+    /// Ãšsalo para HP <= 0 y para el botÃ³n de Reiniciar.
+    /// </summary>
+    public event Action OnRequestKillAllRippers;
+
+    public void KillAllRippers()
+    {
+        Debug.Log("KillAllRippers llamado");
+        if (isRestarting) return;
+        isRestarting = true;
+
+        Debug.Log("Suscriptores de OnRequestKillAllRippers: " + (OnRequestKillAllRippers?.GetInvocationList().Length ?? 0));
+
+        if (OnRequestKillAllRippers != null) OnRequestKillAllRippers();
+        else RestartLevel(); // Nadie escuchando -> reinicia directo
+    }
 
     public void OnUpdate()
     {
@@ -128,7 +156,7 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
     {
         HP += n;
         if (HP > MaxHP) HP = MaxHP;
-        if (HP <= 0) RestartLevel();
+        if (HP <= 0) KillAllRippers();
         uiManager.UpdateHealth(HP, MaxHP);
     }
 
@@ -143,12 +171,13 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
     {
         levelController.StartLevel(n);
     }
-    public void NextPhase() => core.NextScene();//levelController.NextPhase();
+    public void NextPhase() => core.NextScene();
+
     public void TriggerCameraShake(float intensity)
-{
-    if (cameraController != null)
     {
-        cameraController.ShakeCamera(intensity);
+        if (cameraController != null)
+        {
+            cameraController.ShakeCamera(intensity);
+        }
     }
-}
 }
