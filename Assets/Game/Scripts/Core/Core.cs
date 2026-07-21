@@ -125,6 +125,7 @@ public class Core : MonoBehaviour
 public enum SceneTypes
 {
     Menu = 1,
+    LevelSelector = 2
 }
 public enum TransitionMode
 {

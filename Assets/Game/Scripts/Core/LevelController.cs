@@ -35,6 +35,6 @@ public class LevelController : MonoBehaviour
     {
         phaseIndex++;
         if (phaseIndex < phases.Length) return (GetPhaseSO().sceneIndex, TransitionMode.SlideRight);
-        else return ((int)SceneTypes.Menu, TransitionMode.None);
+        else return ((int)SceneTypes.LevelSelector, TransitionMode.None);
     }
 }
