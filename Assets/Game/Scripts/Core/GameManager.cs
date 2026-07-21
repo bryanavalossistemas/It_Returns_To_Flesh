@@ -52,14 +52,13 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
     public void SetLevelData(Transform spawnPoint, Tilemap tilemap)
     {
         this.spawnPoint = spawnPoint;
-        Bounds bounds = tilemap.localBounds;
-        bounds.center += tilemap.transform.position;
-        cameraController.UpdateConfiner(bounds.center, bounds.size);
+        cameraController.UpdateBounds(tilemap);
     }
     public void RestartLevel() => core.ReloadScene();
 
     public void OnUpdate()
     {
+        cameraController.ControllerUpdate();
         if (inputManager.Pause)
         {
             bool isPaused = Time.timeScale == 0f;

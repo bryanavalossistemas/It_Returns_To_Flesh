@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using Cysharp.Threading.Tasks;
 using static BehaviourPlus;
 using UnityEngine.EventSystems;
+using UnityEngine.UIElements;
 
 public class Core : MonoBehaviour
 {
@@ -28,17 +29,17 @@ public class Core : MonoBehaviour
             return;
         }
         DontDestroyOnLoad(gameObject);
-        eventSystem.SetActive(true);
-        MainCamera = Camera.main;
     }
 
     async void Start()
     {
         await UniTask.WhenAll(Init(), LocalizationInit());
-        NextScene();
+        if (SceneManager.GetActiveScene().buildIndex == 0) NextScene();
 
-        static async UniTask Init()
+        async UniTask Init()
         {
+            eventSystem.SetActive(true);
+            MainCamera = Camera.main;
             prefsManager.LoadPlayerPrefs();
         }
 

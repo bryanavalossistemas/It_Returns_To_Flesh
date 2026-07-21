@@ -50,7 +50,7 @@ public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatab
         }
         isGrounded = TRaycast(Tbottom, -transform.up);
 
-        //Movimiento autom�tico
+        //Movimiento automatico
         float speed = isVomiting? 0f : ripperSO.speed;
 
         //Choque contra pared
@@ -60,7 +60,11 @@ public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatab
             if (hitWall)
             {
                 if (TRaycast(Tforward2, transform.right)) transform.InvertAxis();
-                else ApplyKnockback(ripperSO.jumpForce * 0.6f);
+                else
+                {
+                    isGrounded = false;
+                    ApplyKnockback(ripperSO.jumpForce * 0.6f);
+                }
 
             }
         }
