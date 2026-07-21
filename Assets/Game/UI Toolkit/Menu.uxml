@@ -28,6 +28,6 @@
                 </Bindings>
             </ui:Button>
         </ui:VisualElement>
-        <ui:Image source="project://database/Assets/Game/Sprites/Characters/0Sores/0Sores%201.png?fileID=4540799475687585126&amp;guid=155a6713c331c884185e5211fffceaee&amp;type=3#0Sores 1_0"/>
+        <ui:Image source="project://database/Assets/Game/Visuals/Sprites/FleshRipper/Walking/0Sores/0Sores%201.png?fileID=4540799475687585126&amp;guid=155a6713c331c884185e5211fffceaee&amp;type=3#0Sores 1_0"/>
     </ui:VisualElement>
 </ui:UXML>

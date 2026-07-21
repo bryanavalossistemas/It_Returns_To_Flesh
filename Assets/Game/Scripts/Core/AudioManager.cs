@@ -52,7 +52,7 @@ public class AudioManager : MonoBehaviour
         bgmInstance = CreateEventInstance(bgmName);
         bgmInstance.start();
     }
-    public void PlayOneShot(EventReference soundEvent, Vector2 position) => RuntimeManager.PlayOneShot(soundEvent, position);
+    private void PlayOneShot(EventReference soundEvent, Vector2 position) => RuntimeManager.PlayOneShot(soundEvent, position);
 
     public void SetMasterVolume(int value) => SetVolume(ref masterVolume, masterBus, "vol_master", value);
     public void SetMusicVolume(int value) => SetVolume(ref musicVolume, musicBus, "vol_music", value);
@@ -63,6 +63,23 @@ public class AudioManager : MonoBehaviour
         bus.setMute(volume == 0);
         bus.setVolume(value / 100f);
         prefsManager.SetInt(key, value);
+    }
+
+    public void PlaySfx(SFXEnum sfxEnum, Vector2 position)
+    {
+        EventReference sfx = sfxEnum switch
+        {
+            SFXEnum.Eating => songs.eatingSfx,
+            SFXEnum.Frenzy => songs.frenzySfx,
+            SFXEnum.Sores => songs.soresSfx,
+            SFXEnum.GameOver => songs.gameOverSfx,
+            SFXEnum.Explode => songs.explodeSfx,
+            SFXEnum.Guillotine => songs.guillotineSfx,
+            SFXEnum.RipperDead => songs.ripperDeadSfx,
+            SFXEnum.Vomit => songs.vomitSfx,
+            SFXEnum.DestroyableWall => songs.destroyableWallSfx
+        };
+        PlayOneShot(sfx, position);
     }
 
     /*private EventInstance stepEventInstance;
@@ -78,4 +95,17 @@ public class AudioManager : MonoBehaviour
     }*/
 
     public void UpdatePlaystate() => RuntimeManager.StudioSystem.setParameterByID(pState, Time.timeScale == 0? 1 : 0);
+}
+
+public enum SFXEnum
+{
+    Eating,
+    Frenzy,
+    Sores,
+    GameOver,
+    Explode,
+    Guillotine,
+    RipperDead,
+    DestroyableWall,
+    Vomit
 }
