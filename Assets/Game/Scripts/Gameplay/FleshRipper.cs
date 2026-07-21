@@ -241,6 +241,8 @@ public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatab
         isVomiting = true;
         gameManager.ModifyHP(-1);
         cancelNode.SetActive(true);
+        anim.SetTrigger("Vomito");
+       
     }
     public void CancelVomit()
     {

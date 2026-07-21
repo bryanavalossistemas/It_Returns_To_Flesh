@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: LevelSO_T1
   m_EditorClassIdentifier: Shared::LevelSO
   phases: 
-  unlockedSkills: 0001000000
+  unlockedSkills: 0101000100
