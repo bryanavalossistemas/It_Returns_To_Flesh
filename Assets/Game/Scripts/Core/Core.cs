@@ -28,6 +28,7 @@ public class Core : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+        _input.Refresh();
         DontDestroyOnLoad(gameObject);
     }
 
