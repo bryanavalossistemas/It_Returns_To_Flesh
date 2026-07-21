@@ -145,6 +145,7 @@ public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatab
         rb.bodyType = RigidbodyType2D.Kinematic;
         col.enabled = false;
         anim.SetTrigger("Death");
+        audioManager.PlaySfx(SFXEnum.RipperDead, transform.position);
     }
 
     public void OnDeathAnimationComplete()
@@ -242,6 +243,7 @@ public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatab
         isVomiting = true;
         gameManager.ModifyHP(-1);
         cancelNode.SetActive(true);
+        audioManager.PlaySfx(SFXEnum.Vomit, transform.position);
     }
     public void CancelVomit()
     {
@@ -255,6 +257,7 @@ public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatab
         if (!CanCastSores()) return;
         isGrounded = false;
         gameManager.ModifyHP(-2);
+        audioManager.PlaySfx(SFXEnum.Sores, transform.position);
         //anim.SetFloat("Llagas", _soresCastCount);
         anim.SetTrigger("Jump");
         ApplyKnockback(ripperSO.jumpForce);
@@ -270,6 +273,7 @@ public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatab
     {
         if (!CanCastExplosion()) return;
         gameManager.ModifyHP(-5);
+        audioManager.PlaySfx(SFXEnum.Explode, transform.position);
 
         Vector2 force = ripperSO.explosionForce, explosionCenter = transform.position;
         Collider2D[] objectsInRange = Physics2D.OverlapCircleAll(explosionCenter, ripperSO.explosionRadius, gameManager.whatCanBePushed);
@@ -311,6 +315,7 @@ public partial class FleshRipper : MonoBehaviour_UM,IFixedUpdatable,ILateUpdatab
         if (!CanCastFrenzy()) return;
         gameManager.ModifyHP(-3);
         frenzyTimer += ripperSO.frenzyDuration;
+        audioManager.PlaySfx(SFXEnum.Frenzy, transform.position);
     }
 
 #if UNITY_EDITOR

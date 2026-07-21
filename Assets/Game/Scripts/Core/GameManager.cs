@@ -73,6 +73,7 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
         Debug.Log("KillAllRippers llamado");
         if (isRestarting) return;
         isRestarting = true;
+        audioManager.PlaySfx(SFXEnum.GameOver, transform.position);
 
         Debug.Log("Suscriptores de OnRequestKillAllRippers: " + (OnRequestKillAllRippers?.GetInvocationList().Length ?? 0));
 
@@ -166,4 +167,6 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
             cameraController.ShakeCamera(intensity);
         }
     }
+
+    public void ExitLevel() => core.LoadScene(SceneTypes.Menu);
 }

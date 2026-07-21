@@ -34,10 +34,8 @@ MonoBehaviour:
       Value: Menu
     - Key: Menu
       Value: Menu
-    - Key: L0__
-      Value: Game
-    - Key: FleshProto
-      Value: Game
+    - Key: LevelSelector
+      Value: Menu
     - Key: T1
       Value: Game
     - Key: T2
@@ -58,3 +56,51 @@ MonoBehaviour:
       Data2: 1197489383
       Data3: 472634511
       Data4: -102468472
+  frenzySfx:
+    Guid:
+      Data1: -1206009978
+      Data2: 1234172575
+      Data3: -2135221876
+      Data4: 631516811
+  soresSfx:
+    Guid:
+      Data1: -1089386354
+      Data2: 1163848099
+      Data3: 1086903444
+      Data4: -91753758
+  gameOverSfx:
+    Guid:
+      Data1: 752245469
+      Data2: 1283997785
+      Data3: 825397133
+      Data4: 46438654
+  explodeSfx:
+    Guid:
+      Data1: 460660500
+      Data2: 1257860946
+      Data3: 24629923
+      Data4: -1886777905
+  guillotineSfx:
+    Guid:
+      Data1: 1139296820
+      Data2: 1126104483
+      Data3: 1883190678
+      Data4: -1717847306
+  ripperDeadSfx:
+    Guid:
+      Data1: -1746817226
+      Data2: 1120950153
+      Data3: -206916179
+      Data4: 21800698
+  destroyableWallSfx:
+    Guid:
+      Data1: 1149353686
+      Data2: 1125095424
+      Data3: -311541573
+      Data4: -1648697493
+  vomitSfx:
+    Guid:
+      Data1: 858242218
+      Data2: 1285414294
+      Data3: 611036557
+      Data4: -1524916526

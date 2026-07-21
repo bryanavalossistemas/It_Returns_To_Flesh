@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: T3
   m_EditorClassIdentifier: Shared::PhaseSO
   sceneIndex: 5
-  unlockedSkills: 0101010101
+  unlockedSkills: 0101000100

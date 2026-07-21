@@ -67,12 +67,19 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySfx(SFXEnum sfxEnum, Vector2 position)
     {
-        switch (sfxEnum)
+        EventReference sfx = sfxEnum switch
         {
-            case SFXEnum.Eating:
-                PlayOneShot(songs.eatingSfx, position);
-                break;
-        }
+            SFXEnum.Eating => songs.eatingSfx,
+            SFXEnum.Frenzy => songs.frenzySfx,
+            SFXEnum.Sores => songs.soresSfx,
+            SFXEnum.GameOver => songs.gameOverSfx,
+            SFXEnum.Explode => songs.explodeSfx,
+            SFXEnum.Guillotine => songs.guillotineSfx,
+            SFXEnum.RipperDead => songs.ripperDeadSfx,
+            SFXEnum.Vomit => songs.vomitSfx,
+            SFXEnum.DestroyableWall => songs.destroyableWallSfx
+        };
+        PlayOneShot(sfx, position);
     }
 
     /*private EventInstance stepEventInstance;
@@ -92,5 +99,13 @@ public class AudioManager : MonoBehaviour
 
 public enum SFXEnum
 {
-    Eating
+    Eating,
+    Frenzy,
+    Sores,
+    GameOver,
+    Explode,
+    Guillotine,
+    RipperDead,
+    DestroyableWall,
+    Vomit
 }
