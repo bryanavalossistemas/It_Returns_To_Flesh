@@ -8,7 +8,7 @@ public class LevelController : MonoBehaviour
     private PhaseSO[] phases;
     private int phaseIndex;
 
-    public int GetLevelsLength() => levels.Length;
+    public LevelSO[] GetLevels() => levels;
 
     public void StartLevel(int n)
     {

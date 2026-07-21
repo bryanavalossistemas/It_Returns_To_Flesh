@@ -1,0 +1,7 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Game/UI%20Toolkit/UnityThemes/Global.uss?fileID=7433441132597879392&amp;guid=67e949d355c7e2b498e9f05290b5a9df&amp;type=3#Global"/>
+    <ui:VisualElement name="canvas" style="position: absolute; top: 0; left: 0; bottom: 0; right: 0; background-color: rgb(0, 0, 0); justify-content: space-evenly; align-items: center;">
+        <ui:VisualElement name="levels" style="flex-grow: 1; right: 0; left: 0; align-self: stretch; flex-direction: row; flex-wrap: wrap; margin-top: 10%; margin-right: 10%; margin-left: 10%;"/>
+        <ui:Image source="project://database/Assets/Game/Visuals/Sprites/FleshRipper/Walking/0Sores/0Sores%201.png?fileID=4540799475687585126&amp;guid=155a6713c331c884185e5211fffceaee&amp;type=3#0Sores 1_0" style="align-self: flex-start; margin-left: 5%;"/>
+    </ui:VisualElement>
+</ui:UXML>

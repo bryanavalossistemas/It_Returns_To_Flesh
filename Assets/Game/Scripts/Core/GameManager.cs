@@ -156,6 +156,7 @@ public class GameManager : MonoBehaviour_UU, IUpdatable
         cameraController.SetMiniCamera(followedRipper);
     }
 
+    public LevelSO[] GetLevels() => levelController.GetLevels();
     public void StartLevel(int n) => levelController.StartLevel(n);
     public void PhaseCompleted() => levelController.PhaseCompleted();
     public void TriggerCameraShake(float intensity)

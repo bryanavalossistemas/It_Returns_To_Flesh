@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f49a9ec6d53d583498baf6c1dd1784a3, type: 3}
   m_Name: Guillotine
   m_EditorClassIdentifier: Shared::LevelSO
+  levelName: Guillotine
   phases:
   - {fileID: 11400000, guid: 74af2615d2aab9e469407589b34a02e7, type: 2}
   - {fileID: 11400000, guid: 3559a5ec867d91e42864a8ca6c5f9a27, type: 2}

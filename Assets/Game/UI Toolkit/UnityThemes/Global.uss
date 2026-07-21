@@ -23,3 +23,16 @@
     -unity-text-align: middle-center;
     -unity-font-definition: url("project://database/Assets/Roboto-Bold.ttf?fileID=12800000&guid=2512426cb7cfe6d4294a14f8b53a5091&type=3#Roboto-Bold");
 }
+
+.text_white {
+    font-size: 200%;
+    -unity-text-align: middle-center;
+    -unity-font-definition: url("project://database/Assets/Roboto-Bold.ttf?fileID=12800000&guid=2512426cb7cfe6d4294a14f8b53a5091&type=3#Roboto-Bold");
+    color: rgb(255, 255, 255);
+}
+
+.buttonLevel {
+    margin-right: 15px;
+    margin-bottom: 15px;
+    width: 200px;
+}

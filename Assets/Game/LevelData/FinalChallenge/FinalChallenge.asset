@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f49a9ec6d53d583498baf6c1dd1784a3, type: 3}
   m_Name: FinalChallenge
   m_EditorClassIdentifier: Shared::LevelSO
+  levelName: FinalChallenge
   phases:
   - {fileID: 11400000, guid: ff13c4d7e6987a046b310fae5cac05ac, type: 2}
